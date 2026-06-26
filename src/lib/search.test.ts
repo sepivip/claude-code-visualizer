@@ -41,6 +41,42 @@ const fixture: CatalogItem[] = [
   },
 ];
 
+/**
+ * Tie-break fixture: two items engineered to produce IDENTICAL scores for the
+ * query "xyztoken".
+ *
+ * Scoring (from search.ts):
+ *   - name weight=5, summary weight=2, domain weight=1, syntax weight=3
+ *   - startsWith bonus = +0.5
+ *   - tokenScore = best matching field score
+ *
+ * For query token "xyztoken":
+ *   - Both items have domain="cli" which contains "xyztoken"? No — we put the
+ *     token only in the summary of each item at a non-leading position so the
+ *     summary score is weight=2 (no startsWith bonus).
+ *   - Neither name, syntax, nor domain contains "xyztoken".
+ *   - Therefore both items score exactly 2 for token "xyztoken".
+ *   - Tiebreak resolves by name ascending: "Alpha feature" < "Beta feature".
+ */
+const tieFixture: CatalogItem[] = [
+  {
+    id: 'tie-beta',
+    name: 'Beta feature',
+    category: 'feature',
+    domain: 'cli',
+    summary: 'A tool that uses xyztoken internally',
+    confidence: 'verified',
+  },
+  {
+    id: 'tie-alpha',
+    name: 'Alpha feature',
+    category: 'feature',
+    domain: 'cli',
+    summary: 'Another tool that uses xyztoken internally',
+    confidence: 'verified',
+  },
+];
+
 describe('searchCatalog', () => {
   it('returns all items in input order with score 0 for empty query', () => {
     const res = searchCatalog(fixture, '   ');
@@ -50,8 +86,8 @@ describe('searchCatalog', () => {
 
   it('ranks the /clear command first when searching "/clear"', () => {
     const res = searchCatalog(fixture, '/clear');
-    expect(res.length).toBeGreaterThan(0);
-    expect(res[0].item.id).toBe('clear');
+    // Only '/clear' matches the token "/clear"; full ranked order must be exact.
+    expect(res.map((r) => r.item.id)).toEqual(['clear']);
   });
 
   it('matches an item via its summary when searching "compact"', () => {
@@ -71,14 +107,15 @@ describe('searchCatalog', () => {
   });
 
   it('breaks score ties by name ascending', () => {
-    const res = searchCatalog(fixture, 'clear');
-    const clearIdx = res.findIndex((r) => r.item.id === 'clear');
-    const viewIdx = res.findIndex((r) => r.item.id === 'clearview');
-    expect(clearIdx).toBeGreaterThanOrEqual(0);
-    expect(viewIdx).toBeGreaterThanOrEqual(0);
-    // '/clear' sorts before 'Clearview setting' when scores tie
-    if (res[clearIdx].score === res[viewIdx].score) {
-      expect(clearIdx).toBeLessThan(viewIdx);
-    }
+    // tieFixture is engineered so both items score exactly 2 for "xyztoken":
+    // the token appears mid-summary (weight=2, no startsWith bonus) in both
+    // items, and no other field matches. Scores are provably equal, so the
+    // tiebreak (localeCompare on name) MUST be the deciding factor.
+    const res = searchCatalog(tieFixture, 'xyztoken');
+    expect(res).toHaveLength(2);
+    expect(res[0].score).toBe(2);
+    expect(res[1].score).toBe(2);
+    // "Alpha feature" < "Beta feature" → tie-alpha must come first.
+    expect(res.map((r) => r.item.id)).toEqual(['tie-alpha', 'tie-beta']);
   });
 });
