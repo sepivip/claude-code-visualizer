@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach } from 'vitest';
-import { render, screen, act } from '@testing-library/react';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AppProvider, useApp } from './AppContext';
 
@@ -36,17 +36,19 @@ describe('AppContext', () => {
   });
 
   it('useApp throws without a provider', () => {
+    const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const Bad = () => {
       useApp();
       return null;
     };
     expect(() => render(<Bad />)).toThrow(/AppProvider/);
+    spy.mockRestore();
   });
 
   it('submit("hi") appends an input echo plus result lines with unique ids', async () => {
     const user = userEvent.setup();
     setup();
-    await user.click(screen.getByText('hi'));
+    await user.click(screen.getByRole('button', { name: 'hi' }));
     const items = screen.getAllByRole('listitem');
     expect(items.length).toBeGreaterThanOrEqual(2);
     expect(items[0]).toHaveAttribute('data-kind', 'input');
@@ -59,9 +61,9 @@ describe('AppContext', () => {
   it('submit("/clear") empties the lines', async () => {
     const user = userEvent.setup();
     setup();
-    await user.click(screen.getByText('hi'));
+    await user.click(screen.getByRole('button', { name: 'hi' }));
     expect(screen.getAllByRole('listitem').length).toBeGreaterThan(0);
-    await user.click(screen.getByText('clear'));
+    await user.click(screen.getByRole('button', { name: 'clear' }));
     expect(screen.queryAllByRole('listitem').length).toBe(0);
   });
 
@@ -69,19 +71,15 @@ describe('AppContext', () => {
     const user = userEvent.setup();
     setup();
     expect(screen.getByTestId('mode')).not.toHaveTextContent('keyboard');
-    await user.click(screen.getByText('kbd'));
+    await user.click(screen.getByRole('button', { name: 'kbd' }));
     expect(screen.getByTestId('mode')).toHaveTextContent('keyboard');
   });
 
   it('ids stay unique across multiple submits', async () => {
     const user = userEvent.setup();
     setup();
-    await act(async () => {
-      await user.click(screen.getByText('hi'));
-    });
-    await act(async () => {
-      await user.click(screen.getByText('hi'));
-    });
+    await user.click(screen.getByRole('button', { name: 'hi' }));
+    await user.click(screen.getByRole('button', { name: 'hi' }));
     const ids = screen
       .getAllByRole('listitem')
       .map((el) => el.getAttribute('data-id'));
