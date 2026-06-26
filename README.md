@@ -25,3 +25,17 @@ Vite · React · TypeScript · Tailwind CSS · pnpm — static build, deployable
 ---
 
 *This is an educational project and is not affiliated with Anthropic.*
+
+## Deploy
+
+The app deploys to **GitHub Pages** via `.github/workflows/deploy.yml` on every push to `main`
+(and via manual **workflow_dispatch**). The workflow runs `pnpm install --frozen-lockfile`,
+`pnpm build:catalog` (`node scripts/build-catalog.mjs`), `pnpm build`, then uploads `./dist` and
+publishes it.
+
+**One-time setup:** enable Pages in **Settings → Pages → Source: GitHub Actions**.
+
+The site is served under the base path **`/claude-code-visualizer/`** (Vite `base`), so the live
+URL is `https://<owner>.github.io/claude-code-visualizer/`. The same base is used locally by
+`pnpm preview` (`http://localhost:4173/claude-code-visualizer/`), which is what the Playwright
+e2e smoke test (`pnpm test:e2e`) drives.
