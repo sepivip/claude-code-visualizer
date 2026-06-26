@@ -46,11 +46,9 @@ export function Start(): JSX.Element {
   return (
     <section className="mx-auto max-w-3xl px-4 py-8">
       <div className="rounded-md border border-neutral-700 bg-neutral-900/60 p-6 font-mono text-sm text-neutral-200">
-        <pre aria-hidden className="text-[#D97757]">
-{`╭─ Start here ─────────────────────────────╮
+        <pre aria-hidden className="text-[#D97757]">{`╭─ Start here ─────────────────────────────╮
 │  Welcome to the Claude Code Trainer       │
-╰───────────────────────────────────────────╯`}
-        </pre>
+╰───────────────────────────────────────────╯`}</pre>
         <p className="mt-3 text-neutral-400">
           Follow the path below, or jump straight in from the tabs above.
         </p>

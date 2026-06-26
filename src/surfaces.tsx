@@ -14,7 +14,7 @@ function ComingSoon(): JSX.Element {
   );
 }
 
-export const surfaces: Record<Mode, React.ComponentType> = {
+export const surfaces: Record<Mode, React.ComponentType<Record<string, never>>> = {
   start: Start,
   playground: Playground,
   cheatsheet: Cheatsheet,
