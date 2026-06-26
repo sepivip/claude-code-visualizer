@@ -5,22 +5,26 @@ import { CATALOG } from '../../data/catalog';
 import { AppProvider } from '../shell/AppContext';
 import { buildShortcutIndex, type ShortcutHit } from './shortcutIndex';
 import { KeyboardVisualizer } from './KeyboardVisualizer';
+import { displayChord } from '../../lib/keys';
 
 // Pick a real single-letter key that has a Ctrl-modified chord in the index
 // built from the REAL generated CATALOG, so assertions stay robust to content.
 // Falls back to 'r' (the documented expected Ctrl+R shortcut).
-function pickCtrlLetterKey(index: Record<string, ShortcutHit[]>): string {
+function pickCtrlLetterKey(index: Record<string, ShortcutHit[]>): { key: string; hit: ShortcutHit } {
   for (const [key, hits] of Object.entries(index)) {
     if (!/^[a-z]$/.test(key)) continue;
-    if (hits.some((h) => h.chord.mods.includes('ctrl') && h.chord.key === key)) {
-      return key;
-    }
+    const hit = hits.find((h) => h.chord.mods.includes('ctrl') && h.chord.key === key);
+    if (hit) return { key, hit };
   }
-  return 'r';
+  // Fallback: construct a minimal hit for 'r' so the type is consistent
+  const fallbackHits = index['r'] ?? [];
+  const fallbackHit = fallbackHits.find((h) => h.chord.mods.includes('ctrl')) ?? fallbackHits[0];
+  if (!fallbackHit) throw new Error('No ctrl+r shortcut in CATALOG – update the fallback key');
+  return { key: 'r', hit: fallbackHit };
 }
 
 const INDEX = buildShortcutIndex(CATALOG);
-const CTRL_KEY = pickCtrlLetterKey(INDEX);
+const { key: CTRL_KEY, hit: CTRL_HIT } = pickCtrlLetterKey(INDEX);
 
 function renderViz() {
   return render(
@@ -57,11 +61,15 @@ describe('KeyboardVisualizer', () => {
 
   it('clicking a key shows its shortcut detail with the displayed chord', () => {
     renderViz();
+    // Force a deterministic non-mac platform so displayChord produces "Ctrl+<key>"
+    // rather than mac symbols (⌃<key>). Click the Windows platform toggle button.
+    fireEvent.click(screen.getByRole('button', { name: 'Windows' }));
     fireEvent.click(keyButton(CTRL_KEY));
     const panel = screen.getByTestId('shortcut-detail');
-    const expected = new RegExp(`Ctrl\\+${CTRL_KEY}`, 'i');
-    // There may be multiple elements (chord display + item name) — assert at least one
-    expect(within(panel).getAllByText(expected).length).toBeGreaterThan(0);
+    // Compute the expected label via the real displayChord to ensure the assertion
+    // exercises displayChord logic and fails if displayChord is broken.
+    const expectedChord = displayChord(CTRL_HIT.chord, 'win');
+    expect(within(panel).getAllByText(expectedChord).length).toBeGreaterThan(0);
   });
 
   it('a real ctrl+<key> keydown selects that key', () => {
