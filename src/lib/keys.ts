@@ -53,15 +53,9 @@ export function parseChord(raw: string): KeyChord | null {
   const mods: Modifier[] = [];
   let key: string | null = null;
 
-  for (let i = 0; i < tokens.length; i++) {
-    const token = tokens[i];
-    const aliasKey = token.toLowerCase();
-    const mod = MOD_ALIASES[aliasKey] ?? MOD_ALIASES[token];
-    const isLastToken = i === tokens.length - 1;
-    if (mod && !isLastToken) {
-      if (!mods.includes(mod)) mods.push(mod);
-    } else if (mod && isLastToken) {
-      // trailing modifier-only token: not a main key
+  for (const token of tokens) {
+    const mod = MOD_ALIASES[token.toLowerCase()];
+    if (mod) {
       if (!mods.includes(mod)) mods.push(mod);
     } else {
       key = normalizeKey(token);
