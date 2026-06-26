@@ -72,9 +72,8 @@ export function Cheatsheet(): JSX.Element {
       ) : (
         <div
           data-testid="results-grid"
-          role="listbox"
           tabIndex={0}
-          aria-label="Results"
+          aria-label="Search results"
           onKeyDown={onGridKey}
           className="grid grid-cols-1 gap-3 overflow-y-auto outline-none sm:grid-cols-2 lg:grid-cols-3"
         >

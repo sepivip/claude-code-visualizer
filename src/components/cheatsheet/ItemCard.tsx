@@ -18,7 +18,8 @@ export function ItemCard({
       role="button"
       tabIndex={0}
       data-testid="item-card"
-      aria-pressed={active}
+      aria-label={item.name}
+      aria-current={active ? 'true' : undefined}
       onClick={() => onOpen(item)}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
