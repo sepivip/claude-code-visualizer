@@ -57,4 +57,12 @@ describe('useHashRoute', () => {
       params: { q: 'compact' },
     });
   });
+
+  it('setter updates state synchronously without a hashchange event', () => {
+    const { result } = renderHook(() => useHashRoute());
+    act(() => {
+      result.current[1]({ mode: 'keyboard', params: {} });
+    });
+    expect(result.current[0]).toEqual({ mode: 'keyboard', params: {} });
+  });
 });

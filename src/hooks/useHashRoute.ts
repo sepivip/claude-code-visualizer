@@ -18,6 +18,7 @@ export function useHashRoute(): [RouteState, (next: RouteState) => void] {
   }, []);
 
   const navigate = useCallback((next: RouteState): void => {
+    setState(next);
     window.location.hash = buildHash(next);
   }, []);
 
