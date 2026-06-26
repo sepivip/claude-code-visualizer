@@ -130,3 +130,93 @@ describe('transformCatalog', () => {
     expect(missing.newcomerTip).toBe('Press Ctrl+R first.');
   });
 });
+
+// --- Task 14: confidence overrides (appended) ---
+// NOTE: describe/it/expect and transformCatalog are already imported at the
+// top of this file (Task 3). Do NOT re-import them here.
+import { VERIFIED, ADVANCED } from './confidence-overrides.mjs';
+
+describe('confidence-overrides module', () => {
+  it('exports VERIFIED and ADVANCED as arrays of strings', () => {
+    expect(Array.isArray(VERIFIED)).toBe(true);
+    expect(Array.isArray(ADVANCED)).toBe(true);
+    expect(VERIFIED.every((v) => typeof v === 'string')).toBe(true);
+    expect(ADVANCED.every((v) => typeof v === 'string')).toBe(true);
+  });
+
+  it('lists the gap-critic uncertain items in ADVANCED', () => {
+    const expected = [
+      '--teammate-mode',
+      'teammateMode',
+      'advisorModel',
+      'Elicitation hook event',
+      'ElicitationResult hook event',
+      'TeammateIdle hook event',
+      'ConfigChange hook event',
+      'CwdChanged hook event',
+      'FileChanged hook event',
+      'WorktreeCreate hook event',
+      'WorktreeRemove hook event',
+      'PostToolBatch hook event',
+      'PostToolUseFailure hook event',
+      '--exclude-dynamic-system-prompt-sections',
+      '--replay-user-messages',
+    ];
+    for (const name of expected) {
+      expect(ADVANCED).toContain(name);
+    }
+  });
+});
+
+describe('transformCatalog with overrides', () => {
+  // Uses the REAL transformCatalog input shape: an OBJECT with `catalogs`
+  // (each holding raw items WITHOUT id/confidence) and `missingItems`.
+  const raw = {
+    catalogs: [
+      {
+        domain: 'Claude Code Slash Commands',
+        items: [
+          {
+            name: '/clear',
+            category: 'slash-command',
+            summary: 'Clear the conversation history.',
+          },
+          {
+            name: '/help',
+            category: 'slash-command',
+            summary: 'Show available commands.',
+          },
+        ],
+      },
+    ],
+    missingItems: [
+      {
+        name: '--teammate-mode',
+        domain: 'Claude Code CLI',
+        category: 'cli-flag',
+        summary: 'Bleeding-edge teammate mode flag.',
+      },
+    ],
+  };
+
+  it('demotes a name in ADVANCED to advanced', () => {
+    const out = transformCatalog(raw, { VERIFIED, ADVANCED });
+    const item = out.find((i) => i.name === '--teammate-mode');
+    expect(item?.confidence).toBe('advanced');
+  });
+
+  it('promotes a name in VERIFIED to verified', () => {
+    const out = transformCatalog(raw, { VERIFIED, ADVANCED });
+    const item = out.find((i) => i.name === '/clear');
+    expect(item?.confidence).toBe('verified');
+  });
+
+  it('is a no-op when overrides is omitted', () => {
+    // Without overrides, catalog items default to 'verified' and missingItems
+    // to 'advanced' (Task 3 behavior). '--teammate-mode' is a missingItem,
+    // so it is 'advanced' here purely from the Task 3 default, not an override.
+    const out = transformCatalog(raw);
+    const clear = out.find((i) => i.name === '/clear');
+    expect(clear?.confidence).toBe('verified');
+  });
+});

@@ -106,7 +106,28 @@ function toCatalogItem(rawItem, domainKey, confidence, used) {
   return item;
 }
 
-export function transformCatalog(raw) {
+/**
+ * Apply confidence overrides by item NAME. Pure: returns a new array.
+ * `overrides` = { VERIFIED?: string[], ADVANCED?: string[] } of item names.
+ * ADVANCED is applied first, then VERIFIED, so a name appearing in both would
+ * end up 'verified'; in practice the curated lists are disjoint.
+ *
+ * @param {Array<object>} items - already-transformed catalog items.
+ * @param {{ VERIFIED?: string[], ADVANCED?: string[] } | undefined} overrides
+ * @returns {Array<object>}
+ */
+export function applyConfidenceOverrides(items, overrides) {
+  if (!overrides) return items;
+  const advanced = new Set(overrides.ADVANCED ?? []);
+  const verified = new Set(overrides.VERIFIED ?? []);
+  return items.map((item) => {
+    if (advanced.has(item.name)) return { ...item, confidence: 'advanced' };
+    if (verified.has(item.name)) return { ...item, confidence: 'verified' };
+    return item;
+  });
+}
+
+export function transformCatalog(raw, overrides) {
   const used = new Set();
   const out = [];
 
@@ -122,5 +143,5 @@ export function transformCatalog(raw) {
     out.push(toCatalogItem(rawItem, domainKey, 'advanced', used));
   }
 
-  return out;
+  return applyConfidenceOverrides(out, overrides);
 }
