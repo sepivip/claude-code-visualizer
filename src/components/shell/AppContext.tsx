@@ -78,3 +78,7 @@ export function useApp(): AppContextValue {
   if (!ctx) throw new Error('useApp must be used within an AppProvider');
   return ctx;
 }
+
+export function useOptionalApp(): AppContextValue | null {
+  return useContext(AppContext);
+}
