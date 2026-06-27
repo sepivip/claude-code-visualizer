@@ -27,3 +27,6 @@ coverage/
 
 # Claude scratch
 .remember/
+
+# SDD scratch
+.superpowers/
