@@ -1,30 +1,8 @@
 // src/components/keyboard/KeyboardVisualizer.test.tsx
 import { describe, it, expect } from 'vitest';
-import { render, screen, fireEvent, within } from '@testing-library/react';
-import { CATALOG } from '../../data/catalog';
+import { render, screen, fireEvent, within, act } from '@testing-library/react';
 import { AppProvider } from '../shell/AppContext';
-import { buildShortcutIndex, type ShortcutHit } from './shortcutIndex';
 import { KeyboardVisualizer } from './KeyboardVisualizer';
-import { displayChord } from '../../lib/keys';
-
-// Pick a real single-letter key that has a Ctrl-modified chord in the index
-// built from the REAL generated CATALOG, so assertions stay robust to content.
-// Falls back to 'r' (the documented expected Ctrl+R shortcut).
-function pickCtrlLetterKey(index: Record<string, ShortcutHit[]>): { key: string; hit: ShortcutHit } {
-  for (const [key, hits] of Object.entries(index)) {
-    if (!/^[a-z]$/.test(key)) continue;
-    const hit = hits.find((h) => h.chord.mods.includes('ctrl') && h.chord.key === key);
-    if (hit) return { key, hit };
-  }
-  // Fallback: construct a minimal hit for 'r' so the type is consistent
-  const fallbackHits = index['r'] ?? [];
-  const fallbackHit = fallbackHits.find((h) => h.chord.mods.includes('ctrl')) ?? fallbackHits[0];
-  if (!fallbackHit) throw new Error('No ctrl+r shortcut in CATALOG – update the fallback key');
-  return { key: 'r', hit: fallbackHit };
-}
-
-const INDEX = buildShortcutIndex(CATALOG);
-const { key: CTRL_KEY, hit: CTRL_HIT } = pickCtrlLetterKey(INDEX);
 
 function renderViz() {
   return render(
@@ -34,47 +12,80 @@ function renderViz() {
   );
 }
 
-function keyButton(key: string): HTMLElement {
-  const el = document.querySelector(`[data-key="${CSS.escape(key)}"]`);
-  if (!el) throw new Error(`key ${key} not rendered`);
-  return el as HTMLElement;
-}
-
 describe('KeyboardVisualizer', () => {
-  it('renders the keyboard surface root with the canonical testid', () => {
+  it('renders root data-testid="keyboard"', () => {
     renderViz();
     expect(screen.getByTestId('keyboard')).toBeInTheDocument();
   });
 
-  it('renders keyboard keys including the chosen ctrl key', () => {
+  it('at least one kb-key has data-state="active" — e.g. the key with data-code="r"', () => {
     renderViz();
-    expect(keyButton(CTRL_KEY)).toBeInTheDocument();
+    // data-code="r" has Ctrl+R in the catalog → should be active
+    const rKey = document.querySelector('[data-testid="kb-key"][data-code="r"]');
+    expect(rKey).toBeInTheDocument();
+    expect(rKey?.getAttribute('data-state')).toBe('active');
   });
 
-  it('activating Ctrl highlights the chosen ctrl key', () => {
+  it('a key with no shortcut (e.g. data-code="f7") is inactive and disabled', () => {
     renderViz();
-    expect(keyButton(CTRL_KEY).getAttribute('data-highlighted')).toBe('false');
-    // Click the Ctrl button in the ModifierBar (has aria-label="Ctrl")
-    fireEvent.click(screen.getByRole('button', { name: /^ctrl$/i }));
-    expect(keyButton(CTRL_KEY).getAttribute('data-highlighted')).toBe('true');
+    const f7 = document.querySelector('[data-testid="kb-key"][data-code="f7"]');
+    expect(f7).toBeInTheDocument();
+    expect(f7?.getAttribute('data-state')).toBe('inactive');
+    expect(f7 as HTMLButtonElement).toBeDisabled();
   });
 
-  it('clicking a key shows its shortcut detail with the displayed chord', () => {
+  it('clicking C key → it becomes selected; a ctrl key becomes partner; panel shows Ctrl+C item', async () => {
     renderViz();
-    // Force a deterministic non-mac platform so displayChord produces "Ctrl+<key>"
-    // rather than mac symbols (⌃<key>). Click the Windows platform toggle button.
-    fireEvent.click(screen.getByRole('button', { name: 'Windows' }));
-    fireEvent.click(keyButton(CTRL_KEY));
+
+    // Force Windows platform for deterministic chord display (Ctrl+C not ⌃C)
+    const winBtn = screen.getByRole('button', { name: 'Windows' });
+    await act(async () => {
+      fireEvent.click(winBtn);
+    });
+
+    const cKey = document.querySelector('[data-testid="kb-key"][data-code="c"]') as HTMLElement;
+    expect(cKey).toBeInTheDocument();
+
+    await act(async () => {
+      fireEvent.click(cKey);
+    });
+
+    // C key becomes selected
+    expect(cKey.getAttribute('data-state')).toBe('selected');
+
+    // At least one ctrl key becomes partner
+    const ctrlKeys = document.querySelectorAll('[data-testid="kb-key"][data-code="control"]');
+    expect(ctrlKeys.length).toBeGreaterThan(0);
+    const partnerCtrl = Array.from(ctrlKeys).find(
+      (el) => el.getAttribute('data-state') === 'partner',
+    );
+    expect(partnerCtrl).toBeDefined();
+
+    // shortcut-detail panel contains the Ctrl+C catalog item name (may appear
+    // multiple times as chord display + item name — use getAllByText)
     const panel = screen.getByTestId('shortcut-detail');
-    // Compute the expected label via the real displayChord to ensure the assertion
-    // exercises displayChord logic and fails if displayChord is broken.
-    const expectedChord = displayChord(CTRL_HIT.chord, 'win');
-    expect(within(panel).getAllByText(expectedChord).length).toBeGreaterThan(0);
+    expect(within(panel).getAllByText('Ctrl+C').length).toBeGreaterThan(0);
   });
 
-  it('a real ctrl+<key> keydown selects that key', () => {
+  it('keydown Ctrl+R → data-code="r" key becomes selected, a ctrl key becomes partner', async () => {
     renderViz();
-    fireEvent.keyDown(window, { key: CTRL_KEY, ctrlKey: true });
-    expect(keyButton(CTRL_KEY).getAttribute('data-selected')).toBe('true');
+
+    await act(async () => {
+      fireEvent.keyDown(window, { key: 'r', ctrlKey: true });
+    });
+
+    const rKey = document.querySelector('[data-testid="kb-key"][data-code="r"]');
+    expect(rKey?.getAttribute('data-state')).toBe('selected');
+
+    const ctrlKeys = document.querySelectorAll('[data-testid="kb-key"][data-code="control"]');
+    const partnerCtrl = Array.from(ctrlKeys).find(
+      (el) => el.getAttribute('data-state') === 'partner',
+    );
+    expect(partnerCtrl).toBeDefined();
+  });
+
+  it('renders shortcut-detail panel', () => {
+    renderViz();
+    expect(screen.getByTestId('shortcut-detail')).toBeInTheDocument();
   });
 });

@@ -2,7 +2,14 @@
 import { describe, it, expect } from 'vitest';
 import type { ShortcutHit } from './shortcutIndex';
 import { CATALOG } from '../../data/catalog';
-import { buildShortcutIndex, SHORTCUT_INDEX } from './shortcutIndex';
+import {
+  buildShortcutIndex,
+  SHORTCUT_INDEX,
+  ALL_HITS,
+  MODS_USED,
+  hitsForModifier,
+  hitsForKeyCode,
+} from './shortcutIndex';
 
 // Robust picker: find a real single-letter key that has a Ctrl-modified chord
 // in the index built from the REAL generated CATALOG. Falls back to 'r'.
@@ -48,5 +55,53 @@ describe('buildShortcutIndex', () => {
   it('exports a prebuilt index over CATALOG', () => {
     const key = pickCtrlLetterKey(SHORTCUT_INDEX);
     expect((SHORTCUT_INDEX[key] ?? []).length).toBeGreaterThan(0);
+  });
+});
+
+describe('ALL_HITS', () => {
+  it('is non-empty', () => {
+    expect(ALL_HITS.length).toBeGreaterThan(0);
+  });
+
+  it('every hit has category shortcut', () => {
+    ALL_HITS.forEach((h) => expect(h.item.category).toBe('shortcut'));
+  });
+});
+
+describe('MODS_USED', () => {
+  it('includes ctrl', () => {
+    expect(MODS_USED.has('ctrl')).toBe(true);
+  });
+
+  it('is a Set of Modifier values', () => {
+    const validMods = new Set(['ctrl', 'meta', 'shift', 'alt']);
+    MODS_USED.forEach((m) => {
+      expect(validMods.has(m)).toBe(true);
+    });
+  });
+});
+
+describe('hitsForModifier', () => {
+  it('returns non-empty array for ctrl', () => {
+    const hits = hitsForModifier('ctrl');
+    expect(hits.length).toBeGreaterThan(0);
+  });
+
+  it('every returned chord includes ctrl in mods', () => {
+    const hits = hitsForModifier('ctrl');
+    hits.forEach((h) => {
+      expect(h.chord.mods).toContain('ctrl');
+    });
+  });
+});
+
+describe('hitsForKeyCode', () => {
+  it('returns same as SHORTCUT_INDEX[code] for a known key', () => {
+    const key = pickCtrlLetterKey(SHORTCUT_INDEX);
+    expect(hitsForKeyCode(key)).toEqual(SHORTCUT_INDEX[key] ?? []);
+  });
+
+  it('returns empty array for unknown code', () => {
+    expect(hitsForKeyCode('__nonexistent__')).toEqual([]);
   });
 });
