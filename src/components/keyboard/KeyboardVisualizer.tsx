@@ -124,15 +124,6 @@ export function KeyboardVisualizer(): JSX.Element {
     return { selectedHits: hits, partnerIds: buildPartnerIds(selected, hits) };
   }, [selected]);
 
-  // Mobile grouped list (sm:hidden).
-  const grouped = useMemo(
-    () =>
-      Object.entries(SHORTCUT_INDEX)
-        .filter(([, hits]) => hits.length > 0)
-        .sort(([a], [b]) => a.localeCompare(b)),
-    [],
-  );
-
   function renderKeyRow(row: KeyDef[], rowKey: string | number): JSX.Element {
     return (
       <div key={rowKey} className="flex gap-1">
@@ -160,19 +151,16 @@ export function KeyboardVisualizer(): JSX.Element {
         <PlatformToggle />
       </div>
 
-      {/* TKL board — hidden on mobile (sm:block) */}
-      <div className="hidden sm:block overflow-x-auto">
-        <div
-          className="inline-flex gap-4 min-w-max"
-          style={{ '--ku': '2.5rem' } as React.CSSProperties}
-        >
+      {/* TKL board — responsive key unit; scrolls horizontally on small screens */}
+      <div className="overflow-x-auto">
+        <div className="inline-flex min-w-max gap-4 px-1.5 py-1.5 [--ku:1.6rem] sm:[--ku:1.95rem] md:[--ku:2.25rem] lg:[--ku:2.55rem]">
           {/* Main block (6 rows) */}
           <div className="flex flex-col gap-1">
             {LAYOUT.main.map((row, ri) => renderKeyRow(row, ri))}
           </div>
 
-          {/* Right cluster: system row + nav 2×3 + arrows */}
-          <div className="flex flex-col gap-1 justify-between">
+          {/* Right cluster: system row + nav 2×3 + arrows (decorative; hidden on mobile) */}
+          <div className="hidden sm:flex flex-col gap-1 justify-between">
             {/* System row */}
             <div className="flex gap-1">
               {LAYOUT.system.map((def) => {
@@ -202,25 +190,6 @@ export function KeyboardVisualizer(): JSX.Element {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Mobile fallback grouped list */}
-      <div className="flex max-h-72 flex-col gap-2 overflow-y-auto sm:hidden">
-        {grouped.map(([key, hits]) => (
-          <div key={key} className="rounded-md border border-neutral-800 p-2">
-            <div className="font-mono text-xs text-[#D97757]">{key}</div>
-            <ul className="mt-1 space-y-1">
-              {hits.map((h, i) => (
-                <li key={`${h.item.id}-${i}`} className="text-xs text-neutral-200">
-                  <span className="font-mono text-[#D97757]">
-                    {displayChord(h.chord, platform)}
-                  </span>{' '}
-                  — {h.item.summary}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
       </div>
 
       {/* Shortcut detail panel */}
