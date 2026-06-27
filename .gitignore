@@ -30,3 +30,12 @@ coverage/
 
 # SDD scratch
 .superpowers/
+
+# Stale TS build artifacts (vite config is vite.config.ts)
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
+
+# Playwright
+test-results/
+playwright-report/

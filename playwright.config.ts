@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const BASE_PATH = '/claude-code-visualizer/';
+const BASE_PATH = '/';
 const PORT = 4173;
 const BASE_URL = `http://localhost:${PORT}${BASE_PATH}`;
 

@@ -6,7 +6,10 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/claude-code-visualizer/',
+  // Relative base: works at the custom-domain root (cckeys.work/) AND the
+  // project subpath (sepivip.github.io/claude-code-visualizer/), so the cutover
+  // never breaks asset URLs. Safe here because the app uses hash routing.
+  base: './',
   test: {
     environment: 'jsdom',
     globals: true,

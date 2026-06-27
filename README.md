@@ -35,7 +35,20 @@ publishes it.
 
 **One-time setup:** enable Pages in **Settings → Pages → Source: GitHub Actions**.
 
-The site is served under the base path **`/claude-code-visualizer/`** (Vite `base`), so the live
-URL is `https://<owner>.github.io/claude-code-visualizer/`. The same base is used locally by
-`pnpm preview` (`http://localhost:4173/claude-code-visualizer/`), which is what the Playwright
-e2e smoke test (`pnpm test:e2e`) drives.
+**Live site:** **https://cckeys.work** (custom domain; `www.cckeys.work` redirects to the apex).
+The repo's `public/CNAME` pins the custom domain across deploys. Vite `base` is `./` (relative),
+so the build works both at the custom-domain root and at the legacy
+`https://sepivip.github.io/claude-code-visualizer/` path. Locally, `pnpm preview` serves at
+`http://localhost:4173/`, which the Playwright e2e smoke test (`pnpm test:e2e`) drives.
+
+### Custom domain DNS (Cloudflare)
+
+`cckeys.work` is on Cloudflare. Records (all **DNS only / grey-cloud** so GitHub serves HTTPS):
+
+| Type  | Name  | Value                                                     |
+|-------|-------|-----------------------------------------------------------|
+| A     | `@`   | `185.199.108.153`                                         |
+| A     | `@`   | `185.199.109.153`                                         |
+| A     | `@`   | `185.199.110.153`                                         |
+| A     | `@`   | `185.199.111.153`                                         |
+| CNAME | `www` | `sepivip.github.io`                                       |
