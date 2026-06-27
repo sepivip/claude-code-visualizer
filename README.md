@@ -1,54 +1,68 @@
-# Claude Code — Interactive Trainer
+# cckeys — Claude Code Interactive Trainer
 
-> An interactive, terminal-styled web app to help newcomers **master the Claude Code CLI** —
-> like the shortcut-visualizer pages for Photoshop/Illustrator, but playful and hands-on.
+[![Live](https://img.shields.io/badge/live-cckeys.work-D97757)](https://cckeys.work)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-The whole app presents as **one Claude Code window**. You learn by doing:
+> An interactive, terminal-styled web app to help you **master the Claude Code CLI** — like the
+> shortcut-visualizer pages for Photoshop/Illustrator, but playful and hands-on.
 
-- 🎮 **Playground** — a safe *simulated* Claude Code terminal (nothing executes)
-- 🔍 **Cheatsheet** — searchable, filterable catalog of every feature
-- ⌨️ **Keyboard visualizer** — practice shortcuts on an interactive keyboard
-- 🧠 **Quiz** — test and reinforce what you've learned
-- 🚀 **Start here** — a guided track for newcomers
+**🔗 Live at [cckeys.work](https://cckeys.work)**
 
-Built on **~728 catalogued items across 12 domains**, audited against the official Claude Code docs.
+The whole app presents as **one Claude Code window**. You learn by doing — no install, nothing to
+configure, runs entirely in your browser.
 
-## Status
+## Features
 
-🚧 In development. Design spec:
-[`docs/superpowers/specs/2026-06-26-claude-code-interactive-trainer-design.md`](docs/superpowers/specs/2026-06-26-claude-code-interactive-trainer-design.md)
+- ⌨️ **Keyboard visualizer** — a full keyboard where shortcut keys glow; click a key to light up its
+  partners and see every shortcut on it (mac / Windows / Linux views).
+- 🔍 **Cheatsheet** — searchable, filterable catalog of every Claude Code feature, with examples.
+- 🎮 **Playground** — a safe *simulated* Claude Code terminal (nothing executes) to try commands.
+- 🚀 **Start here** — a guided on-ramp for newcomers.
 
-## Stack
+Built on a catalog of **~728 features across 12 domains**, audited against the official Claude Code docs.
 
-Vite · React · TypeScript · Tailwind CSS · pnpm — static build, deployable to GitHub Pages.
+## Tech stack
+
+Vite · React 18 · TypeScript (strict) · Tailwind CSS v4 · Vitest · Playwright · pnpm.
+Static build, no backend, no tracking.
+
+## Getting started
+
+Requires [Node.js](https://nodejs.org) ≥ 20 and [pnpm](https://pnpm.io).
+
+```bash
+git clone https://github.com/sepivip/claude-code-visualizer.git
+cd claude-code-visualizer
+pnpm install
+pnpm dev          # http://localhost:5173
+```
+
+### Scripts
+
+| Command | What it does |
+|---|---|
+| `pnpm dev` | Start the dev server |
+| `pnpm build` | Type-check + production build to `dist/` |
+| `pnpm test` | Run the unit test suite (Vitest) |
+| `pnpm test:e2e` | Run the Playwright smoke test |
+| `pnpm build:catalog` | Regenerate `src/data/catalog.ts` from the content source |
+
+## How it works
+
+The content lives in [`content/cc-catalog.raw.json`](content/cc-catalog.raw.json) and is transformed
+into typed data (`src/data/catalog.ts`) by `pnpm build:catalog`. The keyboard derives its shortcut
+map from that catalog at runtime. It's a fully static site — `pnpm build` produces a `dist/` folder
+you can host anywhere.
+
+## Contributing
+
+Issues and PRs welcome! Spotted a wrong or missing shortcut? Open an issue or edit
+`content/cc-catalog.raw.json`. Please keep `pnpm test` and `pnpm build` green.
+
+## License
+
+[MIT](LICENSE) © Beka Zakaidze
 
 ---
 
-*This is an educational project and is not affiliated with Anthropic.*
-
-## Deploy
-
-The app deploys to **GitHub Pages** via `.github/workflows/deploy.yml` on every push to `main`
-(and via manual **workflow_dispatch**). The workflow runs `pnpm install --frozen-lockfile`,
-`pnpm build:catalog` (`node scripts/build-catalog.mjs`), `pnpm build`, then uploads `./dist` and
-publishes it.
-
-**One-time setup:** enable Pages in **Settings → Pages → Source: GitHub Actions**.
-
-**Live site:** **https://cckeys.work** (custom domain; `www.cckeys.work` redirects to the apex).
-The repo's `public/CNAME` pins the custom domain across deploys. Vite `base` is `./` (relative),
-so the build works both at the custom-domain root and at the legacy
-`https://sepivip.github.io/claude-code-visualizer/` path. Locally, `pnpm preview` serves at
-`http://localhost:4173/`, which the Playwright e2e smoke test (`pnpm test:e2e`) drives.
-
-### Custom domain DNS (Cloudflare)
-
-`cckeys.work` is on Cloudflare. Records (all **DNS only / grey-cloud** so GitHub serves HTTPS):
-
-| Type  | Name  | Value                                                     |
-|-------|-------|-----------------------------------------------------------|
-| A     | `@`   | `185.199.108.153`                                         |
-| A     | `@`   | `185.199.109.153`                                         |
-| A     | `@`   | `185.199.110.153`                                         |
-| A     | `@`   | `185.199.111.153`                                         |
-| CNAME | `www` | `sepivip.github.io`                                       |
+*An educational project. Not affiliated with Anthropic.*
