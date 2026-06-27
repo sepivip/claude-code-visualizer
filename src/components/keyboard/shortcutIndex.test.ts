@@ -1,6 +1,7 @@
 // src/components/keyboard/shortcutIndex.test.ts
 import { describe, it, expect } from 'vitest';
 import type { ShortcutHit } from './shortcutIndex';
+import type { CatalogItem } from '../../data/types';
 import { CATALOG } from '../../data/catalog';
 import {
   buildShortcutIndex,
@@ -50,6 +51,23 @@ describe('buildShortcutIndex', () => {
     Object.values(index)
       .flat()
       .forEach((h) => expect(h.item.category).toBe('shortcut'));
+  });
+
+  it('does not index a multi-stroke sequence under a single key', () => {
+    // "Ctrl+G / Ctrl+X Ctrl+E" (open external editor): only Ctrl+G is a single
+    // key chord. The two-stroke "Ctrl+X Ctrl+E" must NOT surface under e or x.
+    const item: CatalogItem = {
+      id: 'ext-editor',
+      name: 'Ctrl+G / Ctrl+X Ctrl+E',
+      category: 'shortcut',
+      domain: 'interactive',
+      summary: 'Open prompt in external text editor',
+      confidence: 'verified',
+    };
+    const index = buildShortcutIndex([item]);
+    expect((index['g'] ?? []).some((h) => h.item.id === 'ext-editor')).toBe(true);
+    expect((index['e'] ?? []).some((h) => h.item.id === 'ext-editor')).toBe(false);
+    expect((index['x'] ?? []).some((h) => h.item.id === 'ext-editor')).toBe(false);
   });
 
   it('exports a prebuilt index over CATALOG', () => {

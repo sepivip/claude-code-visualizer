@@ -61,6 +61,15 @@ describe('parseChord', () => {
   it('returns null when only modifiers present', () => {
     expect(parseChord('Ctrl+Shift')).toBeNull();
   });
+
+  it('rejects multi-stroke sequences as not a single chord', () => {
+    // "Ctrl+X Ctrl+E" is a readline two-stroke, not a single-key chord —
+    // previously it was mis-parsed and shown as a bogus "Ctrl+E".
+    expect(parseChord('Ctrl+X Ctrl+E')).toBeNull();
+    expect(parseChord('Ctrl+X Ctrl+K (chord)')).toBeNull();
+    // Genuine single chords still parse (incl. multi-modifier ones).
+    expect(parseChord('Ctrl+Shift+P')?.key).toBe('p');
+  });
 });
 
 describe('parseChords', () => {
@@ -80,6 +89,13 @@ describe('parseChords', () => {
 
   it('returns empty array for empty input', () => {
     expect(parseChords('')).toEqual([]);
+  });
+
+  it('drops multi-stroke sequences, keeping only single-chord alternatives', () => {
+    // "Ctrl+G / Ctrl+X Ctrl+E" → only Ctrl+G is a single-key chord.
+    const chords = parseChords('Ctrl+G / Ctrl+X Ctrl+E');
+    expect(chords).toHaveLength(1);
+    expect(chords[0]).toEqual({ mods: ['ctrl'], key: 'g', raw: 'Ctrl+G' });
   });
 });
 

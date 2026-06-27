@@ -47,6 +47,13 @@ function sortMods(mods: Modifier[]): Modifier[] {
 export function parseChord(raw: string): KeyChord | null {
   const trimmed = raw.trim();
   if (trimmed === '') return null;
+  // A whitespace-separated multi-stroke sequence (e.g. "Ctrl+X Ctrl+E", a
+  // readline two-stroke binding) is NOT a single chord. Refuse it so it never
+  // gets mis-mapped onto a single physical key in the keyboard visualizer
+  // (which previously rendered "Ctrl+X Ctrl+E" as a bogus "Ctrl+E").
+  if (trimmed.split(/\s+/).filter((g) => /\S\+\S/.test(g)).length >= 2) {
+    return null;
+  }
   const tokens = trimmed.split('+').map((t) => t.trim()).filter((t) => t !== '');
   if (tokens.length === 0) return null;
 
