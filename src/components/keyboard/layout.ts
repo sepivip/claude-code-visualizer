@@ -148,10 +148,3 @@ export const ALL_KEYS: KeyDef[] = [
   ...LAYOUT.arrows.flat(),
 ].filter((k) => !k.spacer);
 
-// Legacy export for any callers that haven't migrated yet (unused in new code)
-export type LegacyKeyDef = { label: string; key: string; isMod?: boolean };
-export const KEY_ROWS: LegacyKeyDef[][] = LAYOUT.main.map((row) =>
-  row
-    .filter((k) => !k.spacer)
-    .map((k) => ({ label: k.label, key: k.mod ? k.mod : k.code, isMod: k.mod !== undefined })),
-);

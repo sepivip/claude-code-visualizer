@@ -61,10 +61,10 @@ describe('KeyboardVisualizer', () => {
     );
     expect(partnerCtrl).toBeDefined();
 
-    // shortcut-detail panel contains the Ctrl+C catalog item name (may appear
-    // multiple times as chord display + item name — use getAllByText)
+    // shortcut-detail panel contains platform-independent text from the Ctrl+C
+    // catalog item (summary: "Interrupt running operation or clear input")
     const panel = screen.getByTestId('shortcut-detail');
-    expect(within(panel).getAllByText('Ctrl+C').length).toBeGreaterThan(0);
+    expect(within(panel).getAllByText(/interrupt/i).length).toBeGreaterThan(0);
   });
 
   it('keydown Ctrl+R → data-code="r" key becomes selected, a ctrl key becomes partner', async () => {
