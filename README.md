@@ -1,7 +1,13 @@
-# cckeys — Claude Code Interactive Trainer
+<p align="center">
+  <a href="https://cckeys.work"><img src="public/og.png" alt="cckeys — Claude Code Interactive Trainer" width="680"></a>
+</p>
 
-[![Live](https://img.shields.io/badge/live-cckeys.work-D97757)](https://cckeys.work)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+<h1 align="center">cckeys — Claude Code Interactive Trainer</h1>
+
+<p align="center">
+  <a href="https://cckeys.work"><img src="https://img.shields.io/badge/live-cckeys.work-D97757" alt="Live"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT"></a>
+</p>
 
 > An interactive, terminal-styled web app to help you **master the Claude Code CLI** — like the
 > shortcut-visualizer pages for Photoshop/Illustrator, but playful and hands-on.
@@ -14,12 +20,23 @@ configure, runs entirely in your browser.
 ## Features
 
 - ⌨️ **Keyboard visualizer** — a full keyboard where shortcut keys glow; click a key to light up its
-  partners and see every shortcut on it (mac / Windows / Linux views).
+  partner keys and see every shortcut on it (macOS / Windows / Linux views).
 - 🔍 **Cheatsheet** — searchable, filterable catalog of every Claude Code feature, with examples.
 - 🎮 **Playground** — a safe *simulated* Claude Code terminal (nothing executes) to try commands.
-- 🚀 **Start here** — a guided on-ramp for newcomers.
+- 🧠 **Quiz** — multiple-choice and type-the-shortcut questions, scored, with explanations.
+- 🚀 **Start here** — a guided, chaptered track for newcomers (prompt → modes → commands → memory → power features).
 
 Built on a curated catalog of **Claude Code features across 12 domains**, audited against the official docs.
+
+## A look inside
+
+**⌨️ Keyboard visualizer** — click a key and its shortcuts + partner keys light up:
+
+![Keyboard visualizer](docs/media/keyboard.png)
+
+**🧠 Quiz** — test yourself with instant feedback:
+
+![Quiz](docs/media/quiz.png)
 
 ## Tech stack
 
