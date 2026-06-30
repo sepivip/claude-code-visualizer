@@ -26,18 +26,6 @@ export const CATALOG: CatalogItem[] = [
     "platformNotes": "Same across macOS, Windows, Linux/WSL"
   },
   {
-    "id": "ctrl-l",
-    "name": "Ctrl+L",
-    "category": "shortcut",
-    "domain": "interactive",
-    "summary": "Redraw screen / force full terminal redraw",
-    "confidence": "verified",
-    "syntax": "Press Ctrl+L",
-    "details": "Forces a complete redraw of the terminal display while preserving input and conversation history. Useful when display becomes garbled or partially blank.",
-    "example": "If text becomes corrupted: press Ctrl+L to refresh",
-    "platformNotes": "Same across platforms"
-  },
-  {
     "id": "ctrl-r-reverse-history-search",
     "name": "Ctrl+R (Reverse History Search)",
     "category": "shortcut",
@@ -48,18 +36,6 @@ export const CATALOG: CatalogItem[] = [
     "details": "Opens reverse history search mode. Type to filter prompts, press Ctrl+R again to cycle through matches, Ctrl+S to change scope (session/project/all), Tab/Esc to accept and edit, Enter to execute, Ctrl+C to cancel. Searches 100 most recent unique prompts.",
     "example": "Ctrl+R → type 'build' → shows matching commands → Ctrl+R again to see older matches → Enter to run",
     "platformNotes": "Same across platforms; scope cycling with Ctrl+S available everywhere"
-  },
-  {
-    "id": "ctrl-o",
-    "name": "Ctrl+O",
-    "category": "shortcut",
-    "domain": "interactive",
-    "summary": "Toggle transcript viewer",
-    "confidence": "verified",
-    "syntax": "Press Ctrl+O",
-    "details": "Shows detailed tool usage and execution details. Expands MCP calls (which normally collapse to 'Called slack 3 times'). Press again to hide.",
-    "example": "While working: press Ctrl+O to see full tool invocation details",
-    "platformNotes": "Same across platforms"
   },
   {
     "id": "ctrl-v-alt-v",
@@ -145,18 +121,6 @@ export const CATALOG: CatalogItem[] = [
     "details": "When input has text: clears it and saves draft to history (recoverable with Up). When input empty: opens rewind menu to restore or summarize code/conversation from previous checkpoint.",
     "example": "Long prompt typed → Esc Esc → clears and saves. Later: Up → recalled. Or empty prompt: Esc Esc → rewind menu opens",
     "platformNotes": "Same across platforms"
-  },
-  {
-    "id": "shift-tab",
-    "name": "Shift+Tab",
-    "category": "shortcut",
-    "domain": "interactive",
-    "summary": "Cycle permission modes",
-    "confidence": "verified",
-    "syntax": "Press Shift+Tab",
-    "details": "Cycles through permission modes: default → acceptEdits → plan → auto (if enabled) → bypassPermissions (if enabled) → back to default. Respects modes in /config or settings.json.",
-    "example": "In default mode: Shift+Tab → auto mode (for auto-approval), Shift+Tab again → plan mode",
-    "platformNotes": "Windows without VT mode (old Node/Bun): defaults to Alt+M instead; macOS sometimes uses Alt+M"
   },
   {
     "id": "alt-m",
@@ -485,66 +449,6 @@ export const CATALOG: CatalogItem[] = [
     "newcomerTip": "Use for quick context lookups while a long task runs, without derailing the main work"
   },
   {
-    "id": "config",
-    "name": "/config",
-    "category": "slash-command",
-    "domain": "interactive",
-    "summary": "Open settings menu",
-    "confidence": "verified",
-    "syntax": "Type /config",
-    "details": "Configure model, editor mode (vim), permission mode defaults, theme, session recap, other preferences. Changes apply immediately.",
-    "example": "/config → Editor mode → select 'vim' → vim keybindings now active",
-    "platformNotes": "Same across platforms"
-  },
-  {
-    "id": "theme",
-    "name": "/theme",
-    "category": "slash-command",
-    "domain": "interactive",
-    "summary": "Choose or create custom theme",
-    "confidence": "verified",
-    "syntax": "Type /theme",
-    "details": "Select from built-in presets (dark, light, auto) or create custom theme with overridden color tokens. Custom themes saved to ~/.claude/themes/ as JSON.",
-    "example": "/theme → select 'auto' → theme auto-switches with OS dark/light mode",
-    "platformNotes": "Same across platforms"
-  },
-  {
-    "id": "terminal-setup",
-    "name": "/terminal-setup",
-    "category": "slash-command",
-    "domain": "interactive",
-    "summary": "Configure terminal for Shift+Enter and keybindings",
-    "confidence": "verified",
-    "syntax": "Type /terminal-setup",
-    "details": "One-time setup for VS Code, Cursor, Devin Desktop, Alacritty, Zed to enable Shift+Enter for newlines and other keybindings. Also updates GPU acceleration and scroll sensitivity settings. Run in host terminal, not inside tmux.",
-    "example": "/terminal-setup → VS Code terminal now supports Shift+Enter",
-    "platformNotes": "For VS Code, Cursor, Devin Desktop, Alacritty, Zed only"
-  },
-  {
-    "id": "keybindings",
-    "name": "/keybindings",
-    "category": "slash-command",
-    "domain": "interactive",
-    "summary": "Create or open keybindings.json editor",
-    "confidence": "verified",
-    "syntax": "Type /keybindings",
-    "details": "Opens ~/.claude/keybindings.json in default editor. Configure custom keybindings by context (Chat, Global, Confirmation, etc.). Changes auto-detected without restart.",
-    "example": "/keybindings → vim opens file → add custom binding → save → binding active immediately",
-    "platformNotes": "Same across platforms"
-  },
-  {
-    "id": "clear",
-    "name": "/clear",
-    "category": "slash-command",
-    "domain": "interactive",
-    "summary": "Start new session, preserve prior conversation",
-    "confidence": "verified",
-    "syntax": "Type /clear",
-    "details": "Clears input history for current session but keeps conversation accessible via /resume. Resets task list.",
-    "example": "/clear → new session starts → /resume → previous conversation restored",
-    "platformNotes": "Same across platforms"
-  },
-  {
     "id": "recap",
     "name": "/recap",
     "category": "slash-command",
@@ -554,30 +458,6 @@ export const CATALOG: CatalogItem[] = [
     "syntax": "Type /recap",
     "details": "Manually generate a one-line recap of session progress. Normally appears automatically after 3+ turns and 3+ minutes away from terminal.",
     "example": "/recap → 'Fixed bug in auth, added tests, ready to merge'",
-    "platformNotes": "Same across platforms"
-  },
-  {
-    "id": "resume",
-    "name": "/resume",
-    "category": "slash-command",
-    "domain": "interactive",
-    "summary": "Resume previous conversation",
-    "confidence": "verified",
-    "syntax": "Type /resume",
-    "details": "When a session cleared with /clear, list prior sessions and restore one.",
-    "example": "/resume → pick previous session → conversation restored",
-    "platformNotes": "Same across platforms"
-  },
-  {
-    "id": "voice",
-    "name": "/voice",
-    "category": "slash-command",
-    "domain": "interactive",
-    "summary": "Configure voice dictation",
-    "confidence": "verified",
-    "syntax": "Type /voice",
-    "details": "Enable/disable voice input, switch between hold-to-record and tap-to-toggle, rebind dictation key.",
-    "example": "/voice → tap → Space now tap-to-toggle; hold → Space hold-to-record",
     "platformNotes": "Same across platforms"
   },
   {
@@ -954,21 +834,21 @@ export const CATALOG: CatalogItem[] = [
     "platformNotes": "Same across platforms"
   },
   {
-    "id": "help",
-    "name": "/help",
-    "category": "shortcut",
+    "id": "config",
+    "name": "/config",
+    "category": "slash-command",
     "domain": "slash",
-    "summary": "Show help and available commands",
+    "summary": "Open Settings interface or set configuration directly",
     "confidence": "verified",
-    "syntax": "/help",
-    "details": "Displays all available commands in the current session. Use `/` alone to see an interactive command list with filtering",
-    "example": "Type `/help` to see the full command list",
-    "newcomerTip": "Start here when you're unsure what commands are available. Commands that aren't available for your setup (e.g., `/desktop` on Linux) won't appear"
+    "syntax": "/config [key=value ...]",
+    "details": "Open Settings UI to adjust theme, model, output style, and other preferences. From v2.1.181, pass `key=value` pairs to set settings directly without opening the UI. Works in non-interactive mode. Alias: `/settings`. Run `/config --help` to see all settable keys",
+    "example": "/config\n/config thinking=false\n/config theme=dark model=sonnet",
+    "newcomerTip": "Use the UI to explore options. Use `key=value` form in scripts or when you know what you want to change"
   },
   {
-    "id": "clear-2",
+    "id": "clear",
     "name": "/clear",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Start a new conversation with empty context",
     "confidence": "verified",
@@ -979,59 +859,33 @@ export const CATALOG: CatalogItem[] = [
     "platformNotes": "Aliases: `/reset`, `/new`"
   },
   {
-    "id": "context",
-    "name": "/context",
-    "category": "shortcut",
+    "id": "voice",
+    "name": "/voice",
+    "category": "slash-command",
     "domain": "slash",
-    "summary": "Visualize current context usage",
+    "summary": "Toggle voice dictation on or off",
     "confidence": "verified",
-    "syntax": "/context [all]",
-    "details": "Shows context usage as a colored grid, with optimization suggestions for context-heavy tools, memory bloat, and capacity warnings. Pass `all` to expand the full per-item breakdown",
-    "example": "/context",
-    "newcomerTip": "Run this when your session feels slow—it shows what's consuming tokens and suggests optimizations"
+    "syntax": "/voice [hold|tap|off]",
+    "details": "Enable voice input in hold or tap mode. Requires a Claude.ai account. `hold` = hold spacebar to talk, `tap` = tap spacebar to toggle",
+    "example": "/voice hold\n/voice off",
+    "newcomerTip": "Use for hands-free input when you need to keep your hands free or when typing is uncomfortable"
   },
   {
-    "id": "compact",
-    "name": "/compact",
-    "category": "shortcut",
+    "id": "help",
+    "name": "/help",
+    "category": "slash-command",
     "domain": "slash",
-    "summary": "Free up context by summarizing the conversation",
+    "summary": "Show help and available commands",
     "confidence": "verified",
-    "syntax": "/compact [instructions]",
-    "details": "Summarizes the conversation to free context space. Optionally pass focus instructions to guide the summary. Skills loaded via `/skill-name` survive compaction (first 5,000 tokens per skill, 25,000 total across all skills)",
-    "example": "/compact\n/compact keep the auth implementation but summarize the exploration",
-    "newcomerTip": "Use when context is nearly full. Claude handles this automatically, but you can trigger it manually to control what gets summarized"
-  },
-  {
-    "id": "model",
-    "name": "/model",
-    "category": "shortcut",
-    "domain": "slash",
-    "summary": "Switch the AI model",
-    "confidence": "verified",
-    "syntax": "/model [model]",
-    "details": "Switch between claude-opus, claude-sonnet, claude-haiku, or other available models. With no argument, opens a picker. For models that support it, use arrow keys to adjust effort level. Press `s` to switch only for the current session (not saved as default)",
-    "example": "/model sonnet\n/model opus",
-    "newcomerTip": "Opus is slower but smarter, Sonnet is balanced, Haiku is fast and cheap. Switch models mid-session if a task is harder or simpler than expected",
-    "source": "https://code.claude.com/docs/en/commands.md"
-  },
-  {
-    "id": "effort",
-    "name": "/effort",
-    "category": "shortcut",
-    "domain": "slash",
-    "summary": "Set the model effort level",
-    "confidence": "verified",
-    "syntax": "/effort [low|medium|high|xhigh|max|ultracode|auto]",
-    "details": "Control how much reasoning the model uses. `low` is fast, `high`/`xhigh`/`max` spend more tokens on thinking. `ultracode` combines `xhigh` with automatic workflow orchestration. `auto` resets to the model default. Available levels depend on the model. Without argument, opens an interactive slider",
-    "example": "/effort high\n/effort max",
-    "newcomerTip": "Use `high` or `xhigh` for complex architectural or debugging tasks. Use `low` for simple edits to save tokens. `max` is session-only and not saved",
-    "source": "https://code.claude.com/docs/en/commands.md"
+    "syntax": "/help",
+    "details": "Displays all available commands in the current session. Use `/` alone to see an interactive command list with filtering",
+    "example": "Type `/help` to see the full command list",
+    "newcomerTip": "Start here when you're unsure what commands are available. Commands that aren't available for your setup (e.g., `/desktop` on Linux) won't appear"
   },
   {
     "id": "plan",
     "name": "/plan",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Enter plan mode before a large change",
     "confidence": "verified",
@@ -1043,7 +897,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "diff",
     "name": "/diff",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Open an interactive diff viewer",
     "confidence": "verified",
@@ -1092,7 +946,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "security-review",
     "name": "/security-review",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Analyze pending changes for security vulnerabilities",
     "confidence": "verified",
@@ -1104,7 +958,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "rewind",
     "name": "/rewind",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Roll code and conversation back to a checkpoint",
     "confidence": "verified",
@@ -1114,33 +968,9 @@ export const CATALOG: CatalogItem[] = [
     "newcomerTip": "Use when you went down the wrong path. Unlike `/clear`, this keeps everything but lets you go back in time"
   },
   {
-    "id": "resume-2",
-    "name": "/resume",
-    "category": "shortcut",
-    "domain": "slash",
-    "summary": "Resume a previous conversation",
-    "confidence": "verified",
-    "syntax": "/resume [session]",
-    "details": "Resume a conversation by ID or name, or open the session picker. As of v2.1.144, background sessions appear marked with `bg`. Alias: `/continue`",
-    "example": "/resume\n/resume auth-bug-fix",
-    "newcomerTip": "Use after `/clear` to jump back to an earlier conversation. The picker shows recent sessions and labels from previous `/clear` commands"
-  },
-  {
-    "id": "branch",
-    "name": "/branch",
-    "category": "shortcut",
-    "domain": "slash",
-    "summary": "Create a branch of the current conversation",
-    "confidence": "verified",
-    "syntax": "/branch [name]",
-    "details": "Create a branch of the current conversation at this point, trying a different direction without losing the current state. Preserves the original, which you return to with `/resume`. For background subagents instead, use `/fork`",
-    "example": "/branch\n/branch try-different-approach",
-    "newcomerTip": "Use when you want to explore two different approaches in parallel. Switch between them with `/resume`"
-  },
-  {
     "id": "fork",
     "name": "/fork",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Spawn a forked subagent to work on a directive",
     "confidence": "verified",
@@ -1150,21 +980,9 @@ export const CATALOG: CatalogItem[] = [
     "newcomerTip": "Use when you want Claude to investigate something in parallel while you continue on the main task"
   },
   {
-    "id": "btw-2",
-    "name": "/btw",
-    "category": "shortcut",
-    "domain": "slash",
-    "summary": "Ask a quick side question without adding to conversation history",
-    "confidence": "verified",
-    "syntax": "/btw <question>",
-    "details": "Ask a quick question that doesn't bloat your conversation history. Perfect for quick clarifications while staying focused on the main task",
-    "example": "/btw what's the syntax for async/await in TypeScript?",
-    "newcomerTip": "Use when you need a quick answer that's not central to the current task"
-  },
-  {
     "id": "init",
     "name": "/init",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Initialize project with a CLAUDE.md guide",
     "confidence": "verified",
@@ -1176,7 +994,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "memory",
     "name": "/memory",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Edit CLAUDE.md memory files and manage auto-memory",
     "confidence": "verified",
@@ -1188,7 +1006,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "permissions",
     "name": "/permissions",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Manage allow, ask, and deny rules for tool permissions",
     "confidence": "verified",
@@ -1198,21 +1016,9 @@ export const CATALOG: CatalogItem[] = [
     "newcomerTip": "Use to approve tools Claude uses frequently (like `git`) so you stop seeing permission prompts. Or deny dangerous tools for autonomous tasks"
   },
   {
-    "id": "mcp",
-    "name": "/mcp",
-    "category": "shortcut",
-    "domain": "slash",
-    "summary": "Manage MCP server connections and OAuth authentication",
-    "confidence": "verified",
-    "syntax": "/mcp [reconnect <server>|enable|disable [<server>|all]]",
-    "details": "Opens an interactive list of MCP servers to connect/disconnect, or directly enable/disable servers without opening the dialog. Manage authentication and integration with external tools",
-    "example": "/mcp\n/mcp reconnect github\n/mcp enable all",
-    "newcomerTip": "Use to connect tools like GitHub, Slack, Jira, or Google Drive to Claude Code. Run once with no arguments to see what's available"
-  },
-  {
     "id": "agents",
     "name": "/agents",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Manage agent (subagent) configurations",
     "confidence": "verified",
@@ -1224,7 +1030,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "tasks",
     "name": "/tasks",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "View and manage everything running in the background",
     "confidence": "verified",
@@ -1236,7 +1042,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "background",
     "name": "/background",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Detach the current session to run as a background agent",
     "confidence": "verified",
@@ -1260,7 +1066,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "add-dir",
     "name": "/add-dir",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Add a working directory for file access during the session",
     "confidence": "verified",
@@ -1272,7 +1078,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "cd",
     "name": "/cd",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Move the session to a new working directory",
     "confidence": "verified",
@@ -1282,33 +1088,9 @@ export const CATALOG: CatalogItem[] = [
     "newcomerTip": "Faster than starting a new session in another directory because the prompt cache isn't invalidated"
   },
   {
-    "id": "config-2",
-    "name": "/config",
-    "category": "shortcut",
-    "domain": "slash",
-    "summary": "Open Settings interface or set configuration directly",
-    "confidence": "verified",
-    "syntax": "/config [key=value ...]",
-    "details": "Open Settings UI to adjust theme, model, output style, and other preferences. From v2.1.181, pass `key=value` pairs to set settings directly without opening the UI. Works in non-interactive mode. Alias: `/settings`. Run `/config --help` to see all settable keys",
-    "example": "/config\n/config thinking=false\n/config theme=dark model=sonnet",
-    "newcomerTip": "Use the UI to explore options. Use `key=value` form in scripts or when you know what you want to change"
-  },
-  {
-    "id": "keybindings-2",
-    "name": "/keybindings",
-    "category": "shortcut",
-    "domain": "slash",
-    "summary": "Open keyboard shortcuts configuration file",
-    "confidence": "verified",
-    "syntax": "/keybindings",
-    "details": "Opens ~/.claude/keybindings.json to customize keyboard shortcuts. Supports Vim bindings, chord combinations, and custom terminal setup",
-    "example": "/keybindings",
-    "newcomerTip": "Edit this to rebind keys to your muscle memory (e.g., remap submit key, enable Vim mode)"
-  },
-  {
     "id": "hooks",
     "name": "/hooks",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "View hook configurations for tool events",
     "confidence": "verified",
@@ -1320,7 +1102,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "focus",
     "name": "/focus",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Toggle focus view (fullscreen mode only)",
     "confidence": "verified",
@@ -1332,7 +1114,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "copy",
     "name": "/copy",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Copy the last assistant response to clipboard",
     "confidence": "verified",
@@ -1340,18 +1122,6 @@ export const CATALOG: CatalogItem[] = [
     "details": "Copy the last response (or the Nth-latest with `/copy N`). When code blocks are present, pick individual blocks or the full response. Press `w` to write to file instead of clipboard (useful over SSH)",
     "example": "/copy\n/copy 2",
     "newcomerTip": "Use to quickly grab code snippets. Over SSH, press `w` to save directly to a file"
-  },
-  {
-    "id": "export",
-    "name": "/export",
-    "category": "shortcut",
-    "domain": "slash",
-    "summary": "Export the current conversation as plain text",
-    "confidence": "verified",
-    "syntax": "/export [filename]",
-    "details": "Export conversation as markdown/text. With a filename, writes directly to that file. Without, opens a dialog to copy or save",
-    "example": "/export\n/export session-log.txt",
-    "newcomerTip": "Use to save important conversations for documentation or sharing with teammates"
   },
   {
     "id": "debug",
@@ -1366,21 +1136,9 @@ export const CATALOG: CatalogItem[] = [
     "newcomerTip": "Use when something doesn't work as expected. Claude analyzes the logs and suggests fixes"
   },
   {
-    "id": "doctor-2",
-    "name": "/doctor",
-    "category": "shortcut",
-    "domain": "slash",
-    "summary": "Diagnose your Claude Code installation and settings",
-    "confidence": "verified",
-    "syntax": "/doctor",
-    "details": "Verify your installation, settings, and environment. Shows status icons. Press `f` to fix reported issues automatically",
-    "example": "/doctor",
-    "newcomerTip": "Run this if something breaks. Shows exactly what's wrong and helps fix it"
-  },
-  {
     "id": "feedback",
     "name": "/feedback",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Submit feedback, report a bug, or share your conversation",
     "confidence": "verified",
@@ -1392,7 +1150,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "usage",
     "name": "/usage",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Show session cost, plan usage limits, and activity stats",
     "confidence": "verified",
@@ -1404,7 +1162,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "status",
     "name": "/status",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Show version, model, account, and connectivity",
     "confidence": "verified",
@@ -1416,7 +1174,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "login",
     "name": "/login",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Sign in to your Anthropic account",
     "confidence": "verified",
@@ -1427,7 +1185,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "logout",
     "name": "/logout",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Sign out from your Anthropic account",
     "confidence": "verified",
@@ -1438,7 +1196,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "desktop",
     "name": "/desktop",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Continue the current session in the Claude Code Desktop app",
     "confidence": "verified",
@@ -1450,7 +1208,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "teleport",
     "name": "/teleport",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Pull a Claude Code on the web session into this terminal",
     "confidence": "verified",
@@ -1462,7 +1220,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "remote-control",
     "name": "/remote-control",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Make this session available for remote control from claude.ai",
     "confidence": "verified",
@@ -1472,21 +1230,9 @@ export const CATALOG: CatalogItem[] = [
     "newcomerTip": "Use to keep working from your phone when away from your desk"
   },
   {
-    "id": "theme-2",
-    "name": "/theme",
-    "category": "shortcut",
-    "domain": "slash",
-    "summary": "Change the terminal color theme",
-    "confidence": "verified",
-    "syntax": "/theme",
-    "details": "Choose from light, dark, colorblind-accessible (daltonized), ANSI, or custom themes from ~/.claude/themes/. Also supports creating new custom themes",
-    "example": "/theme",
-    "newcomerTip": "Use to match your terminal colors or improve contrast if the default is hard to read"
-  },
-  {
     "id": "tui",
     "name": "/tui",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Set the terminal UI renderer",
     "confidence": "verified",
@@ -1496,21 +1242,9 @@ export const CATALOG: CatalogItem[] = [
     "newcomerTip": "Try `fullscreen` if you want a cleaner interface. Some terminal emulators render better with `default`"
   },
   {
-    "id": "rename",
-    "name": "/rename",
-    "category": "shortcut",
-    "domain": "slash",
-    "summary": "Rename the current session",
-    "confidence": "verified",
-    "syntax": "/rename [name]",
-    "details": "Rename the session for easy identification. Without a name, auto-generates one from conversation history. Shows the name on the prompt bar",
-    "example": "/rename auth-implementation\n/rename",
-    "newcomerTip": "Use meaningful names so you can find sessions quickly in `/resume`"
-  },
-  {
     "id": "color",
     "name": "/color",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Set the prompt bar color for the current session",
     "confidence": "verified",
@@ -1546,7 +1280,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "goal",
     "name": "/goal",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Set a goal for Claude to work toward across turns",
     "confidence": "verified",
@@ -1554,18 +1288,6 @@ export const CATALOG: CatalogItem[] = [
     "details": "Set a condition like 'all tests pass' and Claude keeps working across turns until it's met. With no argument, shows the current goal. Clear with `/goal clear`, `/goal stop`, `/goal off`, etc",
     "example": "/goal all tests pass\n/goal clear",
     "newcomerTip": "Use for open-ended tasks. Claude will iterate autonomously until the goal is satisfied"
-  },
-  {
-    "id": "plan-2",
-    "name": "/plan",
-    "category": "shortcut",
-    "domain": "slash",
-    "summary": "Enter plan mode to review before execution",
-    "confidence": "verified",
-    "syntax": "/plan [description]",
-    "details": "Switch into plan mode where Claude presents a structured plan before making changes. Useful for large refactors or architectural decisions",
-    "example": "/plan refactor the authentication module",
-    "newcomerTip": "Always use for tasks spanning multiple files or architectural changes"
   },
   {
     "id": "run",
@@ -1642,7 +1364,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "autofix-pr",
     "name": "/autofix-pr",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Watch a PR and automatically push fixes",
     "confidence": "verified",
@@ -1654,7 +1376,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "web-setup",
     "name": "/web-setup",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Connect GitHub to Claude Code on the web",
     "confidence": "verified",
@@ -1666,7 +1388,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "ide",
     "name": "/ide",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Manage IDE integrations and show status",
     "confidence": "verified",
@@ -1678,7 +1400,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "chrome",
     "name": "/chrome",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Configure Claude in Chrome browser integration",
     "confidence": "verified",
@@ -1690,7 +1412,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "advisor",
     "name": "/advisor",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Enable or disable the advisor tool for second opinions",
     "confidence": "verified",
@@ -1700,33 +1422,9 @@ export const CATALOG: CatalogItem[] = [
     "newcomerTip": "Use when you want a second opinion on architectural decisions or complex implementations"
   },
   {
-    "id": "fast",
-    "name": "/fast",
-    "category": "shortcut",
-    "domain": "slash",
-    "summary": "Toggle fast mode on or off",
-    "confidence": "verified",
-    "syntax": "/fast [on|off]",
-    "details": "Enable fast mode for quicker but lower-quality responses. Useful for rapid prototyping or when speed matters more than quality",
-    "example": "/fast on\n/fast off",
-    "newcomerTip": "Use for quick iterations when you don't need perfect quality. Switch back to normal for final implementations"
-  },
-  {
-    "id": "voice-2",
-    "name": "/voice",
-    "category": "shortcut",
-    "domain": "slash",
-    "summary": "Toggle voice dictation on or off",
-    "confidence": "verified",
-    "syntax": "/voice [hold|tap|off]",
-    "details": "Enable voice input in hold or tap mode. Requires a Claude.ai account. `hold` = hold spacebar to talk, `tap` = tap spacebar to toggle",
-    "example": "/voice hold\n/voice off",
-    "newcomerTip": "Use for hands-free input when you need to keep your hands free or when typing is uncomfortable"
-  },
-  {
     "id": "exit",
     "name": "/exit",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Exit the CLI or detach from a background session",
     "confidence": "verified",
@@ -1736,21 +1434,9 @@ export const CATALOG: CatalogItem[] = [
     "newcomerTip": "In background sessions, `/exit` detaches and returns to your shell. The session keeps working"
   },
   {
-    "id": "help-2",
-    "name": "/help",
-    "category": "shortcut",
-    "domain": "slash",
-    "summary": "Show help and available commands",
-    "confidence": "verified",
-    "syntax": "/help",
-    "details": "Display all available commands. Use `/` to see an interactive filterable command list",
-    "example": "/help",
-    "newcomerTip": "Type `/` and start typing to search commands. Much better than scrolling /help output"
-  },
-  {
     "id": "powerup",
     "name": "/powerup",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Discover features through interactive lessons with demos",
     "confidence": "verified",
@@ -1762,7 +1448,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "insights",
     "name": "/insights",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Generate a report analyzing your Claude Code sessions",
     "confidence": "verified",
@@ -1774,7 +1460,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "team-onboarding",
     "name": "/team-onboarding",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Generate a team onboarding guide from your usage",
     "confidence": "verified",
@@ -1786,7 +1472,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "release-notes",
     "name": "/release-notes",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "View the changelog in an interactive version picker",
     "confidence": "verified",
@@ -1798,7 +1484,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "skills",
     "name": "/skills",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "List available skills and toggle their visibility",
     "confidence": "verified",
@@ -1810,7 +1496,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "plugin",
     "name": "/plugin",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Manage Claude Code plugins and marketplaces",
     "confidence": "verified",
@@ -1822,7 +1508,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "reload-plugins",
     "name": "/reload-plugins",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Reload all active plugins to apply pending changes",
     "confidence": "verified",
@@ -1834,7 +1520,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "reload-skills",
     "name": "/reload-skills",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Re-scan skill directories for new/changed skills",
     "confidence": "verified",
@@ -1846,7 +1532,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "install-github-app",
     "name": "/install-github-app",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Install the Claude GitHub App for a repository",
     "confidence": "verified",
@@ -1858,7 +1544,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "install-slack-app",
     "name": "/install-slack-app",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Install the Claude Slack app",
     "confidence": "verified",
@@ -1868,21 +1554,9 @@ export const CATALOG: CatalogItem[] = [
     "newcomerTip": "Use to route bug reports from Slack directly to Claude Code sessions"
   },
   {
-    "id": "terminal-setup-2",
-    "name": "/terminal-setup",
-    "category": "shortcut",
-    "domain": "slash",
-    "summary": "Configure terminal keybindings for shortcuts",
-    "confidence": "verified",
-    "syntax": "/terminal-setup",
-    "details": "Set up terminal keybindings for Shift+Enter and other shortcuts. Only shows in terminals that need it (VS Code, Cursor, Alacritty, Zed, etc.)",
-    "example": "/terminal-setup",
-    "newcomerTip": "Use if your terminal doesn't recognize Claude Code shortcuts by default"
-  },
-  {
     "id": "stickers",
     "name": "/stickers",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Order Claude Code stickers",
     "confidence": "verified",
@@ -1894,7 +1568,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "radio",
     "name": "/radio",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Open Claude FM lo-fi radio in your browser",
     "confidence": "verified",
@@ -1906,7 +1580,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "mobile",
     "name": "/mobile",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Show QR code to download the Claude mobile app",
     "confidence": "verified",
@@ -1918,7 +1592,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "passes",
     "name": "/passes",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Share a free week of Claude Code with friends",
     "confidence": "verified",
@@ -1930,7 +1604,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "upgrade",
     "name": "/upgrade",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Open upgrade page to switch to a higher plan",
     "confidence": "verified",
@@ -1942,7 +1616,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "privacy-settings",
     "name": "/privacy-settings",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "View and update your privacy settings",
     "confidence": "verified",
@@ -1954,7 +1628,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "workflow",
     "name": "/workflow",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Watch and manage running workflows",
     "confidence": "verified",
@@ -1966,7 +1640,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "sandbox",
     "name": "/sandbox",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Toggle sandbox mode for restricted execution",
     "confidence": "verified",
@@ -1978,7 +1652,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "heapdump",
     "name": "/heapdump",
-    "category": "shortcut",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Write a JavaScript heap snapshot for diagnosing memory usage",
     "confidence": "verified",
@@ -2080,7 +1754,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-prompt",
     "name": "claude <prompt>",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Start an interactive session with an initial prompt",
     "confidence": "verified",
@@ -2524,7 +2198,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "version-v",
     "name": "--version / -v",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Print the Claude Code version and exit",
     "confidence": "verified",
@@ -2536,7 +2210,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-update",
     "name": "claude update",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Update Claude Code to the latest version",
     "confidence": "verified",
@@ -2548,7 +2222,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-install-version",
     "name": "claude install [version]",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Install or reinstall the native binary at a specific version",
     "confidence": "verified",
@@ -2560,7 +2234,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-auth-login",
     "name": "claude auth login",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Sign in to your Anthropic account",
     "confidence": "verified",
@@ -2572,7 +2246,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-auth-logout",
     "name": "claude auth logout",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Sign out from your Anthropic account",
     "confidence": "verified",
@@ -2584,7 +2258,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-auth-status",
     "name": "claude auth status",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Show authentication status as JSON (or human-readable with --text)",
     "confidence": "verified",
@@ -2594,33 +2268,9 @@ export const CATALOG: CatalogItem[] = [
     "newcomerTip": "Use this in CI scripts to verify you're authenticated before running Claude Code."
   },
   {
-    "id": "claude-mcp-add",
-    "name": "claude mcp add",
-    "category": "shortcut",
-    "domain": "cli",
-    "summary": "Add an MCP server interactively or via command line",
-    "confidence": "verified",
-    "syntax": "claude mcp add [--transport http|sse|ws] <name> <url> or claude mcp add [--transport stdio] <name> -- <command> [args]",
-    "details": "Full syntax: `claude mcp add [options] <name> -- <command>` for stdio or `claude mcp add --transport <type> <name> <url>` for HTTP/SSE/WebSocket. Supports `--env`, `--scope`, `--header`, `--client-id`, `--client-secret`, `--callback-port`.",
-    "example": "claude mcp add --transport http github https://api.githubcopilot.com/mcp/ --header \"Authorization: Bearer YOUR_TOKEN\"",
-    "newcomerTip": "Start with HTTP servers (easier, supports OAuth). Use stdio for local tools that need system access."
-  },
-  {
-    "id": "claude-mcp-list",
-    "name": "claude mcp list",
-    "category": "shortcut",
-    "domain": "cli",
-    "summary": "List all configured MCP servers",
-    "confidence": "verified",
-    "syntax": "claude mcp list",
-    "details": "Shows servers from local, project, and user scopes, plus plugin-provided servers. Marks pending approval and rejected servers.",
-    "example": "claude mcp list",
-    "newcomerTip": "Use this to see what's configured and what's waiting for approval."
-  },
-  {
     "id": "claude-mcp-get-name",
     "name": "claude mcp get <name>",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Get details for a specific MCP server",
     "confidence": "verified",
@@ -2632,7 +2282,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-mcp-remove-name",
     "name": "claude mcp remove <name>",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Remove an MCP server",
     "confidence": "verified",
@@ -2644,7 +2294,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-mcp-login-name",
     "name": "claude mcp login <name>",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Run OAuth flow from the command line (v2.1.186+)",
     "confidence": "verified",
@@ -2656,7 +2306,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-mcp-logout-name",
     "name": "claude mcp logout <name>",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Clear stored OAuth credentials for an MCP server (v2.1.186+)",
     "confidence": "verified",
@@ -2668,7 +2318,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-mcp-serve",
     "name": "claude mcp serve",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Run Claude Code itself as an MCP server",
     "confidence": "verified",
@@ -2680,7 +2330,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-config-key-value",
     "name": "claude config [key=value ...]",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Open Settings interface or set individual options via command line",
     "confidence": "verified",
@@ -2692,7 +2342,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-doctor",
     "name": "claude doctor",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Diagnose your Claude Code installation and configuration",
     "confidence": "verified",
@@ -2704,7 +2354,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-agents",
     "name": "claude agents",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Open agent view to monitor and dispatch background sessions",
     "confidence": "verified",
@@ -2716,7 +2366,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-attach-id",
     "name": "claude attach <id>",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Attach to a background session in this terminal",
     "confidence": "verified",
@@ -2728,7 +2378,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-stop-claude-kill-id",
     "name": "claude stop / claude kill <id>",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Stop a background session",
     "confidence": "verified",
@@ -2740,7 +2390,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-logs-id",
     "name": "claude logs <id>",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Print recent output from a background session",
     "confidence": "verified",
@@ -2752,7 +2402,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-respawn-id",
     "name": "claude respawn <id>",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Restart a background session with its conversation intact",
     "confidence": "verified",
@@ -2764,7 +2414,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-rm-id",
     "name": "claude rm <id>",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Remove a background session from the list",
     "confidence": "verified",
@@ -2776,7 +2426,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-daemon-status",
     "name": "claude daemon status",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Print background-session supervisor status (version, socket, workers)",
     "confidence": "verified",
@@ -2788,7 +2438,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-daemon-stop-any",
     "name": "claude daemon stop --any",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Stop the background-session supervisor",
     "confidence": "verified",
@@ -2800,7 +2450,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-setup-token",
     "name": "claude setup-token",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Generate a long-lived OAuth token for CI and scripts",
     "confidence": "verified",
@@ -2812,7 +2462,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-project-purge-path",
     "name": "claude project purge [path]",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Delete all local Claude Code state for a project",
     "confidence": "verified",
@@ -2824,7 +2474,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-remote-control",
     "name": "claude remote-control",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Start a Remote Control server to control Claude Code from claude.ai or the Claude app",
     "confidence": "verified",
@@ -2836,7 +2486,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-ultrareview-target",
     "name": "claude ultrareview [target]",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Run a deep multi-agent code review in the cloud (non-interactive)",
     "confidence": "verified",
@@ -3446,7 +3096,7 @@ export const CATALOG: CatalogItem[] = [
     "source": "https://code.claude.com/docs/en/settings.md"
   },
   {
-    "id": "model-2",
+    "id": "model",
     "name": "model",
     "category": "setting",
     "domain": "settings",
@@ -4516,19 +4166,20 @@ export const CATALOG: CatalogItem[] = [
     "source": "https://code.claude.com/docs/en/hooks.md"
   },
   {
-    "id": "what-is-mcp",
-    "name": "What is MCP",
-    "category": "concept",
+    "id": "mcp",
+    "name": "/mcp",
+    "category": "slash-command",
     "domain": "mcp",
-    "summary": "Open-source standard for AI-tool integrations that lets Claude Code connect to external services and data sources",
+    "summary": "Interactive panel to view, authenticate, and manage MCP servers inside a Claude Code session",
     "confidence": "verified",
-    "details": "MCP (Model Context Protocol) is the foundation for extending Claude Code beyond its built-in tools. Instead of copying data from Jira, Sentry, or your database into chat, an MCP server lets Claude read and act on those systems directly. Servers run locally (stdio), over HTTP/SSE (remote), or via WebSocket. MCP handles tool discovery, authentication, and resource management automatically. Common use cases: query databases, implement features from issue trackers, analyze monitoring data, integrate designs, automate workflows, react to external events.",
-    "example": "Connect Sentry for monitoring: `claude mcp add --transport http sentry https://mcp.sentry.dev/mcp`, then ask 'What are the most common errors in the last 24 hours?'",
-    "newcomerTip": "Think of MCP as 'bringing your tools into Claude's conversation' rather than copying data out. Once connected, Claude sees them like built-in tools.",
-    "source": "https://code.claude.com/docs/en/mcp.md"
+    "syntax": "/mcp",
+    "details": "Slash command that opens a TUI panel showing all connected servers with detailed status. From here you can authenticate servers requiring OAuth (runs browser sign-in), check tool lists, reconnect failed servers, or clear authentication. Lists servers from all scopes (local, project, user, plugins, claude.ai). Shows which servers need authentication, failed, or are pending approval. The panel also shows tool counts and flags servers with no tools.",
+    "example": "Inside a session, type `/mcp`, select 'sentry' from the list, press Enter, choose 'Authenticate', and your browser opens Sentry's sign-in",
+    "newcomerTip": "Use `/mcp` to authenticate (OAuth) or troubleshoot servers without leaving your session. It's the interactive counterpart to shell `claude mcp` commands.",
+    "source": "https://code.claude.com/docs/en/mcp-quickstart.md"
   },
   {
-    "id": "claude-mcp-add-2",
+    "id": "claude-mcp-add",
     "name": "claude mcp add",
     "category": "cli-flag",
     "domain": "mcp",
@@ -4541,7 +4192,7 @@ export const CATALOG: CatalogItem[] = [
     "source": "https://code.claude.com/docs/en/mcp-quickstart.md"
   },
   {
-    "id": "claude-mcp-list-2",
+    "id": "claude-mcp-list",
     "name": "claude mcp list",
     "category": "cli-flag",
     "domain": "mcp",
@@ -4552,6 +4203,18 @@ export const CATALOG: CatalogItem[] = [
     "example": "`claude mcp list` outputs something like: `✓ Connected claude-code-docs (3 tools)` / `! Needs authentication sentry`",
     "newcomerTip": "Check status here before troubleshooting. 'Needs authentication' means the server works but requires a sign-in via `/mcp` inside a session.",
     "source": "https://code.claude.com/docs/en/mcp-quickstart.md"
+  },
+  {
+    "id": "what-is-mcp",
+    "name": "What is MCP",
+    "category": "concept",
+    "domain": "mcp",
+    "summary": "Open-source standard for AI-tool integrations that lets Claude Code connect to external services and data sources",
+    "confidence": "verified",
+    "details": "MCP (Model Context Protocol) is the foundation for extending Claude Code beyond its built-in tools. Instead of copying data from Jira, Sentry, or your database into chat, an MCP server lets Claude read and act on those systems directly. Servers run locally (stdio), over HTTP/SSE (remote), or via WebSocket. MCP handles tool discovery, authentication, and resource management automatically. Common use cases: query databases, implement features from issue trackers, analyze monitoring data, integrate designs, automate workflows, react to external events.",
+    "example": "Connect Sentry for monitoring: `claude mcp add --transport http sentry https://mcp.sentry.dev/mcp`, then ask 'What are the most common errors in the last 24 hours?'",
+    "newcomerTip": "Think of MCP as 'bringing your tools into Claude's conversation' rather than copying data out. Once connected, Claude sees them like built-in tools.",
+    "source": "https://code.claude.com/docs/en/mcp.md"
   },
   {
     "id": "claude-mcp-get",
@@ -4577,19 +4240,6 @@ export const CATALOG: CatalogItem[] = [
     "details": "Deletes a server's configuration. If a server exists in multiple scopes, omit `--scope` to remove from all or specify which one. Each connected server takes space in Claude's context window (their tool names and instructions load every session), so remove servers you no longer use. Run from shell.",
     "example": "`claude mcp remove claude-code-docs` / `claude mcp remove github --scope local`",
     "newcomerTip": "Removing saves context window space. If a server exists in multiple scopes and you remove it without `--scope`, it removes from all of them.",
-    "source": "https://code.claude.com/docs/en/mcp-quickstart.md"
-  },
-  {
-    "id": "mcp-2",
-    "name": "/mcp",
-    "category": "slash-command",
-    "domain": "mcp",
-    "summary": "Interactive panel to view, authenticate, and manage MCP servers inside a Claude Code session",
-    "confidence": "verified",
-    "syntax": "/mcp",
-    "details": "Slash command that opens a TUI panel showing all connected servers with detailed status. From here you can authenticate servers requiring OAuth (runs browser sign-in), check tool lists, reconnect failed servers, or clear authentication. Lists servers from all scopes (local, project, user, plugins, claude.ai). Shows which servers need authentication, failed, or are pending approval. The panel also shows tool counts and flags servers with no tools.",
-    "example": "Inside a session, type `/mcp`, select 'sentry' from the list, press Enter, choose 'Authenticate', and your browser opens Sentry's sign-in",
-    "newcomerTip": "Use `/mcp` to authenticate (OAuth) or troubleshoot servers without leaving your session. It's the interactive counterpart to shell `claude mcp` commands.",
     "source": "https://code.claude.com/docs/en/mcp-quickstart.md"
   },
   {
@@ -6757,19 +6407,44 @@ export const CATALOG: CatalogItem[] = [
     "source": "https://code.claude.com/docs/en/plugin-marketplaces.md"
   },
   {
-    "id": "config-3",
-    "name": "/config",
-    "category": "slash-command",
+    "id": "ctrl-l",
+    "name": "Ctrl+L",
+    "category": "shortcut",
     "domain": "customization",
-    "summary": "Open interactive menu to configure settings, themes, output styles, editor modes, and effort levels without editing files",
+    "summary": "Redraw terminal or clear conversation (fullscreen mode: press twice within 2 seconds)",
     "confidence": "verified",
-    "syntax": "/config [key=value]",
-    "details": "Launches a menu-driven interface to browse all available settings. Changes take effect immediately and are saved to your settings files (user, project, or local scope). You can also pass individual key=value pairs to set them directly without the menu.",
-    "example": "/config\n/config verbose=true\n/config theme=dark",
-    "source": "https://code.claude.com/docs/en/settings.md"
+    "syntax": "Ctrl+L",
+    "details": "Single press: full screen redraw, input and history preserved. Fullscreen mode: first press shows hint, second press runs /clear. Also available as Cmd+K on macOS in fullscreen mode.",
+    "example": "Screen garbled? Ctrl+L. In fullscreen mode, press Ctrl+L twice within 2 seconds to run /clear and start fresh.",
+    "source": "https://code.claude.com/docs/en/interactive-mode.md"
   },
   {
-    "id": "theme-3",
+    "id": "ctrl-o",
+    "name": "Ctrl+O",
+    "category": "shortcut",
+    "domain": "customization",
+    "summary": "Toggle verbose transcript viewer (fullscreen: shows less-style search and navigation)",
+    "confidence": "verified",
+    "syntax": "Ctrl+O",
+    "details": "Toggles between condensed view (one-line tool summaries) and verbose transcript (full output). In fullscreen mode, opens a full-featured viewer with `less`-style navigation (/search, n/N for next/prev, q/Esc to exit, [ to write to scrollback, v to open in $EDITOR).",
+    "example": "Press Ctrl+O to expand all tool calls and show raw output; press again to collapse.",
+    "source": "https://code.claude.com/docs/en/interactive-mode.md"
+  },
+  {
+    "id": "shift-tab",
+    "name": "Shift+Tab",
+    "category": "shortcut",
+    "domain": "customization",
+    "summary": "Cycle through permission modes: default → plan → acceptEdits → auto (if enabled)",
+    "confidence": "verified",
+    "syntax": "Shift+Tab",
+    "details": "Quickly switch between permission modes without `/config`. Cycles through available modes in order. The current mode is shown in a colored border around the input box (prompt, plan, or autoAccept colors). Can be rebound via chat:cycleMode.",
+    "example": "Start in default mode (asks before edits), press Shift+Tab to switch to plan mode (view plan, approve edits), press again for acceptEdits mode (auto-applies edits).",
+    "newcomerTip": "Use default mode for safety (asks before each edit), plan mode for complex changes (review first), and acceptEdits mode for rapid prototyping (auto-apply).",
+    "source": "https://code.claude.com/docs/en/interactive-mode.md"
+  },
+  {
+    "id": "theme",
     "name": "/theme",
     "category": "slash-command",
     "domain": "customization",
@@ -6780,6 +6455,71 @@ export const CATALOG: CatalogItem[] = [
     "example": "/theme\n# Then select 'dark', 'light', 'auto', or 'New custom theme...'",
     "newcomerTip": "Start with 'auto' to match your system's appearance; create a custom theme only if you need specific colors that the presets don't provide.",
     "source": "https://code.claude.com/docs/en/terminal-config.md"
+  },
+  {
+    "id": "terminal-setup",
+    "name": "/terminal-setup",
+    "category": "slash-command",
+    "domain": "customization",
+    "summary": "Auto-configure your terminal: enables Shift+Enter, fixes GPU acceleration in VS Code, configures mouse options",
+    "confidence": "verified",
+    "syntax": "/terminal-setup",
+    "details": "One-time setup that configures: Shift+Enter for newlines (VS Code, Cursor, Alacritty, Zed only), terminal GPU acceleration toggle, mouse wheel sensitivity. Detects your terminal and applies appropriate changes. Some terminals (iTerm2, Ghostty, Kitty) work without setup. For tmux/screen, add configuration lines manually. On macOS, can also enable Option as Meta key.",
+    "example": "/terminal-setup (detects terminal, runs once, modifies config files or IDE settings)",
+    "newcomerTip": "Run once per terminal type. Safe to re-run; won't duplicate existing settings. Shows messages if binding already exists.",
+    "source": "https://code.claude.com/docs/en/terminal-config.md"
+  },
+  {
+    "id": "keybindings",
+    "name": "/keybindings",
+    "category": "slash-command",
+    "domain": "customization",
+    "summary": "Create or open the keybindings configuration file to customize keyboard shortcuts",
+    "confidence": "verified",
+    "syntax": "/keybindings",
+    "details": "Opens ~/.claude/keybindings.json in your default editor. The file uses a bindings array with contexts and action maps. Changes are automatically detected and applied without restart. You can bind multiple modifiers (ctrl, shift, meta, cmd), use chords (sequences of keys), and unbind defaults by setting to null.",
+    "example": "/keybindings",
+    "newcomerTip": "Start by copying an example from the docs and changing just the keys you use most; most defaults work well out of the box.",
+    "source": "https://code.claude.com/docs/en/keybindings.md"
+  },
+  {
+    "id": "model-2",
+    "name": "/model",
+    "category": "slash-command",
+    "domain": "customization",
+    "summary": "Open model picker to switch models mid-session (press 's' to apply this session only, Enter to save as default)",
+    "confidence": "verified",
+    "syntax": "/model [alias|name]",
+    "details": "Opens interactive picker showing model families, effort level (slider), and context window. Press Enter to switch and save as new default. Press 's' to apply to current session only (does not change settings). Using /model directly with a model name (e.g., /model sonnet) acts like Enter. Shows warning if model is retiring or mapped to newer version.",
+    "example": "/model\n/model opus\n/model sonnet[1m]",
+    "newcomerTip": "Use /model frequently to experiment. Opus is the strongest but most expensive; Sonnet balances speed/cost; Haiku is fastest/cheapest for simple tasks.",
+    "source": "https://code.claude.com/docs/en/model-config.md"
+  },
+  {
+    "id": "effort",
+    "name": "/effort",
+    "category": "slash-command",
+    "domain": "customization",
+    "summary": "Adjust adaptive reasoning effort level: low, medium, high (default), xhigh, max (session-only), or ultracode (dynamic workflows)",
+    "confidence": "verified",
+    "syntax": "/effort [level]\n/effort (opens slider)",
+    "details": "Controls how much the model thinks on each step. low/medium/high/xhigh persist across sessions; max and ultracode apply to current session only. Fable 5 supports max; Opus 4.8/4.7 support max; Opus/Sonnet 4.6 do not. Model defaults vary: Fable/Opus 4.8/Sonnet 4.6 default high; Opus 4.7 defaults xhigh. ultracode plans dynamic workflows at xhigh reasoning per turn. ultrathink keyword in prompt does one-off deep reasoning without changing session effort.",
+    "example": "/effort high\n/effort xhigh\n/effort (opens interactive slider)\n/effort auto (resets to model default)",
+    "newcomerTip": "Use high for typical work, xhigh for complex problems, low for cost-sensitive/latency-sensitive tasks. Try max only if xhigh isn't enough.",
+    "source": "https://code.claude.com/docs/en/model-config.md"
+  },
+  {
+    "id": "fast",
+    "name": "/fast",
+    "category": "slash-command",
+    "domain": "customization",
+    "summary": "Toggle fast mode: 2.5x faster Opus at higher per-token cost (research preview)",
+    "confidence": "verified",
+    "syntax": "/fast",
+    "details": "Switches Opus to a high-speed configuration. Up to 2.5x faster at higher cost per token. Requires Anthropic API or subscription with usage credits. Available on Opus 4.8, 4.7, 4.6 only; not on Sonnet, Haiku, or third-party providers. Enabling auto-switches to Opus if on another model. Can also be set in settings as fastMode: true.",
+    "example": "/fast (toggles on/off, shows confirmation 'Fast mode ON' or 'Fast mode OFF' with ↯ icon)",
+    "newcomerTip": "Use fast mode for interactive debugging or rapid iteration where speed is critical. Turn off for long-running tasks or batch processing.",
+    "source": "https://code.claude.com/docs/en/fast-mode.md"
   },
   {
     "id": "color-token-customization",
@@ -6793,19 +6533,6 @@ export const CATALOG: CatalogItem[] = [
     "example": "{\n  \"name\": \"Dracula\",\n  \"base\": \"dark\",\n  \"overrides\": {\n    \"claude\": \"#bd93f9\",\n    \"error\": \"#ff5555\",\n    \"success\": \"#50fa7b\"\n  }\n}",
     "newcomerTip": "Use hex colors (#rrggbb) for exact control, or ansi256(n) for terminal colors. The interactive `/theme` editor shows live preview as you customize.",
     "source": "https://code.claude.com/docs/en/terminal-config.md"
-  },
-  {
-    "id": "keybindings-3",
-    "name": "/keybindings",
-    "category": "slash-command",
-    "domain": "customization",
-    "summary": "Create or open the keybindings configuration file to customize keyboard shortcuts",
-    "confidence": "verified",
-    "syntax": "/keybindings",
-    "details": "Opens ~/.claude/keybindings.json in your default editor. The file uses a bindings array with contexts and action maps. Changes are automatically detected and applied without restart. You can bind multiple modifiers (ctrl, shift, meta, cmd), use chords (sequences of keys), and unbind defaults by setting to null.",
-    "example": "/keybindings",
-    "newcomerTip": "Start by copying an example from the docs and changing just the keys you use most; most defaults work well out of the box.",
-    "source": "https://code.claude.com/docs/en/keybindings.md"
   },
   {
     "id": "keybinding-contexts",
@@ -6870,19 +6597,6 @@ export const CATALOG: CatalogItem[] = [
     "source": "https://code.claude.com/docs/en/keybindings.md"
   },
   {
-    "id": "shift-tab-2",
-    "name": "Shift+Tab",
-    "category": "shortcut",
-    "domain": "customization",
-    "summary": "Cycle through permission modes: default → plan → acceptEdits → auto (if enabled)",
-    "confidence": "verified",
-    "syntax": "Shift+Tab",
-    "details": "Quickly switch between permission modes without `/config`. Cycles through available modes in order. The current mode is shown in a colored border around the input box (prompt, plan, or autoAccept colors). Can be rebound via chat:cycleMode.",
-    "example": "Start in default mode (asks before edits), press Shift+Tab to switch to plan mode (view plan, approve edits), press again for acceptEdits mode (auto-applies edits).",
-    "newcomerTip": "Use default mode for safety (asks before each edit), plan mode for complex changes (review first), and acceptEdits mode for rapid prototyping (auto-apply).",
-    "source": "https://code.claude.com/docs/en/interactive-mode.md"
-  },
-  {
     "id": "option-p-macos-alt-p-windows-linux",
     "name": "Option+P (macOS) / Alt+P (Windows/Linux)",
     "category": "shortcut",
@@ -6934,30 +6648,6 @@ export const CATALOG: CatalogItem[] = [
     "source": "https://code.claude.com/docs/en/interactive-mode.md"
   },
   {
-    "id": "ctrl-l-2",
-    "name": "Ctrl+L",
-    "category": "shortcut",
-    "domain": "customization",
-    "summary": "Redraw terminal or clear conversation (fullscreen mode: press twice within 2 seconds)",
-    "confidence": "verified",
-    "syntax": "Ctrl+L",
-    "details": "Single press: full screen redraw, input and history preserved. Fullscreen mode: first press shows hint, second press runs /clear. Also available as Cmd+K on macOS in fullscreen mode.",
-    "example": "Screen garbled? Ctrl+L. In fullscreen mode, press Ctrl+L twice within 2 seconds to run /clear and start fresh.",
-    "source": "https://code.claude.com/docs/en/interactive-mode.md"
-  },
-  {
-    "id": "ctrl-o-2",
-    "name": "Ctrl+O",
-    "category": "shortcut",
-    "domain": "customization",
-    "summary": "Toggle verbose transcript viewer (fullscreen: shows less-style search and navigation)",
-    "confidence": "verified",
-    "syntax": "Ctrl+O",
-    "details": "Toggles between condensed view (one-line tool summaries) and verbose transcript (full output). In fullscreen mode, opens a full-featured viewer with `less`-style navigation (/search, n/N for next/prev, q/Esc to exit, [ to write to scrollback, v to open in $EDITOR).",
-    "example": "Press Ctrl+O to expand all tool calls and show raw output; press again to collapse.",
-    "source": "https://code.claude.com/docs/en/interactive-mode.md"
-  },
-  {
     "id": "ctrl-v-or-alt-v-on-windows-wsl",
     "name": "Ctrl+V (or Alt+V on Windows/WSL)",
     "category": "shortcut",
@@ -6971,18 +6661,6 @@ export const CATALOG: CatalogItem[] = [
     "source": "https://code.claude.com/docs/en/interactive-mode.md"
   },
   {
-    "id": "ctrl-c-2",
-    "name": "Ctrl+C",
-    "category": "shortcut",
-    "domain": "customization",
-    "summary": "Interrupt current operation (Ctrl+C then Ctrl+C again to exit session)",
-    "confidence": "verified",
-    "syntax": "Ctrl+C",
-    "details": "First press: stops current operation. If nothing is running, first press clears input and second press exits. Cannot be rebound (hardcoded).",
-    "example": "Claude is running a long command. Press Ctrl+C to stop. Press again to clear input. Press once more to exit.",
-    "source": "https://code.claude.com/docs/en/interactive-mode.md"
-  },
-  {
     "id": "ctrl-b-or-ctrl-x-ctrl-b",
     "name": "Ctrl+B (or Ctrl+X Ctrl+B)",
     "category": "shortcut",
@@ -6992,18 +6670,6 @@ export const CATALOG: CatalogItem[] = [
     "syntax": "Ctrl+B or Ctrl+X Ctrl+B",
     "details": "Moves bash commands or agents to background, returning a task ID. Output is written to a file. Tmux users must press Ctrl+B twice due to prefix conflict. Can be rebound via task:background.",
     "example": "Claude runs `npm build`. Press Ctrl+B to move to background. Continue with new prompts while build runs. Retrieve output later with the Read tool.",
-    "source": "https://code.claude.com/docs/en/interactive-mode.md"
-  },
-  {
-    "id": "ctrl-t-2",
-    "name": "Ctrl+T",
-    "category": "shortcut",
-    "domain": "customization",
-    "summary": "Toggle task list visibility (shows pending, in-progress, and completed tasks)",
-    "confidence": "verified",
-    "syntax": "Ctrl+T",
-    "details": "Shows up to 5 tasks at a time. In fullscreen mode, full task list appears in a panel. Tasks persist across context compactions and can be shared across sessions via CLAUDE_CODE_TASK_LIST_ID env var.",
-    "example": "Press Ctrl+T to show/hide the task list panel at the bottom of the screen.",
     "source": "https://code.claude.com/docs/en/interactive-mode.md"
   },
   {
@@ -7056,19 +6722,6 @@ export const CATALOG: CatalogItem[] = [
     "example": "~/.claude/output-styles/diagrams-first.md:\n---\nname: Diagrams First\ndescription: Lead every explanation with a Mermaid diagram\nkeep-coding-instructions: true\n---\n\nWhen explaining code or architecture, start with a Mermaid diagram showing structure.",
     "newcomerTip": "Start by copying a built-in style concept and adding specific instructions. Set keep-coding-instructions: true to modify tone while preserving engineering behavior.",
     "source": "https://code.claude.com/docs/en/output-styles.md"
-  },
-  {
-    "id": "terminal-setup-3",
-    "name": "/terminal-setup",
-    "category": "slash-command",
-    "domain": "customization",
-    "summary": "Auto-configure your terminal: enables Shift+Enter, fixes GPU acceleration in VS Code, configures mouse options",
-    "confidence": "verified",
-    "syntax": "/terminal-setup",
-    "details": "One-time setup that configures: Shift+Enter for newlines (VS Code, Cursor, Alacritty, Zed only), terminal GPU acceleration toggle, mouse wheel sensitivity. Detects your terminal and applies appropriate changes. Some terminals (iTerm2, Ghostty, Kitty) work without setup. For tmux/screen, add configuration lines manually. On macOS, can also enable Option as Meta key.",
-    "example": "/terminal-setup (detects terminal, runs once, modifies config files or IDE settings)",
-    "newcomerTip": "Run once per terminal type. Safe to re-run; won't duplicate existing settings. Shows messages if binding already exists.",
-    "source": "https://code.claude.com/docs/en/terminal-config.md"
   },
   {
     "id": "tui-fullscreen",
@@ -7133,45 +6786,6 @@ export const CATALOG: CatalogItem[] = [
     "details": "Set the initial model when Claude Code starts. Alias options: default (recommended for your account), best (Fable 5 if available, else latest Opus), fable, opus, sonnet, haiku, opusplan (Opus in plan mode, Sonnet in execute mode), sonnet[1m], opus[1m] (with 1M token context). Can override at startup with --model flag or ANTHROPIC_MODEL env var. Use /model to switch mid-session.",
     "example": "{ \"model\": \"fable\" }\n{ \"model\": \"opus[1m]\" }\n{ \"model\": \"claude-sonnet-4-6\" }",
     "newcomerTip": "Start with opus for complex tasks, sonnet for everyday coding, haiku for simple tasks. Try fable for tough problems that need deep reasoning.",
-    "source": "https://code.claude.com/docs/en/model-config.md"
-  },
-  {
-    "id": "model-3",
-    "name": "/model",
-    "category": "slash-command",
-    "domain": "customization",
-    "summary": "Open model picker to switch models mid-session (press 's' to apply this session only, Enter to save as default)",
-    "confidence": "verified",
-    "syntax": "/model [alias|name]",
-    "details": "Opens interactive picker showing model families, effort level (slider), and context window. Press Enter to switch and save as new default. Press 's' to apply to current session only (does not change settings). Using /model directly with a model name (e.g., /model sonnet) acts like Enter. Shows warning if model is retiring or mapped to newer version.",
-    "example": "/model\n/model opus\n/model sonnet[1m]",
-    "newcomerTip": "Use /model frequently to experiment. Opus is the strongest but most expensive; Sonnet balances speed/cost; Haiku is fastest/cheapest for simple tasks.",
-    "source": "https://code.claude.com/docs/en/model-config.md"
-  },
-  {
-    "id": "fast-2",
-    "name": "/fast",
-    "category": "slash-command",
-    "domain": "customization",
-    "summary": "Toggle fast mode: 2.5x faster Opus at higher per-token cost (research preview)",
-    "confidence": "verified",
-    "syntax": "/fast",
-    "details": "Switches Opus to a high-speed configuration. Up to 2.5x faster at higher cost per token. Requires Anthropic API or subscription with usage credits. Available on Opus 4.8, 4.7, 4.6 only; not on Sonnet, Haiku, or third-party providers. Enabling auto-switches to Opus if on another model. Can also be set in settings as fastMode: true.",
-    "example": "/fast (toggles on/off, shows confirmation 'Fast mode ON' or 'Fast mode OFF' with ↯ icon)",
-    "newcomerTip": "Use fast mode for interactive debugging or rapid iteration where speed is critical. Turn off for long-running tasks or batch processing.",
-    "source": "https://code.claude.com/docs/en/fast-mode.md"
-  },
-  {
-    "id": "effort-2",
-    "name": "/effort",
-    "category": "slash-command",
-    "domain": "customization",
-    "summary": "Adjust adaptive reasoning effort level: low, medium, high (default), xhigh, max (session-only), or ultracode (dynamic workflows)",
-    "confidence": "verified",
-    "syntax": "/effort [level]\n/effort (opens slider)",
-    "details": "Controls how much the model thinks on each step. low/medium/high/xhigh persist across sessions; max and ultracode apply to current session only. Fable 5 supports max; Opus 4.8/4.7 support max; Opus/Sonnet 4.6 do not. Model defaults vary: Fable/Opus 4.8/Sonnet 4.6 default high; Opus 4.7 defaults xhigh. ultracode plans dynamic workflows at xhigh reasoning per turn. ultrathink keyword in prompt does one-off deep reasoning without changing session effort.",
-    "example": "/effort high\n/effort xhigh\n/effort (opens interactive slider)\n/effort auto (resets to model default)",
-    "newcomerTip": "Use high for typical work, xhigh for complex problems, low for cost-sensitive/latency-sensitive tasks. Try max only if xhigh isn't enough.",
     "source": "https://code.claude.com/docs/en/model-config.md"
   },
   {
@@ -7314,7 +6928,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-code-no-flicker-environment-variable",
     "name": "CLAUDE_CODE_NO_FLICKER environment variable",
-    "category": "cli-flag",
+    "category": "setting",
     "domain": "customization",
     "summary": "Enable fullscreen rendering at startup (flicker-free, flat memory, mouse support)",
     "confidence": "verified",
@@ -7327,7 +6941,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-code-scroll-speed-environment-variable",
     "name": "CLAUDE_CODE_SCROLL_SPEED environment variable",
-    "category": "cli-flag",
+    "category": "setting",
     "domain": "customization",
     "summary": "Multiply mouse wheel scroll distance in fullscreen mode (1-20, default auto-detected)",
     "confidence": "verified",
@@ -7340,7 +6954,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "anthropic-model-environment-variable",
     "name": "ANTHROPIC_MODEL environment variable",
-    "category": "cli-flag",
+    "category": "setting",
     "domain": "customization",
     "summary": "Set the model for current session (overrides settings, but not --model flag)",
     "confidence": "verified",
@@ -7352,7 +6966,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "anthropic-default-opus-model-sonnet-model-haiku-model-fable-model",
     "name": "ANTHROPIC_DEFAULT_OPUS_MODEL, SONNET_MODEL, HAIKU_MODEL, FABLE_MODEL",
-    "category": "cli-flag",
+    "category": "setting",
     "domain": "customization",
     "summary": "Pin model versions for your provider (Bedrock, Vertex AI, Foundry, Claude Platform on AWS)",
     "confidence": "verified",
@@ -7365,7 +6979,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "max-thinking-tokens-environment-variable",
     "name": "MAX_THINKING_TOKENS environment variable",
-    "category": "cli-flag",
+    "category": "setting",
     "domain": "customization",
     "summary": "Control extended thinking budget: 0 to disable, or a token count limit (Opus 4.6/Sonnet 4.6 only)",
     "confidence": "verified",
@@ -7378,7 +6992,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "disable-prompt-caching-disable-prompt-caching-haiku-sonnet-opus-fable",
     "name": "DISABLE_PROMPT_CACHING, DISABLE_PROMPT_CACHING_HAIKU, _SONNET, _OPUS, _FABLE",
-    "category": "cli-flag",
+    "category": "setting",
     "domain": "customization",
     "summary": "Disable prompt caching globally or per-model tier to reduce costs or debug",
     "confidence": "verified",
@@ -7390,7 +7004,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "statusline-configuration",
     "name": "/statusline configuration",
-    "category": "customization",
+    "category": "slash-command",
     "domain": "customization",
     "summary": "Custom status bar script showing model, costs, context usage, git status, or any metrics",
     "confidence": "verified",
@@ -7401,9 +7015,81 @@ export const CATALOG: CatalogItem[] = [
     "source": "https://code.claude.com/docs/en/statusline.md"
   },
   {
+    "id": "resume",
+    "name": "/resume",
+    "category": "slash-command",
+    "domain": "sessions",
+    "summary": "Switch to a different conversation from inside the current session",
+    "confidence": "verified",
+    "syntax": "/resume [<name>]",
+    "details": "Opens the session picker from within a session. Searching and keyboard shortcuts work the same as `claude --resume`. If a name is provided, it looks for exact matches across the current worktree and repository.",
+    "example": "/resume\n/resume feature-auth",
+    "newcomerTip": "This keeps you in the CLI without needing to exit and restart."
+  },
+  {
+    "id": "context",
+    "name": "/context",
+    "category": "slash-command",
+    "domain": "sessions",
+    "summary": "Display what is consuming context window space",
+    "confidence": "verified",
+    "syntax": "/context",
+    "details": "Shows a breakdown of what's in your context: system prompt, auto memory, conversation history, file contents, MCP tool definitions (deferred by default), and more. Helps you identify which features are using the most tokens.",
+    "example": "/context",
+    "newcomerTip": "Run /context when your prompts slow down—it often reveals that compaction or /clear will help."
+  },
+  {
+    "id": "compact",
+    "name": "/compact",
+    "category": "slash-command",
+    "domain": "sessions",
+    "summary": "Replace conversation history with an AI-generated summary to free context space",
+    "confidence": "verified",
+    "syntax": "/compact [<focus>]",
+    "details": "Compresses the conversation history into a summary while keeping CLAUDE.md, recent messages, and code intact. You can provide optional focus instructions to preserve certain topics. Similar to /rewind summarize, but targets the entire conversation. Claude automatically compacts when approaching context limits.",
+    "example": "/compact focus on code changes and test results",
+    "newcomerTip": "Use /compact when early setup discussions are taking up space but you still need recent work intact."
+  },
+  {
+    "id": "branch",
+    "name": "/branch",
+    "category": "slash-command",
+    "domain": "sessions",
+    "summary": "Branch the current conversation to try a different approach",
+    "confidence": "verified",
+    "syntax": "/branch [<name>]",
+    "details": "Creates a copy of the conversation so far and switches you into it, leaving the original session unchanged. The command prints two session IDs: the new branch and the original. You can return to the original by passing its ID to /resume.",
+    "example": "/branch try-streaming-approach",
+    "newcomerTip": "Use /branch when you want to explore a different direction but keep your current progress safe."
+  },
+  {
+    "id": "export",
+    "name": "/export",
+    "category": "slash-command",
+    "domain": "sessions",
+    "summary": "Export the current session conversation as readable text",
+    "confidence": "verified",
+    "syntax": "/export [<filename>]",
+    "details": "Copies the conversation to your clipboard or saves to a file. Messages and tool outputs are rendered as readable text, not raw JSON. Useful for sharing or archiving.",
+    "example": "/export\n/export session-notes.txt",
+    "newcomerTip": "Use /export to create a shareable record of your work for team review or documentation."
+  },
+  {
+    "id": "rename",
+    "name": "/rename",
+    "category": "slash-command",
+    "domain": "sessions",
+    "summary": "Rename the current session",
+    "confidence": "verified",
+    "syntax": "/rename <new-name>",
+    "details": "Changes the name of the active session. The name appears in the prompt bar and in the session picker. You can also rename from the picker with Ctrl+R.",
+    "example": "/rename auth-refactor-final",
+    "newcomerTip": "Rename descriptively before using /clear so you can find the session later with /resume <name>."
+  },
+  {
     "id": "claude-continue",
     "name": "claude --continue",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "sessions",
     "summary": "Resume the most recent session in the current directory",
     "confidence": "verified",
@@ -7415,7 +7101,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-resume",
     "name": "claude --resume",
-    "category": "shortcut",
+    "category": "cli-flag",
     "domain": "sessions",
     "summary": "Open an interactive session picker to resume any past conversation",
     "confidence": "verified",
@@ -7423,18 +7109,6 @@ export const CATALOG: CatalogItem[] = [
     "details": "Opens a searchable picker showing all sessions in the current project. Press up/down to navigate, / to search, Ctrl+A for all projects, Ctrl+W for all worktrees. Press Space to preview session content. If you supply a name, it attempts an exact match and resumes directly, or shows the picker with the name pre-filled for ambiguous matches.",
     "example": "claude --resume auth-refactor",
     "newcomerTip": "Use /resume inside an active session to switch conversations without exiting."
-  },
-  {
-    "id": "resume-3",
-    "name": "/resume",
-    "category": "slash-command",
-    "domain": "sessions",
-    "summary": "Switch to a different conversation from inside the current session",
-    "confidence": "verified",
-    "syntax": "/resume [<name>]",
-    "details": "Opens the session picker from within a session. Searching and keyboard shortcuts work the same as `claude --resume`. If a name is provided, it looks for exact matches across the current worktree and repository.",
-    "example": "/resume\n/resume feature-auth",
-    "newcomerTip": "This keeps you in the CLI without needing to exit and restart."
   },
   {
     "id": "session-picker-keyboard-shortcuts",
@@ -7461,18 +7135,6 @@ export const CATALOG: CatalogItem[] = [
     "newcomerTip": "Always name sessions when working on multiple parallel tasks. It saves time later."
   },
   {
-    "id": "rename-2",
-    "name": "/rename",
-    "category": "slash-command",
-    "domain": "sessions",
-    "summary": "Rename the current session",
-    "confidence": "verified",
-    "syntax": "/rename <new-name>",
-    "details": "Changes the name of the active session. The name appears in the prompt bar and in the session picker. You can also rename from the picker with Ctrl+R.",
-    "example": "/rename auth-refactor-final",
-    "newcomerTip": "Rename descriptively before using /clear so you can find the session later with /resume <name>."
-  },
-  {
     "id": "claude-continue-fork-session",
     "name": "claude --continue --fork-session",
     "category": "cli-flag",
@@ -7483,18 +7145,6 @@ export const CATALOG: CatalogItem[] = [
     "details": "Creates a copy of the current session with a new ID and switches you into it. The original session remains unchanged and available in the picker. This is useful when you want to explore an alternative direction without losing your current path. Permissions you approved ('allow for this session') do not carry over to the fork.",
     "example": "claude --continue --fork-session",
     "newcomerTip": "Forking and resuming the original lets you safely experiment without commitment."
-  },
-  {
-    "id": "branch-2",
-    "name": "/branch",
-    "category": "slash-command",
-    "domain": "sessions",
-    "summary": "Branch the current conversation to try a different approach",
-    "confidence": "verified",
-    "syntax": "/branch [<name>]",
-    "details": "Creates a copy of the conversation so far and switches you into it, leaving the original session unchanged. The command prints two session IDs: the new branch and the original. You can return to the original by passing its ID to /resume.",
-    "example": "/branch try-streaming-approach",
-    "newcomerTip": "Use /branch when you want to explore a different direction but keep your current progress safe."
   },
   {
     "id": "session-id-lookup",
@@ -7509,42 +7159,6 @@ export const CATALOG: CatalogItem[] = [
     "newcomerTip": "If a session doesn't show in /resume, try `claude --resume <session-id>` with the exact ID from earlier output."
   },
   {
-    "id": "clear-3",
-    "name": "/clear",
-    "category": "slash-command",
-    "domain": "sessions",
-    "summary": "Start fresh with an empty context window within the same session",
-    "confidence": "verified",
-    "syntax": "/clear",
-    "details": "Wipes the conversation history and file outputs from the context window, but the session transcript is saved and resumable. Claude can still access learnings from /memory and CLAUDE.md. Use when switching to unrelated work to avoid wasting tokens on irrelevant context.",
-    "example": "/clear",
-    "newcomerTip": "Clear between unrelated tasks to keep token costs down, but rename first so you can find the session later."
-  },
-  {
-    "id": "context-2",
-    "name": "/context",
-    "category": "slash-command",
-    "domain": "sessions",
-    "summary": "Display what is consuming context window space",
-    "confidence": "verified",
-    "syntax": "/context",
-    "details": "Shows a breakdown of what's in your context: system prompt, auto memory, conversation history, file contents, MCP tool definitions (deferred by default), and more. Helps you identify which features are using the most tokens.",
-    "example": "/context",
-    "newcomerTip": "Run /context when your prompts slow down—it often reveals that compaction or /clear will help."
-  },
-  {
-    "id": "compact-2",
-    "name": "/compact",
-    "category": "slash-command",
-    "domain": "sessions",
-    "summary": "Replace conversation history with an AI-generated summary to free context space",
-    "confidence": "verified",
-    "syntax": "/compact [<focus>]",
-    "details": "Compresses the conversation history into a summary while keeping CLAUDE.md, recent messages, and code intact. You can provide optional focus instructions to preserve certain topics. Similar to /rewind summarize, but targets the entire conversation. Claude automatically compacts when approaching context limits.",
-    "example": "/compact focus on code changes and test results",
-    "newcomerTip": "Use /compact when early setup discussions are taking up space but you still need recent work intact."
-  },
-  {
     "id": "esc-esc-rewind-menu",
     "name": "Esc Esc (rewind menu)",
     "category": "shortcut",
@@ -7555,18 +7169,6 @@ export const CATALOG: CatalogItem[] = [
     "details": "Opens a menu showing every prompt in the session. Select a point and choose 'Restore code and conversation', 'Restore conversation', 'Restore code', 'Summarize from here', or 'Summarize up to here'. If the prompt input is not empty, Esc clears it instead (the text is saved to history).",
     "example": "Press Esc twice when the prompt box is empty",
     "newcomerTip": "Rewind is your safety net—always use it before asking Claude to try something risky."
-  },
-  {
-    "id": "rewind-2",
-    "name": "/rewind",
-    "category": "slash-command",
-    "domain": "sessions",
-    "summary": "Open the rewind menu with explicit command invocation",
-    "confidence": "verified",
-    "syntax": "/rewind",
-    "details": "Same as pressing Esc Esc, but as an explicit command. Useful when Esc is bound to something else or when you have text in the prompt box.",
-    "example": "/rewind",
-    "newcomerTip": "Use /rewind when Esc Esc doesn't work, or just press Esc Esc for faster access."
   },
   {
     "id": "checkpoint-safety-mechanism",
@@ -7711,18 +7313,6 @@ export const CATALOG: CatalogItem[] = [
     "details": "Each session is a continuous JSONL transcript. Messages, tool uses, and metadata are written as you work. Sessions expire after 30 days by default (configurable via cleanupPeriodDays). To suppress transcript writes, set CLAUDE_CODE_SKIP_PROMPT_HISTORY. To store elsewhere, set CLAUDE_CONFIG_DIR.",
     "example": "~/.claude/projects/my-project/abc12345.jsonl",
     "newcomerTip": "Sessions are plaintext—you can review or audit them directly. Transcripts survive session exit."
-  },
-  {
-    "id": "export-2",
-    "name": "/export",
-    "category": "slash-command",
-    "domain": "sessions",
-    "summary": "Export the current session conversation as readable text",
-    "confidence": "verified",
-    "syntax": "/export [<filename>]",
-    "details": "Copies the conversation to your clipboard or saves to a file. Messages and tool outputs are rendered as readable text, not raw JSON. Useful for sharing or archiving.",
-    "example": "/export\n/export session-notes.txt",
-    "newcomerTip": "Use /export to create a shareable record of your work for team review or documentation."
   },
   {
     "id": "cost-and-usage",
@@ -8195,7 +7785,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "reverse-search-keyboard-shortcut-ctrl-s",
     "name": "Reverse search keyboard shortcut Ctrl+S",
-    "category": "concept",
+    "category": "shortcut",
     "domain": "interactive",
     "summary": "In reverse history search (initiated with Ctrl+R), press Ctrl+S to cycle scope through this session, this project, and all projects",
     "confidence": "advanced",
@@ -8205,7 +7795,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "jump-to-previous-next-user-prompt",
     "name": "Jump to previous/next user prompt",
-    "category": "concept",
+    "category": "shortcut",
     "domain": "interactive",
     "summary": "In fullscreen rendering with transcript viewer open, press { to jump to previous user prompt or } to jump to next user prompt, like vim paragraph motion",
     "confidence": "advanced",
@@ -8216,7 +7806,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "write-scrollback-to-native-terminal-buffer",
     "name": "Write scrollback to native terminal buffer",
-    "category": "concept",
+    "category": "shortcut",
     "domain": "interactive",
     "summary": "In fullscreen rendering, press [ to write full conversation to terminal's native scrollback so Cmd+F, tmux copy mode, and other native search tools can find it",
     "confidence": "advanced",
@@ -8226,7 +7816,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "open-conversation-in-editor",
     "name": "Open conversation in editor",
-    "category": "concept",
+    "category": "shortcut",
     "domain": "interactive",
     "summary": "In fullscreen rendering, press v to write conversation to temp file and open in $VISUAL or $EDITOR",
     "confidence": "advanced",
@@ -8234,20 +7824,9 @@ export const CATALOG: CatalogItem[] = [
     "source": "https://code.claude.com/docs/en/interactive-mode.md"
   },
   {
-    "id": "simplify-2",
-    "name": "/simplify",
-    "category": "concept",
-    "domain": "slash",
-    "summary": "Review changed code for cleanup opportunities (reuse, simplification, efficiency, abstraction level) and apply fixes. Four review agents run in parallel. Does not hunt for correctness bugs (use /code-review for that). Available as bundled skill from v2.1.154+",
-    "confidence": "advanced",
-    "syntax": "/simplify [target]",
-    "example": "/simplify src/auth.ts",
-    "source": "https://code.claude.com/docs/en/commands.md"
-  },
-  {
     "id": "fewer-permission-prompts",
     "name": "/fewer-permission-prompts",
-    "category": "concept",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Scan transcripts for common read-only Bash and MCP tool calls, then add a prioritized allowlist to project .claude/settings.json to reduce permission prompts during development",
     "confidence": "advanced",
@@ -8258,7 +7837,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "scroll-speed",
     "name": "/scroll-speed",
-    "category": "concept",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Adjust mouse wheel scroll speed interactively in fullscreen rendering mode with a ruler preview",
     "confidence": "advanced",
@@ -8269,7 +7848,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "remote-env",
     "name": "/remote-env",
-    "category": "concept",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Choose the default environment for cloud agents running on Claude Code on the web",
     "confidence": "advanced",
@@ -8279,7 +7858,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "workflows",
     "name": "/workflows",
-    "category": "concept",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Open the workflow progress view to watch, pause, resume, or save running and completed workflows",
     "confidence": "advanced",
@@ -8289,7 +7868,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "bashes",
     "name": "/bashes",
-    "category": "concept",
+    "category": "slash-command",
     "domain": "slash",
     "summary": "Alias for /tasks. View and manage everything running in the background",
     "confidence": "advanced",
@@ -8299,7 +7878,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "disable-slash-commands",
     "name": "--disable-slash-commands",
-    "category": "concept",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Disable all skills and commands for this session",
     "confidence": "advanced",
@@ -8307,19 +7886,9 @@ export const CATALOG: CatalogItem[] = [
     "source": "https://code.claude.com/docs/en/cli-reference.md"
   },
   {
-    "id": "ax-screen-reader-2",
-    "name": "--ax-screen-reader",
-    "category": "concept",
-    "domain": "cli",
-    "summary": "Render screen-reader friendly output with flat text without decorative borders or animations. Forces classic renderer. Takes precedence over CLAUDE_AX_SCREEN_READER env var and axScreenReader setting. Added in v2.1.181",
-    "confidence": "advanced",
-    "syntax": "claude --ax-screen-reader",
-    "source": "https://code.claude.com/docs/en/cli-reference.md"
-  },
-  {
     "id": "input-format",
     "name": "--input-format",
-    "category": "concept",
+    "category": "cli-flag",
     "domain": "cli",
     "summary": "Specify input format for print mode (options: text, stream-json)",
     "confidence": "advanced",
@@ -8327,140 +7896,9 @@ export const CATALOG: CatalogItem[] = [
     "source": "https://code.claude.com/docs/en/cli-reference.md"
   },
   {
-    "id": "json-schema-2",
-    "name": "--json-schema",
-    "category": "concept",
-    "domain": "cli",
-    "summary": "Get validated JSON output matching a JSON Schema after agent completes its workflow (print mode only). See structured outputs documentation",
-    "confidence": "advanced",
-    "syntax": "claude -p --json-schema '{\"type\":\"object\",\"properties\":{...}}' \"query\"",
-    "source": "https://code.claude.com/docs/en/cli-reference.md"
-  },
-  {
-    "id": "max-budget-usd-2",
-    "name": "--max-budget-usd",
-    "category": "concept",
-    "domain": "cli",
-    "summary": "Set maximum dollar amount to spend on API calls before stopping (print mode only)",
-    "confidence": "advanced",
-    "syntax": "claude -p --max-budget-usd 5.00 \"query\"",
-    "source": "https://code.claude.com/docs/en/cli-reference.md"
-  },
-  {
-    "id": "maintenance-2",
-    "name": "--maintenance",
-    "category": "concept",
-    "domain": "cli",
-    "summary": "Run Setup hooks with the maintenance matcher before the session (print mode only)",
-    "confidence": "advanced",
-    "syntax": "claude -p --maintenance \"query\"",
-    "source": "https://code.claude.com/docs/en/cli-reference.md"
-  },
-  {
-    "id": "init-3",
-    "name": "--init",
-    "category": "concept",
-    "domain": "cli",
-    "summary": "Run Setup hooks with the init matcher before the session (print mode only)",
-    "confidence": "advanced",
-    "syntax": "claude -p --init \"query\"",
-    "source": "https://code.claude.com/docs/en/cli-reference.md"
-  },
-  {
-    "id": "init-only-2",
-    "name": "--init-only",
-    "category": "concept",
-    "domain": "cli",
-    "summary": "Run Setup and SessionStart hooks, then exit without starting a conversation",
-    "confidence": "advanced",
-    "syntax": "claude --init-only",
-    "source": "https://code.claude.com/docs/en/cli-reference.md"
-  },
-  {
-    "id": "exclude-dynamic-system-prompt-sections-2",
-    "name": "--exclude-dynamic-system-prompt-sections",
-    "category": "concept",
-    "domain": "cli",
-    "summary": "Move per-machine sections from system prompt (cwd, env info, memory paths, git-repo flag) into first user message. Improves prompt-cache reuse across machines/users. Works with default system prompt only",
-    "confidence": "advanced",
-    "syntax": "claude -p --exclude-dynamic-system-prompt-sections \"query\"",
-    "source": "https://code.claude.com/docs/en/cli-reference.md"
-  },
-  {
-    "id": "fallback-model-2",
-    "name": "--fallback-model",
-    "category": "concept",
-    "domain": "cli",
-    "summary": "Enable automatic fallback to specified model(s) when primary is overloaded. Accepts comma-separated list tried in order",
-    "confidence": "advanced",
-    "syntax": "claude --fallback-model sonnet,haiku",
-    "source": "https://code.claude.com/docs/en/cli-reference.md"
-  },
-  {
-    "id": "from-pr-2",
-    "name": "--from-pr",
-    "category": "concept",
-    "domain": "cli",
-    "summary": "Resume sessions linked to a specific pull request. Accepts PR number, GitHub URL, GitLab MR URL, or Bitbucket PR URL. Sessions auto-link when Claude creates the PR",
-    "confidence": "advanced",
-    "syntax": "claude --from-pr 123",
-    "source": "https://code.claude.com/docs/en/cli-reference.md"
-  },
-  {
-    "id": "no-chrome-2",
-    "name": "--no-chrome",
-    "category": "concept",
-    "domain": "cli",
-    "summary": "Disable Chrome browser integration for this session",
-    "confidence": "advanced",
-    "syntax": "claude --no-chrome",
-    "source": "https://code.claude.com/docs/en/cli-reference.md"
-  },
-  {
-    "id": "permission-prompt-tool-2",
-    "name": "--permission-prompt-tool",
-    "category": "concept",
-    "domain": "cli",
-    "summary": "Specify an MCP tool to handle permission prompts in non-interactive mode",
-    "confidence": "advanced",
-    "syntax": "claude -p --permission-prompt-tool mcp_auth_tool \"query\"",
-    "source": "https://code.claude.com/docs/en/cli-reference.md"
-  },
-  {
-    "id": "replay-user-messages-2",
-    "name": "--replay-user-messages",
-    "category": "concept",
-    "domain": "cli",
-    "summary": "Re-emit user messages from stdin back on stdout for acknowledgment. Requires stream-json format on both input and output",
-    "confidence": "advanced",
-    "syntax": "claude -p --input-format stream-json --output-format stream-json --replay-user-messages",
-    "source": "https://code.claude.com/docs/en/cli-reference.md"
-  },
-  {
-    "id": "safe-mode-2",
-    "name": "--safe-mode",
-    "category": "concept",
-    "domain": "cli",
-    "summary": "Start with all customizations disabled (CLAUDE.md, skills, plugins, hooks, MCP servers, custom commands, output styles, themes, keybindings) but keeping auth, model selection, built-in tools, and permissions. Added in v2.1.169. Sets CLAUDE_CODE_SAFE_MODE env var",
-    "confidence": "advanced",
-    "syntax": "claude --safe-mode",
-    "newcomerTip": "Useful for troubleshooting broken configurations or checking if customization causes fallback",
-    "source": "https://code.claude.com/docs/en/cli-reference.md"
-  },
-  {
-    "id": "teammate-mode-2",
-    "name": "--teammate-mode",
-    "category": "concept",
-    "domain": "cli",
-    "summary": "Set how agent team teammates display: in-process (default), auto, tmux, or iterm2 (v2.1.186+). Overrides teammateMode setting",
-    "confidence": "advanced",
-    "syntax": "claude --teammate-mode auto",
-    "source": "https://code.claude.com/docs/en/cli-reference.md"
-  },
-  {
     "id": "setup-hook-event",
     "name": "Setup hook event",
-    "category": "concept",
+    "category": "hook",
     "domain": "hooks",
     "summary": "Hook event that runs setup tasks before the session, triggered by --init or --maintenance flags or @matcher. Can modify the working directory or install tools",
     "confidence": "advanced",
@@ -8470,7 +7908,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "instructionsloaded-hook-event",
     "name": "InstructionsLoaded hook event",
-    "category": "concept",
+    "category": "hook",
     "domain": "hooks",
     "summary": "Hook event fired after CLAUDE.md files and project memory load. Useful for validating or augmenting project instructions",
     "confidence": "advanced",
@@ -8480,7 +7918,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "userpromptexpansion-hook-event",
     "name": "UserPromptExpansion hook event",
-    "category": "concept",
+    "category": "hook",
     "domain": "hooks",
     "summary": "Hook event that fires when user submits text starting with @ or / but before command/file expansion. Can modify or reject the expansion",
     "confidence": "advanced",
@@ -8490,7 +7928,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "posttoolbatch-hook-event",
     "name": "PostToolBatch hook event",
-    "category": "concept",
+    "category": "hook",
     "domain": "hooks",
     "summary": "Hook event fired after all tools in a batch complete. Receives results from all tools in the batch for aggregate handling",
     "confidence": "advanced",
@@ -8500,7 +7938,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "posttoolusefailure-hook-event",
     "name": "PostToolUseFailure hook event",
-    "category": "concept",
+    "category": "hook",
     "domain": "hooks",
     "summary": "Hook event fired when a tool call fails. Can be used to log failures, retry, or provide alternate data",
     "confidence": "advanced",
@@ -8510,7 +7948,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "teammateidle-hook-event",
     "name": "TeammateIdle hook event",
-    "category": "concept",
+    "category": "hook",
     "domain": "hooks",
     "summary": "Hook event fired when an agent team teammate becomes idle. Can be used to reassign work or check on progress",
     "confidence": "advanced",
@@ -8520,7 +7958,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "configchange-hook-event",
     "name": "ConfigChange hook event",
-    "category": "concept",
+    "category": "hook",
     "domain": "hooks",
     "summary": "Hook event fired when settings or configuration change during a session. Can be used to validate, log, or react to config changes",
     "confidence": "advanced",
@@ -8530,7 +7968,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "cwdchanged-hook-event",
     "name": "CwdChanged hook event",
-    "category": "concept",
+    "category": "hook",
     "domain": "hooks",
     "summary": "Hook event fired when the current working directory changes (via /cd). Input includes old and new paths",
     "confidence": "advanced",
@@ -8540,7 +7978,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "filechanged-hook-event",
     "name": "FileChanged hook event",
-    "category": "concept",
+    "category": "hook",
     "domain": "hooks",
     "summary": "Hook event fired when files change on disk outside of Claude's edits. Can be used to reload context or re-read files",
     "confidence": "advanced",
@@ -8550,7 +7988,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "worktreecreate-hook-event",
     "name": "WorktreeCreate hook event",
-    "category": "concept",
+    "category": "hook",
     "domain": "hooks",
     "summary": "Hook event fired when a new git worktree is created. Includes worktree path and branch information",
     "confidence": "advanced",
@@ -8560,7 +7998,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "worktreeremove-hook-event",
     "name": "WorktreeRemove hook event",
-    "category": "concept",
+    "category": "hook",
     "domain": "hooks",
     "summary": "Hook event fired when a git worktree is removed. Includes the worktree path being removed",
     "confidence": "advanced",
@@ -8570,7 +8008,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "precompact-hook-event",
     "name": "PreCompact hook event",
-    "category": "concept",
+    "category": "hook",
     "domain": "hooks",
     "summary": "Hook event fired before conversation compaction starts. Can be used to save state or reject compaction",
     "confidence": "advanced",
@@ -8580,7 +8018,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "postcompact-hook-event",
     "name": "PostCompact hook event",
-    "category": "concept",
+    "category": "hook",
     "domain": "hooks",
     "summary": "Hook event fired after conversation compaction completes. Can be used to log compaction or verify results",
     "confidence": "advanced",
@@ -8590,7 +8028,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "sessionend-hook-event",
     "name": "SessionEnd hook event",
-    "category": "concept",
+    "category": "hook",
     "domain": "hooks",
     "summary": "Hook event fired when a session ends. Can be used to clean up resources, save artifacts, or log metrics",
     "confidence": "advanced",
@@ -8600,7 +8038,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "elicitation-hook-event",
     "name": "Elicitation hook event",
-    "category": "concept",
+    "category": "hook",
     "domain": "hooks",
     "summary": "Hook event fired when an MCP server requests information from Claude. Can provide data or reject the request",
     "confidence": "advanced",
@@ -8610,7 +8048,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "elicitationresult-hook-event",
     "name": "ElicitationResult hook event",
-    "category": "concept",
+    "category": "hook",
     "domain": "hooks",
     "summary": "Hook event fired after Claude responds to an MCP elicitation request. Can be used to log or validate the response",
     "confidence": "advanced",
@@ -8620,7 +8058,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "respondtobashcommands-setting",
     "name": "respondToBashCommands setting",
-    "category": "concept",
+    "category": "setting",
     "domain": "settings",
     "summary": "Boolean setting that controls whether Claude automatically responds to shell mode (!) commands. Default true. Set to false to restore older behavior where output is added to context without response",
     "confidence": "advanced",
@@ -8630,7 +8068,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "viewmode-setting",
     "name": "viewMode setting",
-    "category": "concept",
+    "category": "setting",
     "domain": "settings",
     "summary": "Set default view mode for sessions: focus (show only last prompt/response) or normal (show full history). Can be overridden per-session with /focus",
     "confidence": "advanced",
@@ -8640,7 +8078,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "fallbackmodel-setting",
     "name": "fallbackModel setting",
-    "category": "concept",
+    "category": "setting",
     "domain": "settings",
     "summary": "Comma-separated list of model fallback chain for when primary model is overloaded. Overridable with --fallback-model flag",
     "confidence": "advanced",
@@ -8650,7 +8088,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "advisormodel-setting",
     "name": "advisorModel setting",
-    "category": "concept",
+    "category": "setting",
     "domain": "settings",
     "summary": "Set default advisor model (opus, sonnet, fable, or full model ID). Can be overridden with /advisor command or --advisor flag",
     "confidence": "advanced",
@@ -8660,7 +8098,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "axscreenreader-setting",
     "name": "axScreenReader setting",
-    "category": "concept",
+    "category": "setting",
     "domain": "settings",
     "summary": "Boolean setting for screen-reader friendly output (flat text without decorative borders). Can be overridden with --ax-screen-reader flag",
     "confidence": "advanced",
@@ -8670,7 +8108,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "teammatemode-setting",
     "name": "teammateMode setting",
-    "category": "concept",
+    "category": "setting",
     "domain": "settings",
     "summary": "Default display mode for agent team teammates: in-process, auto, tmux, or iterm2. Can be overridden with --teammate-mode flag",
     "confidence": "advanced",
@@ -8680,7 +8118,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-code-skip-prompt-history",
     "name": "CLAUDE_CODE_SKIP_PROMPT_HISTORY",
-    "category": "concept",
+    "category": "setting",
     "domain": "settings",
     "summary": "Environment variable that disables session persistence so sessions are not saved to disk and cannot be resumed. Works across all modes (equivalent to --no-session-persistence)",
     "confidence": "advanced",
@@ -8690,7 +8128,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-remote-control-session-name-prefix",
     "name": "CLAUDE_REMOTE_CONTROL_SESSION_NAME_PREFIX",
-    "category": "concept",
+    "category": "setting",
     "domain": "settings",
     "summary": "Prefix for auto-generated Remote Control session names when no explicit name is set. Defaults to machine hostname",
     "confidence": "advanced",
@@ -8700,7 +8138,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-code-enable-prompt-suggestion",
     "name": "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION",
-    "category": "concept",
+    "category": "setting",
     "domain": "settings",
     "summary": "Environment variable to disable prompt suggestions globally. Set to 0 or false to turn off suggestions",
     "confidence": "advanced",
@@ -8710,7 +8148,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-code-disable-background-tasks",
     "name": "CLAUDE_CODE_DISABLE_BACKGROUND_TASKS",
-    "category": "concept",
+    "category": "setting",
     "domain": "settings",
     "summary": "Environment variable to disable all background task functionality. Set to 1 to turn off background commands with Ctrl+B",
     "confidence": "advanced",
@@ -8720,7 +8158,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-code-task-list-id",
     "name": "CLAUDE_CODE_TASK_LIST_ID",
-    "category": "concept",
+    "category": "setting",
     "domain": "settings",
     "summary": "Environment variable to share a task list across sessions. Set to named directory in ~/.claude/tasks/ to use persistent task tracking",
     "confidence": "advanced",
@@ -8730,7 +8168,7 @@ export const CATALOG: CatalogItem[] = [
   {
     "id": "claude-code-new-init",
     "name": "CLAUDE_CODE_NEW_INIT",
-    "category": "concept",
+    "category": "setting",
     "domain": "settings",
     "summary": "Environment variable that enables interactive flow for /init command, walking through skills, hooks, and personal memory setup",
     "confidence": "advanced",

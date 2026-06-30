@@ -1,6 +1,4 @@
 {
-  "domainCount": 12,
-  "totalItems": 674,
   "catalogs": [
     {
       "domain": "Claude Code Terminal/REPL Interactive Controls",
@@ -25,15 +23,6 @@
           "platformNotes": "Same across macOS, Windows, Linux/WSL"
         },
         {
-          "name": "Ctrl+L",
-          "category": "shortcut",
-          "summary": "Redraw screen / force full terminal redraw",
-          "details": "Forces a complete redraw of the terminal display while preserving input and conversation history. Useful when display becomes garbled or partially blank.",
-          "syntax": "Press Ctrl+L",
-          "example": "If text becomes corrupted: press Ctrl+L to refresh",
-          "platformNotes": "Same across platforms"
-        },
-        {
           "name": "Ctrl+R (Reverse History Search)",
           "category": "shortcut",
           "summary": "Interactively search through command history",
@@ -41,15 +30,6 @@
           "syntax": "Press Ctrl+R, type query, press Ctrl+R to cycle, Ctrl+S to change scope",
           "example": "Ctrl+R → type 'build' → shows matching commands → Ctrl+R again to see older matches → Enter to run",
           "platformNotes": "Same across platforms; scope cycling with Ctrl+S available everywhere"
-        },
-        {
-          "name": "Ctrl+O",
-          "category": "shortcut",
-          "summary": "Toggle transcript viewer",
-          "details": "Shows detailed tool usage and execution details. Expands MCP calls (which normally collapse to 'Called slack 3 times'). Press again to hide.",
-          "syntax": "Press Ctrl+O",
-          "example": "While working: press Ctrl+O to see full tool invocation details",
-          "platformNotes": "Same across platforms"
         },
         {
           "name": "Ctrl+V / Alt+V",
@@ -114,15 +94,6 @@
           "syntax": "Press Esc, release, press Esc again",
           "example": "Long prompt typed → Esc Esc → clears and saves. Later: Up → recalled. Or empty prompt: Esc Esc → rewind menu opens",
           "platformNotes": "Same across platforms"
-        },
-        {
-          "name": "Shift+Tab",
-          "category": "shortcut",
-          "summary": "Cycle permission modes",
-          "details": "Cycles through permission modes: default → acceptEdits → plan → auto (if enabled) → bypassPermissions (if enabled) → back to default. Respects modes in /config or settings.json.",
-          "syntax": "Press Shift+Tab",
-          "example": "In default mode: Shift+Tab → auto mode (for auto-approval), Shift+Tab again → plan mode",
-          "platformNotes": "Windows without VT mode (old Node/Bun): defaults to Alt+M instead; macOS sometimes uses Alt+M"
         },
         {
           "name": "Alt+M",
@@ -370,75 +341,12 @@
           "newcomerTip": "Use for quick context lookups while a long task runs, without derailing the main work"
         },
         {
-          "name": "/config",
-          "category": "slash-command",
-          "summary": "Open settings menu",
-          "details": "Configure model, editor mode (vim), permission mode defaults, theme, session recap, other preferences. Changes apply immediately.",
-          "syntax": "Type /config",
-          "example": "/config → Editor mode → select 'vim' → vim keybindings now active",
-          "platformNotes": "Same across platforms"
-        },
-        {
-          "name": "/theme",
-          "category": "slash-command",
-          "summary": "Choose or create custom theme",
-          "details": "Select from built-in presets (dark, light, auto) or create custom theme with overridden color tokens. Custom themes saved to ~/.claude/themes/ as JSON.",
-          "syntax": "Type /theme",
-          "example": "/theme → select 'auto' → theme auto-switches with OS dark/light mode",
-          "platformNotes": "Same across platforms"
-        },
-        {
-          "name": "/terminal-setup",
-          "category": "slash-command",
-          "summary": "Configure terminal for Shift+Enter and keybindings",
-          "details": "One-time setup for VS Code, Cursor, Devin Desktop, Alacritty, Zed to enable Shift+Enter for newlines and other keybindings. Also updates GPU acceleration and scroll sensitivity settings. Run in host terminal, not inside tmux.",
-          "syntax": "Type /terminal-setup",
-          "example": "/terminal-setup → VS Code terminal now supports Shift+Enter",
-          "platformNotes": "For VS Code, Cursor, Devin Desktop, Alacritty, Zed only"
-        },
-        {
-          "name": "/keybindings",
-          "category": "slash-command",
-          "summary": "Create or open keybindings.json editor",
-          "details": "Opens ~/.claude/keybindings.json in default editor. Configure custom keybindings by context (Chat, Global, Confirmation, etc.). Changes auto-detected without restart.",
-          "syntax": "Type /keybindings",
-          "example": "/keybindings → vim opens file → add custom binding → save → binding active immediately",
-          "platformNotes": "Same across platforms"
-        },
-        {
-          "name": "/clear",
-          "category": "slash-command",
-          "summary": "Start new session, preserve prior conversation",
-          "details": "Clears input history for current session but keeps conversation accessible via /resume. Resets task list.",
-          "syntax": "Type /clear",
-          "example": "/clear → new session starts → /resume → previous conversation restored",
-          "platformNotes": "Same across platforms"
-        },
-        {
           "name": "/recap",
           "category": "slash-command",
           "summary": "Generate session summary on demand",
           "details": "Manually generate a one-line recap of session progress. Normally appears automatically after 3+ turns and 3+ minutes away from terminal.",
           "syntax": "Type /recap",
           "example": "/recap → 'Fixed bug in auth, added tests, ready to merge'",
-          "platformNotes": "Same across platforms"
-        },
-        {
-          "name": "/resume",
-          "category": "slash-command",
-          "summary": "Resume previous conversation",
-          "details": "When a session cleared with /clear, list prior sessions and restore one.",
-          "syntax": "Type /resume",
-          "example": "/resume → pick previous session → conversation restored",
-          "platformNotes": "Same across platforms"
-        },
-        {
-          "name": "/voice",
-          "category": "slash-command",
-          "summary": "Configure voice dictation",
-          "details": "Enable/disable voice input, switch between hold-to-record and tap-to-toggle, rebind dictation key.",
-          "syntax": "Type /voice",
-          "example": "/voice → tap → Space now tap-to-toggle; hold → Space hold-to-record",
           "platformNotes": "Same across platforms"
         },
         {
@@ -728,17 +636,17 @@
       "overview": "Slash commands are the primary interface for controlling Claude Code—they provide quick ways to switch models, manage permissions, clear context, run workflows, and configure your environment. Commands are recognized at the start of a message, followed by optional arguments. Type `/` to see all available commands or `/search` to filter. Built-in commands are coded into the CLI, while bundled skills and custom commands are prompts Claude executes.",
       "items": [
         {
-          "name": "/help",
-          "category": "shortcut",
-          "summary": "Show help and available commands",
-          "syntax": "/help",
-          "example": "Type `/help` to see the full command list",
-          "details": "Displays all available commands in the current session. Use `/` alone to see an interactive command list with filtering",
-          "newcomerTip": "Start here when you're unsure what commands are available. Commands that aren't available for your setup (e.g., `/desktop` on Linux) won't appear"
+          "name": "/config",
+          "category": "slash-command",
+          "summary": "Open Settings interface or set configuration directly",
+          "syntax": "/config [key=value ...]",
+          "example": "/config\n/config thinking=false\n/config theme=dark model=sonnet",
+          "details": "Open Settings UI to adjust theme, model, output style, and other preferences. From v2.1.181, pass `key=value` pairs to set settings directly without opening the UI. Works in non-interactive mode. Alias: `/settings`. Run `/config --help` to see all settable keys",
+          "newcomerTip": "Use the UI to explore options. Use `key=value` form in scripts or when you know what you want to change"
         },
         {
           "name": "/clear",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Start a new conversation with empty context",
           "syntax": "/clear [name]",
           "example": "/clear\n/clear fixing-auth-bug",
@@ -747,46 +655,26 @@
           "platformNotes": "Aliases: `/reset`, `/new`"
         },
         {
-          "name": "/context",
-          "category": "shortcut",
-          "summary": "Visualize current context usage",
-          "syntax": "/context [all]",
-          "example": "/context",
-          "details": "Shows context usage as a colored grid, with optimization suggestions for context-heavy tools, memory bloat, and capacity warnings. Pass `all` to expand the full per-item breakdown",
-          "newcomerTip": "Run this when your session feels slow—it shows what's consuming tokens and suggests optimizations"
+          "name": "/voice",
+          "category": "slash-command",
+          "summary": "Toggle voice dictation on or off",
+          "syntax": "/voice [hold|tap|off]",
+          "example": "/voice hold\n/voice off",
+          "details": "Enable voice input in hold or tap mode. Requires a Claude.ai account. `hold` = hold spacebar to talk, `tap` = tap spacebar to toggle",
+          "newcomerTip": "Use for hands-free input when you need to keep your hands free or when typing is uncomfortable"
         },
         {
-          "name": "/compact",
-          "category": "shortcut",
-          "summary": "Free up context by summarizing the conversation",
-          "syntax": "/compact [instructions]",
-          "example": "/compact\n/compact keep the auth implementation but summarize the exploration",
-          "details": "Summarizes the conversation to free context space. Optionally pass focus instructions to guide the summary. Skills loaded via `/skill-name` survive compaction (first 5,000 tokens per skill, 25,000 total across all skills)",
-          "newcomerTip": "Use when context is nearly full. Claude handles this automatically, but you can trigger it manually to control what gets summarized"
-        },
-        {
-          "name": "/model",
-          "category": "shortcut",
-          "summary": "Switch the AI model",
-          "syntax": "/model [model]",
-          "example": "/model sonnet\n/model opus",
-          "details": "Switch between claude-opus, claude-sonnet, claude-haiku, or other available models. With no argument, opens a picker. For models that support it, use arrow keys to adjust effort level. Press `s` to switch only for the current session (not saved as default)",
-          "newcomerTip": "Opus is slower but smarter, Sonnet is balanced, Haiku is fast and cheap. Switch models mid-session if a task is harder or simpler than expected",
-          "source": "https://code.claude.com/docs/en/commands.md"
-        },
-        {
-          "name": "/effort",
-          "category": "shortcut",
-          "summary": "Set the model effort level",
-          "syntax": "/effort [low|medium|high|xhigh|max|ultracode|auto]",
-          "example": "/effort high\n/effort max",
-          "details": "Control how much reasoning the model uses. `low` is fast, `high`/`xhigh`/`max` spend more tokens on thinking. `ultracode` combines `xhigh` with automatic workflow orchestration. `auto` resets to the model default. Available levels depend on the model. Without argument, opens an interactive slider",
-          "newcomerTip": "Use `high` or `xhigh` for complex architectural or debugging tasks. Use `low` for simple edits to save tokens. `max` is session-only and not saved",
-          "source": "https://code.claude.com/docs/en/commands.md"
+          "name": "/help",
+          "category": "slash-command",
+          "summary": "Show help and available commands",
+          "syntax": "/help",
+          "example": "Type `/help` to see the full command list",
+          "details": "Displays all available commands in the current session. Use `/` alone to see an interactive command list with filtering",
+          "newcomerTip": "Start here when you're unsure what commands are available. Commands that aren't available for your setup (e.g., `/desktop` on Linux) won't appear"
         },
         {
           "name": "/plan",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Enter plan mode before a large change",
           "syntax": "/plan [description]",
           "example": "/plan refactor the auth module\n/plan",
@@ -795,7 +683,7 @@
         },
         {
           "name": "/diff",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Open an interactive diff viewer",
           "syntax": "/diff",
           "example": "/diff",
@@ -832,7 +720,7 @@
         },
         {
           "name": "/security-review",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Analyze pending changes for security vulnerabilities",
           "syntax": "/security-review",
           "example": "/security-review",
@@ -841,7 +729,7 @@
         },
         {
           "name": "/rewind",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Roll code and conversation back to a checkpoint",
           "syntax": "/rewind",
           "example": "/rewind",
@@ -849,26 +737,8 @@
           "newcomerTip": "Use when you went down the wrong path. Unlike `/clear`, this keeps everything but lets you go back in time"
         },
         {
-          "name": "/resume",
-          "category": "shortcut",
-          "summary": "Resume a previous conversation",
-          "syntax": "/resume [session]",
-          "example": "/resume\n/resume auth-bug-fix",
-          "details": "Resume a conversation by ID or name, or open the session picker. As of v2.1.144, background sessions appear marked with `bg`. Alias: `/continue`",
-          "newcomerTip": "Use after `/clear` to jump back to an earlier conversation. The picker shows recent sessions and labels from previous `/clear` commands"
-        },
-        {
-          "name": "/branch",
-          "category": "shortcut",
-          "summary": "Create a branch of the current conversation",
-          "syntax": "/branch [name]",
-          "example": "/branch\n/branch try-different-approach",
-          "details": "Create a branch of the current conversation at this point, trying a different direction without losing the current state. Preserves the original, which you return to with `/resume`. For background subagents instead, use `/fork`",
-          "newcomerTip": "Use when you want to explore two different approaches in parallel. Switch between them with `/resume`"
-        },
-        {
           "name": "/fork",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Spawn a forked subagent to work on a directive",
           "syntax": "/fork <directive>",
           "example": "/fork investigate the database query performance issue",
@@ -876,17 +746,8 @@
           "newcomerTip": "Use when you want Claude to investigate something in parallel while you continue on the main task"
         },
         {
-          "name": "/btw",
-          "category": "shortcut",
-          "summary": "Ask a quick side question without adding to conversation history",
-          "syntax": "/btw <question>",
-          "example": "/btw what's the syntax for async/await in TypeScript?",
-          "details": "Ask a quick question that doesn't bloat your conversation history. Perfect for quick clarifications while staying focused on the main task",
-          "newcomerTip": "Use when you need a quick answer that's not central to the current task"
-        },
-        {
           "name": "/init",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Initialize project with a CLAUDE.md guide",
           "syntax": "/init",
           "example": "/init",
@@ -895,7 +756,7 @@
         },
         {
           "name": "/memory",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Edit CLAUDE.md memory files and manage auto-memory",
           "syntax": "/memory",
           "example": "/memory",
@@ -904,7 +765,7 @@
         },
         {
           "name": "/permissions",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Manage allow, ask, and deny rules for tool permissions",
           "syntax": "/permissions",
           "example": "/permissions",
@@ -912,17 +773,8 @@
           "newcomerTip": "Use to approve tools Claude uses frequently (like `git`) so you stop seeing permission prompts. Or deny dangerous tools for autonomous tasks"
         },
         {
-          "name": "/mcp",
-          "category": "shortcut",
-          "summary": "Manage MCP server connections and OAuth authentication",
-          "syntax": "/mcp [reconnect <server>|enable|disable [<server>|all]]",
-          "example": "/mcp\n/mcp reconnect github\n/mcp enable all",
-          "details": "Opens an interactive list of MCP servers to connect/disconnect, or directly enable/disable servers without opening the dialog. Manage authentication and integration with external tools",
-          "newcomerTip": "Use to connect tools like GitHub, Slack, Jira, or Google Drive to Claude Code. Run once with no arguments to see what's available"
-        },
-        {
           "name": "/agents",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Manage agent (subagent) configurations",
           "syntax": "/agents",
           "example": "/agents",
@@ -931,7 +783,7 @@
         },
         {
           "name": "/tasks",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "View and manage everything running in the background",
           "syntax": "/tasks",
           "example": "/tasks",
@@ -940,7 +792,7 @@
         },
         {
           "name": "/background",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Detach the current session to run as a background agent",
           "syntax": "/background [prompt]",
           "example": "/background run the test suite\n/background",
@@ -958,7 +810,7 @@
         },
         {
           "name": "/add-dir",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Add a working directory for file access during the session",
           "syntax": "/add-dir <path>",
           "example": "/add-dir /home/user/other-project\n/add-dir ../sibling-repo",
@@ -967,7 +819,7 @@
         },
         {
           "name": "/cd",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Move the session to a new working directory",
           "syntax": "/cd <path>",
           "example": "/cd ../other-project\n/cd ~/projects/myapp",
@@ -975,26 +827,8 @@
           "newcomerTip": "Faster than starting a new session in another directory because the prompt cache isn't invalidated"
         },
         {
-          "name": "/config",
-          "category": "shortcut",
-          "summary": "Open Settings interface or set configuration directly",
-          "syntax": "/config [key=value ...]",
-          "example": "/config\n/config thinking=false\n/config theme=dark model=sonnet",
-          "details": "Open Settings UI to adjust theme, model, output style, and other preferences. From v2.1.181, pass `key=value` pairs to set settings directly without opening the UI. Works in non-interactive mode. Alias: `/settings`. Run `/config --help` to see all settable keys",
-          "newcomerTip": "Use the UI to explore options. Use `key=value` form in scripts or when you know what you want to change"
-        },
-        {
-          "name": "/keybindings",
-          "category": "shortcut",
-          "summary": "Open keyboard shortcuts configuration file",
-          "syntax": "/keybindings",
-          "example": "/keybindings",
-          "details": "Opens ~/.claude/keybindings.json to customize keyboard shortcuts. Supports Vim bindings, chord combinations, and custom terminal setup",
-          "newcomerTip": "Edit this to rebind keys to your muscle memory (e.g., remap submit key, enable Vim mode)"
-        },
-        {
           "name": "/hooks",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "View hook configurations for tool events",
           "syntax": "/hooks",
           "example": "/hooks",
@@ -1003,7 +837,7 @@
         },
         {
           "name": "/focus",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Toggle focus view (fullscreen mode only)",
           "syntax": "/focus",
           "example": "/focus",
@@ -1012,21 +846,12 @@
         },
         {
           "name": "/copy",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Copy the last assistant response to clipboard",
           "syntax": "/copy [N]",
           "example": "/copy\n/copy 2",
           "details": "Copy the last response (or the Nth-latest with `/copy N`). When code blocks are present, pick individual blocks or the full response. Press `w` to write to file instead of clipboard (useful over SSH)",
           "newcomerTip": "Use to quickly grab code snippets. Over SSH, press `w` to save directly to a file"
-        },
-        {
-          "name": "/export",
-          "category": "shortcut",
-          "summary": "Export the current conversation as plain text",
-          "syntax": "/export [filename]",
-          "example": "/export\n/export session-log.txt",
-          "details": "Export conversation as markdown/text. With a filename, writes directly to that file. Without, opens a dialog to copy or save",
-          "newcomerTip": "Use to save important conversations for documentation or sharing with teammates"
         },
         {
           "name": "/debug",
@@ -1038,17 +863,8 @@
           "newcomerTip": "Use when something doesn't work as expected. Claude analyzes the logs and suggests fixes"
         },
         {
-          "name": "/doctor",
-          "category": "shortcut",
-          "summary": "Diagnose your Claude Code installation and settings",
-          "syntax": "/doctor",
-          "example": "/doctor",
-          "details": "Verify your installation, settings, and environment. Shows status icons. Press `f` to fix reported issues automatically",
-          "newcomerTip": "Run this if something breaks. Shows exactly what's wrong and helps fix it"
-        },
-        {
           "name": "/feedback",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Submit feedback, report a bug, or share your conversation",
           "syntax": "/feedback [report]",
           "example": "/feedback\n/feedback this command doesn't work",
@@ -1057,7 +873,7 @@
         },
         {
           "name": "/usage",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Show session cost, plan usage limits, and activity stats",
           "syntax": "/usage",
           "example": "/usage",
@@ -1066,7 +882,7 @@
         },
         {
           "name": "/status",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Show version, model, account, and connectivity",
           "syntax": "/status",
           "example": "/status",
@@ -1075,7 +891,7 @@
         },
         {
           "name": "/login",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Sign in to your Anthropic account",
           "syntax": "/login",
           "example": "/login",
@@ -1083,7 +899,7 @@
         },
         {
           "name": "/logout",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Sign out from your Anthropic account",
           "syntax": "/logout",
           "example": "/logout",
@@ -1091,7 +907,7 @@
         },
         {
           "name": "/desktop",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Continue the current session in the Claude Code Desktop app",
           "syntax": "/desktop",
           "example": "/desktop",
@@ -1100,7 +916,7 @@
         },
         {
           "name": "/teleport",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Pull a Claude Code on the web session into this terminal",
           "syntax": "/teleport",
           "example": "/teleport",
@@ -1109,7 +925,7 @@
         },
         {
           "name": "/remote-control",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Make this session available for remote control from claude.ai",
           "syntax": "/remote-control",
           "example": "/remote-control",
@@ -1117,17 +933,8 @@
           "newcomerTip": "Use to keep working from your phone when away from your desk"
         },
         {
-          "name": "/theme",
-          "category": "shortcut",
-          "summary": "Change the terminal color theme",
-          "syntax": "/theme",
-          "example": "/theme",
-          "details": "Choose from light, dark, colorblind-accessible (daltonized), ANSI, or custom themes from ~/.claude/themes/. Also supports creating new custom themes",
-          "newcomerTip": "Use to match your terminal colors or improve contrast if the default is hard to read"
-        },
-        {
           "name": "/tui",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Set the terminal UI renderer",
           "syntax": "/tui [default|fullscreen]",
           "example": "/tui fullscreen\n/tui default",
@@ -1135,17 +942,8 @@
           "newcomerTip": "Try `fullscreen` if you want a cleaner interface. Some terminal emulators render better with `default`"
         },
         {
-          "name": "/rename",
-          "category": "shortcut",
-          "summary": "Rename the current session",
-          "syntax": "/rename [name]",
-          "example": "/rename auth-implementation\n/rename",
-          "details": "Rename the session for easy identification. Without a name, auto-generates one from conversation history. Shows the name on the prompt bar",
-          "newcomerTip": "Use meaningful names so you can find sessions quickly in `/resume`"
-        },
-        {
           "name": "/color",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Set the prompt bar color for the current session",
           "syntax": "/color [color|default]",
           "example": "/color red\n/color blue",
@@ -1172,21 +970,12 @@
         },
         {
           "name": "/goal",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Set a goal for Claude to work toward across turns",
           "syntax": "/goal [condition|clear]",
           "example": "/goal all tests pass\n/goal clear",
           "details": "Set a condition like 'all tests pass' and Claude keeps working across turns until it's met. With no argument, shows the current goal. Clear with `/goal clear`, `/goal stop`, `/goal off`, etc",
           "newcomerTip": "Use for open-ended tasks. Claude will iterate autonomously until the goal is satisfied"
-        },
-        {
-          "name": "/plan",
-          "category": "shortcut",
-          "summary": "Enter plan mode to review before execution",
-          "syntax": "/plan [description]",
-          "example": "/plan refactor the authentication module",
-          "details": "Switch into plan mode where Claude presents a structured plan before making changes. Useful for large refactors or architectural decisions",
-          "newcomerTip": "Always use for tasks spanning multiple files or architectural changes"
         },
         {
           "name": "/run",
@@ -1244,7 +1033,7 @@
         },
         {
           "name": "/autofix-pr",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Watch a PR and automatically push fixes",
           "syntax": "/autofix-pr [prompt]",
           "example": "/autofix-pr\n/autofix-pr only fix lint and type errors",
@@ -1253,7 +1042,7 @@
         },
         {
           "name": "/web-setup",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Connect GitHub to Claude Code on the web",
           "syntax": "/web-setup",
           "example": "/web-setup",
@@ -1262,7 +1051,7 @@
         },
         {
           "name": "/ide",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Manage IDE integrations and show status",
           "syntax": "/ide",
           "example": "/ide",
@@ -1271,7 +1060,7 @@
         },
         {
           "name": "/chrome",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Configure Claude in Chrome browser integration",
           "syntax": "/chrome",
           "example": "/chrome",
@@ -1280,7 +1069,7 @@
         },
         {
           "name": "/advisor",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Enable or disable the advisor tool for second opinions",
           "syntax": "/advisor [model|off]",
           "example": "/advisor opus\n/advisor off",
@@ -1288,26 +1077,8 @@
           "newcomerTip": "Use when you want a second opinion on architectural decisions or complex implementations"
         },
         {
-          "name": "/fast",
-          "category": "shortcut",
-          "summary": "Toggle fast mode on or off",
-          "syntax": "/fast [on|off]",
-          "example": "/fast on\n/fast off",
-          "details": "Enable fast mode for quicker but lower-quality responses. Useful for rapid prototyping or when speed matters more than quality",
-          "newcomerTip": "Use for quick iterations when you don't need perfect quality. Switch back to normal for final implementations"
-        },
-        {
-          "name": "/voice",
-          "category": "shortcut",
-          "summary": "Toggle voice dictation on or off",
-          "syntax": "/voice [hold|tap|off]",
-          "example": "/voice hold\n/voice off",
-          "details": "Enable voice input in hold or tap mode. Requires a Claude.ai account. `hold` = hold spacebar to talk, `tap` = tap spacebar to toggle",
-          "newcomerTip": "Use for hands-free input when you need to keep your hands free or when typing is uncomfortable"
-        },
-        {
           "name": "/exit",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Exit the CLI or detach from a background session",
           "syntax": "/exit",
           "example": "/exit",
@@ -1315,17 +1086,8 @@
           "newcomerTip": "In background sessions, `/exit` detaches and returns to your shell. The session keeps working"
         },
         {
-          "name": "/help",
-          "category": "shortcut",
-          "summary": "Show help and available commands",
-          "syntax": "/help",
-          "example": "/help",
-          "details": "Display all available commands. Use `/` to see an interactive filterable command list",
-          "newcomerTip": "Type `/` and start typing to search commands. Much better than scrolling /help output"
-        },
-        {
           "name": "/powerup",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Discover features through interactive lessons with demos",
           "syntax": "/powerup",
           "example": "/powerup",
@@ -1334,7 +1096,7 @@
         },
         {
           "name": "/insights",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Generate a report analyzing your Claude Code sessions",
           "syntax": "/insights",
           "example": "/insights",
@@ -1343,7 +1105,7 @@
         },
         {
           "name": "/team-onboarding",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Generate a team onboarding guide from your usage",
           "syntax": "/team-onboarding",
           "example": "/team-onboarding",
@@ -1352,7 +1114,7 @@
         },
         {
           "name": "/release-notes",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "View the changelog in an interactive version picker",
           "syntax": "/release-notes",
           "example": "/release-notes",
@@ -1361,7 +1123,7 @@
         },
         {
           "name": "/skills",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "List available skills and toggle their visibility",
           "syntax": "/skills",
           "example": "/skills",
@@ -1370,7 +1132,7 @@
         },
         {
           "name": "/plugin",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Manage Claude Code plugins and marketplaces",
           "syntax": "/plugin [list|install|enable|disable]",
           "example": "/plugin\n/plugin install skillcreator\n/plugin disable myskill",
@@ -1379,7 +1141,7 @@
         },
         {
           "name": "/reload-plugins",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Reload all active plugins to apply pending changes",
           "syntax": "/reload-plugins [--force]",
           "example": "/reload-plugins",
@@ -1388,7 +1150,7 @@
         },
         {
           "name": "/reload-skills",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Re-scan skill directories for new/changed skills",
           "syntax": "/reload-skills",
           "example": "/reload-skills",
@@ -1397,7 +1159,7 @@
         },
         {
           "name": "/install-github-app",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Install the Claude GitHub App for a repository",
           "syntax": "/install-github-app",
           "example": "/install-github-app",
@@ -1406,7 +1168,7 @@
         },
         {
           "name": "/install-slack-app",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Install the Claude Slack app",
           "syntax": "/install-slack-app",
           "example": "/install-slack-app",
@@ -1414,17 +1176,8 @@
           "newcomerTip": "Use to route bug reports from Slack directly to Claude Code sessions"
         },
         {
-          "name": "/terminal-setup",
-          "category": "shortcut",
-          "summary": "Configure terminal keybindings for shortcuts",
-          "syntax": "/terminal-setup",
-          "example": "/terminal-setup",
-          "details": "Set up terminal keybindings for Shift+Enter and other shortcuts. Only shows in terminals that need it (VS Code, Cursor, Alacritty, Zed, etc.)",
-          "newcomerTip": "Use if your terminal doesn't recognize Claude Code shortcuts by default"
-        },
-        {
           "name": "/stickers",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Order Claude Code stickers",
           "syntax": "/stickers",
           "example": "/stickers",
@@ -1433,7 +1186,7 @@
         },
         {
           "name": "/radio",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Open Claude FM lo-fi radio in your browser",
           "syntax": "/radio",
           "example": "/radio",
@@ -1442,7 +1195,7 @@
         },
         {
           "name": "/mobile",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Show QR code to download the Claude mobile app",
           "syntax": "/mobile",
           "example": "/mobile",
@@ -1451,7 +1204,7 @@
         },
         {
           "name": "/passes",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Share a free week of Claude Code with friends",
           "syntax": "/passes",
           "example": "/passes",
@@ -1460,7 +1213,7 @@
         },
         {
           "name": "/upgrade",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Open upgrade page to switch to a higher plan",
           "syntax": "/upgrade",
           "example": "/upgrade",
@@ -1469,7 +1222,7 @@
         },
         {
           "name": "/privacy-settings",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "View and update your privacy settings",
           "syntax": "/privacy-settings",
           "example": "/privacy-settings",
@@ -1478,7 +1231,7 @@
         },
         {
           "name": "/workflow",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Watch and manage running workflows",
           "syntax": "/workflows",
           "example": "/workflows",
@@ -1487,7 +1240,7 @@
         },
         {
           "name": "/sandbox",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Toggle sandbox mode for restricted execution",
           "syntax": "/sandbox",
           "example": "/sandbox",
@@ -1496,7 +1249,7 @@
         },
         {
           "name": "/heapdump",
-          "category": "shortcut",
+          "category": "slash-command",
           "summary": "Write a JavaScript heap snapshot for diagnosing memory usage",
           "syntax": "/heapdump",
           "example": "/heapdump",
@@ -1577,7 +1330,7 @@
         },
         {
           "name": "claude <prompt>",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Start an interactive session with an initial prompt",
           "details": "Launches a session and immediately sends your prompt to Claude, skipping the initial blank prompt.",
           "example": "claude \"write tests for the auth module\"",
@@ -1910,7 +1663,7 @@
         },
         {
           "name": "--version / -v",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Print the Claude Code version and exit",
           "details": "Shows the installed version number. Useful for checking if you're on the latest release.",
           "example": "claude --version",
@@ -1919,7 +1672,7 @@
         },
         {
           "name": "claude update",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Update Claude Code to the latest version",
           "details": "Checks for updates and installs the newest release. Native installations auto-update in the background; Homebrew and WinGet require manual updates.",
           "example": "claude update",
@@ -1928,7 +1681,7 @@
         },
         {
           "name": "claude install [version]",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Install or reinstall the native binary at a specific version",
           "details": "Accepts `stable`, `latest`, or a version like `2.1.118`. Useful for pinning a version or recovering from a broken install.",
           "example": "claude install stable",
@@ -1937,7 +1690,7 @@
         },
         {
           "name": "claude auth login",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Sign in to your Anthropic account",
           "details": "Supports `--email` to pre-fill, `--sso` to force SSO, and `--console` to use Anthropic Console (API key billing) instead of Claude subscription.",
           "example": "claude auth login --console",
@@ -1946,7 +1699,7 @@
         },
         {
           "name": "claude auth logout",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Sign out from your Anthropic account",
           "details": "Clears stored authentication. You'll be prompted to log in again on next use.",
           "example": "claude auth logout",
@@ -1955,7 +1708,7 @@
         },
         {
           "name": "claude auth status",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Show authentication status as JSON (or human-readable with --text)",
           "details": "Exits code 0 if logged in, 1 if not. Useful for scripts that check auth state.",
           "example": "claude auth status --text",
@@ -1963,26 +1716,8 @@
           "newcomerTip": "Use this in CI scripts to verify you're authenticated before running Claude Code."
         },
         {
-          "name": "claude mcp add",
-          "category": "shortcut",
-          "summary": "Add an MCP server interactively or via command line",
-          "details": "Full syntax: `claude mcp add [options] <name> -- <command>` for stdio or `claude mcp add --transport <type> <name> <url>` for HTTP/SSE/WebSocket. Supports `--env`, `--scope`, `--header`, `--client-id`, `--client-secret`, `--callback-port`.",
-          "example": "claude mcp add --transport http github https://api.githubcopilot.com/mcp/ --header \"Authorization: Bearer YOUR_TOKEN\"",
-          "syntax": "claude mcp add [--transport http|sse|ws] <name> <url> or claude mcp add [--transport stdio] <name> -- <command> [args]",
-          "newcomerTip": "Start with HTTP servers (easier, supports OAuth). Use stdio for local tools that need system access."
-        },
-        {
-          "name": "claude mcp list",
-          "category": "shortcut",
-          "summary": "List all configured MCP servers",
-          "details": "Shows servers from local, project, and user scopes, plus plugin-provided servers. Marks pending approval and rejected servers.",
-          "example": "claude mcp list",
-          "syntax": "claude mcp list",
-          "newcomerTip": "Use this to see what's configured and what's waiting for approval."
-        },
-        {
           "name": "claude mcp get <name>",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Get details for a specific MCP server",
           "details": "Shows type, URL, scope, OAuth status, and other configuration details.",
           "example": "claude mcp get github",
@@ -1991,7 +1726,7 @@
         },
         {
           "name": "claude mcp remove <name>",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Remove an MCP server",
           "details": "Deletes the configuration. The server is no longer available in new sessions.",
           "example": "claude mcp remove github",
@@ -2000,7 +1735,7 @@
         },
         {
           "name": "claude mcp login <name>",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Run OAuth flow from the command line (v2.1.186+)",
           "details": "Authenticate an MCP server without opening a Claude Code session. Pass `--no-browser` for SSH or headless environments. Requires interactive terminal.",
           "example": "claude mcp login sentry --no-browser",
@@ -2009,7 +1744,7 @@
         },
         {
           "name": "claude mcp logout <name>",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Clear stored OAuth credentials for an MCP server (v2.1.186+)",
           "details": "Revokes access without removing the server configuration.",
           "example": "claude mcp logout sentry",
@@ -2018,7 +1753,7 @@
         },
         {
           "name": "claude mcp serve",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Run Claude Code itself as an MCP server",
           "details": "Starts Claude Code in stdio MCP mode so other applications (e.g., Claude Desktop) can connect to it and use Claude's tools (Read, Edit, Bash, etc.).",
           "example": "claude mcp serve",
@@ -2027,7 +1762,7 @@
         },
         {
           "name": "claude config [key=value ...]",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Open Settings interface or set individual options via command line",
           "details": "Without arguments, opens interactive tabs for theme, model, output style, etc. With key=value pairs (v2.1.181+), sets options directly. Run `claude config --help` to list all settable keys.",
           "example": "claude config theme=dark model=sonnet",
@@ -2036,7 +1771,7 @@
         },
         {
           "name": "claude doctor",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Diagnose your Claude Code installation and configuration",
           "details": "Checks installation health, settings validity, MCP server status, context usage, and other diagnostics. Shows status icons and suggestions. Press 'f' to auto-fix issues if found.",
           "example": "claude doctor",
@@ -2045,7 +1780,7 @@
         },
         {
           "name": "claude agents",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Open agent view to monitor and dispatch background sessions",
           "details": "Shows active and completed background sessions. Use `--cwd` to filter by directory, `--json` to output JSON for scripting, `--json --all` to include completed sessions. Accepts `--permission-mode`, `--model`, `--effort`, `--agent` to set defaults.",
           "example": "claude agents --json",
@@ -2054,7 +1789,7 @@
         },
         {
           "name": "claude attach <id>",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Attach to a background session in this terminal",
           "details": "Takes over control of a running background session. Exit with Ctrl+C to detach (session keeps running).",
           "example": "claude attach 7c5dcf5d",
@@ -2063,7 +1798,7 @@
         },
         {
           "name": "claude stop / claude kill <id>",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Stop a background session",
           "details": "Terminates the session gracefully. The transcript is saved and can be resumed with `claude --resume`.",
           "example": "claude stop 7c5dcf5d",
@@ -2072,7 +1807,7 @@
         },
         {
           "name": "claude logs <id>",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Print recent output from a background session",
           "details": "Shows the last output without attaching. Useful for quick checks.",
           "example": "claude logs 7c5dcf5d",
@@ -2081,7 +1816,7 @@
         },
         {
           "name": "claude respawn <id>",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Restart a background session with its conversation intact",
           "details": "Useful after updating Claude Code. Use `--all` to restart every running session.",
           "example": "claude respawn 7c5dcf5d",
@@ -2090,7 +1825,7 @@
         },
         {
           "name": "claude rm <id>",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Remove a background session from the list",
           "details": "Cleans up the session entry. The transcript is still saved and can be resumed with `claude --resume`.",
           "example": "claude rm 7c5dcf5d",
@@ -2099,7 +1834,7 @@
         },
         {
           "name": "claude daemon status",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Print background-session supervisor status (version, socket, workers)",
           "details": "Exits 1 if supervisor isn't running. Useful for diagnosing multi-session issues.",
           "example": "claude daemon status",
@@ -2108,7 +1843,7 @@
         },
         {
           "name": "claude daemon stop --any",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Stop the background-session supervisor",
           "details": "Stops the supervisor and all hosted sessions. Use `--keep-workers` to leave sessions running (supervisor reconnects on next use).",
           "example": "claude daemon stop --any --keep-workers",
@@ -2117,7 +1852,7 @@
         },
         {
           "name": "claude setup-token",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Generate a long-lived OAuth token for CI and scripts",
           "details": "Prints the token to stdout without saving it. Requires Claude subscription. Use with `ANTHROPIC_AUTH_TOKEN` env var in scripts.",
           "example": "claude setup-token",
@@ -2126,7 +1861,7 @@
         },
         {
           "name": "claude project purge [path]",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Delete all local Claude Code state for a project",
           "details": "Removes transcripts, task lists, debug logs, file history, prompt history, and the project entry in ~/.claude.json. Flags: `--dry-run` to preview, `-y`/`--yes` to skip confirmation, `-i`/`--interactive` to confirm each item, `--all` for every project.",
           "example": "claude project purge ~/work/repo --dry-run",
@@ -2135,7 +1870,7 @@
         },
         {
           "name": "claude remote-control",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Start a Remote Control server to control Claude Code from claude.ai or the Claude app",
           "details": "Runs in server mode (no local interactive session). Supports server-mode flags like `--name`, `--model`, `--permission-mode`.",
           "example": "claude remote-control --name \"My Project\"",
@@ -2144,7 +1879,7 @@
         },
         {
           "name": "claude ultrareview [target]",
-          "category": "shortcut",
+          "category": "cli-flag",
           "summary": "Run a deep multi-agent code review in the cloud (non-interactive)",
           "details": "Prints findings to stdout, exits 0 on success or 1 on failure. Use `--json` for raw payload, `--timeout <minutes>` to override 30-minute default. Alias: `claude /code-review ultra`",
           "example": "claude ultrareview 1234 --json",
@@ -3432,13 +3167,14 @@
       "overview": "The Model Context Protocol (MCP) is an open-source standard that lets Claude Code connect to hundreds of external tools, databases, and APIs. MCP servers give Claude direct access to your issue trackers, monitoring dashboards, databases, and custom tools without manual copy-paste. Configure servers at local/project/user scope, authenticate with OAuth or tokens, and reference resources via @ mentions or use them as slash commands.",
       "items": [
         {
-          "name": "What is MCP",
-          "category": "concept",
-          "summary": "Open-source standard for AI-tool integrations that lets Claude Code connect to external services and data sources",
-          "details": "MCP (Model Context Protocol) is the foundation for extending Claude Code beyond its built-in tools. Instead of copying data from Jira, Sentry, or your database into chat, an MCP server lets Claude read and act on those systems directly. Servers run locally (stdio), over HTTP/SSE (remote), or via WebSocket. MCP handles tool discovery, authentication, and resource management automatically. Common use cases: query databases, implement features from issue trackers, analyze monitoring data, integrate designs, automate workflows, react to external events.",
-          "source": "https://code.claude.com/docs/en/mcp.md",
-          "example": "Connect Sentry for monitoring: `claude mcp add --transport http sentry https://mcp.sentry.dev/mcp`, then ask 'What are the most common errors in the last 24 hours?'",
-          "newcomerTip": "Think of MCP as 'bringing your tools into Claude's conversation' rather than copying data out. Once connected, Claude sees them like built-in tools."
+          "name": "/mcp",
+          "category": "slash-command",
+          "syntax": "/mcp",
+          "summary": "Interactive panel to view, authenticate, and manage MCP servers inside a Claude Code session",
+          "details": "Slash command that opens a TUI panel showing all connected servers with detailed status. From here you can authenticate servers requiring OAuth (runs browser sign-in), check tool lists, reconnect failed servers, or clear authentication. Lists servers from all scopes (local, project, user, plugins, claude.ai). Shows which servers need authentication, failed, or are pending approval. The panel also shows tool counts and flags servers with no tools.",
+          "source": "https://code.claude.com/docs/en/mcp-quickstart.md",
+          "example": "Inside a session, type `/mcp`, select 'sentry' from the list, press Enter, choose 'Authenticate', and your browser opens Sentry's sign-in",
+          "newcomerTip": "Use `/mcp` to authenticate (OAuth) or troubleshoot servers without leaving your session. It's the interactive counterpart to shell `claude mcp` commands."
         },
         {
           "name": "claude mcp add",
@@ -3461,6 +3197,15 @@
           "newcomerTip": "Check status here before troubleshooting. 'Needs authentication' means the server works but requires a sign-in via `/mcp` inside a session."
         },
         {
+          "name": "What is MCP",
+          "category": "concept",
+          "summary": "Open-source standard for AI-tool integrations that lets Claude Code connect to external services and data sources",
+          "details": "MCP (Model Context Protocol) is the foundation for extending Claude Code beyond its built-in tools. Instead of copying data from Jira, Sentry, or your database into chat, an MCP server lets Claude read and act on those systems directly. Servers run locally (stdio), over HTTP/SSE (remote), or via WebSocket. MCP handles tool discovery, authentication, and resource management automatically. Common use cases: query databases, implement features from issue trackers, analyze monitoring data, integrate designs, automate workflows, react to external events.",
+          "source": "https://code.claude.com/docs/en/mcp.md",
+          "example": "Connect Sentry for monitoring: `claude mcp add --transport http sentry https://mcp.sentry.dev/mcp`, then ask 'What are the most common errors in the last 24 hours?'",
+          "newcomerTip": "Think of MCP as 'bringing your tools into Claude's conversation' rather than copying data out. Once connected, Claude sees them like built-in tools."
+        },
+        {
           "name": "claude mcp get",
           "category": "cli-flag",
           "syntax": "claude mcp get <name>",
@@ -3479,16 +3224,6 @@
           "source": "https://code.claude.com/docs/en/mcp-quickstart.md",
           "example": "`claude mcp remove claude-code-docs` / `claude mcp remove github --scope local`",
           "newcomerTip": "Removing saves context window space. If a server exists in multiple scopes and you remove it without `--scope`, it removes from all of them."
-        },
-        {
-          "name": "/mcp",
-          "category": "slash-command",
-          "syntax": "/mcp",
-          "summary": "Interactive panel to view, authenticate, and manage MCP servers inside a Claude Code session",
-          "details": "Slash command that opens a TUI panel showing all connected servers with detailed status. From here you can authenticate servers requiring OAuth (runs browser sign-in), check tool lists, reconnect failed servers, or clear authentication. Lists servers from all scopes (local, project, user, plugins, claude.ai). Shows which servers need authentication, failed, or are pending approval. The panel also shows tool counts and flags servers with no tools.",
-          "source": "https://code.claude.com/docs/en/mcp-quickstart.md",
-          "example": "Inside a session, type `/mcp`, select 'sentry' from the list, press Enter, choose 'Authenticate', and your browser opens Sentry's sign-in",
-          "newcomerTip": "Use `/mcp` to authenticate (OAuth) or troubleshoot servers without leaving your session. It's the interactive counterpart to shell `claude mcp` commands."
         },
         {
           "name": "claude mcp add --transport http",
@@ -4285,7 +4020,7 @@
         },
         {
           "name": "Subagent example: code-reviewer",
-          "category": "example",
+          "category": "concept",
           "summary": "Read-only subagent that reviews code without modifying; demonstrates tool restriction and detailed prompt",
           "details": "Tools: Read, Grep, Glob, Bash (no Write/Edit). Model: inherit. Prompt guides review checklist: readability, naming, duplication, error handling, secrets, validation, testing, performance. Output organized by priority (critical/warning/suggestion).",
           "example": "See example in sub-agents.md under Example subagents > Code reviewer",
@@ -4293,7 +4028,7 @@
         },
         {
           "name": "Subagent example: debugger",
-          "category": "example",
+          "category": "concept",
           "summary": "Subagent that analyzes and fixes bugs; includes Edit for modifications and structured debugging workflow",
           "details": "Tools: Read, Edit, Bash, Grep, Glob. Prompt guides root cause analysis, hypothesis testing, minimal fix, verification. Output includes explanation, evidence, fix, testing approach, prevention.",
           "example": "See example in sub-agents.md under Example subagents > Debugger",
@@ -4301,7 +4036,7 @@
         },
         {
           "name": "Subagent example: data-scientist",
-          "category": "example",
+          "category": "concept",
           "summary": "Domain-specific subagent for data analysis; SQL queries, BigQuery, analysis. Model: sonnet.",
           "details": "Tools: Bash, Read, Write. Demonstrates specialized workflows outside typical coding. Prompt guides SQL optimization, aggregations, joins, comments, formatting, recommendations.",
           "example": "See example in sub-agents.md under Example subagents > Data scientist",
@@ -4309,7 +4044,7 @@
         },
         {
           "name": "Subagent example: db-reader with validation hook",
-          "category": "example",
+          "category": "concept",
           "summary": "Read-only database subagent using PreToolUse hook to block write operations; demonstrates conditional tool control",
           "details": "Tools: Bash. Hook validates queries, blocks INSERT/UPDATE/DELETE/etc. Script exits code 2 to block write ops. Shows how to allow tool while restricting specific operations.",
           "example": "See example in sub-agents.md under Example subagents > Database query validator",
@@ -4728,7 +4463,7 @@
         },
         {
           "name": "Writing Effective Instructions",
-          "category": "best-practice",
+          "category": "concept",
           "summary": "Keep CLAUDE.md specific, concise, and well-structured to maximize Claude's adherence and reduce context waste",
           "details": "CLAUDE.md content is delivered as a user message, not enforced by the system, so how you write matters. (1) Size: target under 200 lines per file. Longer files consume more context and reduce adherence. Use path-scoped rules to load instructions only when needed. (2) Structure: use markdown headers and bullets to group related instructions. Organized sections are easier to follow. (3) Specificity: write concrete rules, not vague ones. 'Use 2-space indentation' works better than 'Format code properly'. 'API handlers live in src/api/handlers/' works better than 'Keep files organized'. (4) Consistency: review CLAUDE.md files periodically to remove outdated or conflicting rules. If two files contradict, Claude may pick one arbitrarily.",
           "example": "Bad: 'Format code nicely and test your changes.'\nGood: 'Run npm test before commit. Use 2-space indentation. Format with prettier on save.'",
@@ -4773,7 +4508,7 @@
         },
         {
           "name": "Troubleshooting: CLAUDE.md Not Followed",
-          "category": "troubleshooting",
+          "category": "concept",
           "summary": "If Claude ignores your CLAUDE.md, check that it's loaded, make instructions more specific, and look for conflicts",
           "details": "CLAUDE.md is delivered as a user message, not a system constraint, so there's no guarantee Claude strictly follows vague instructions. To debug: (1) Run /memory to verify your CLAUDE.md is listed and loaded. If not listed, Claude can't see it. (2) Check the file is in a location that gets loaded for your session (root directory or parent, or managed policy location). (3) Make instructions more specific: 'Use 2-space indentation' works better than 'Format code nicely'. (4) Look for conflicting instructions across multiple CLAUDE.md files—if two say different things, Claude may pick one arbitrarily. (5) If the instruction must run at a specific point (e.g., before every commit), use a hook instead—hooks execute as shell commands regardless of Claude's decision.",
           "example": "Run /memory → verify CLAUDE.md is listed. If missing, check: (1) Is it at ./CLAUDE.md or ./.claude/CLAUDE.md? (2) Are you in the right directory? (3) Does managed policy exclude it?",
@@ -4782,7 +4517,7 @@
         },
         {
           "name": "Manage CLAUDE.md for Teams",
-          "category": "best-practice",
+          "category": "concept",
           "summary": "For organizations, deploy centrally managed CLAUDE.md via MDM or Group Policy to enforce company standards",
           "details": "Organizations can deploy a managed CLAUDE.md to enforce company-wide coding standards and compliance. Deploy to managed policy locations (macOS, Linux, Windows vary). Cannot be excluded by individual settings. Use managed settings file's `claudeMd` key to put content directly in managed-settings.json instead of a separate file. Managed CLAUDE.md serves different purposes than managed settings: use CLAUDE.md for behavioral guidance and code style, use settings for technical enforcement like tool permissions and environment variables.",
           "example": "Deploy via MDM: Create /Library/Application Support/ClaudeCode/CLAUDE.md (macOS) with company standards. All users read it automatically. Or set in managed-settings.json: \"claudeMd\": \"Always run make lint before commit.\"",
@@ -5151,13 +4886,32 @@
       "overview": "Claude Code offers extensive customization for appearance, behavior, and workflow through settings, keybindings, output styles, and terminal configuration. Control everything from the visual theme and status line to model selection, fast mode, and rendering behavior. Most changes are instant with live reload, and preferences persist across sessions through settings files.",
       "items": [
         {
-          "name": "/config",
-          "category": "slash-command",
-          "summary": "Open interactive menu to configure settings, themes, output styles, editor modes, and effort levels without editing files",
-          "syntax": "/config [key=value]",
-          "example": "/config\n/config verbose=true\n/config theme=dark",
-          "details": "Launches a menu-driven interface to browse all available settings. Changes take effect immediately and are saved to your settings files (user, project, or local scope). You can also pass individual key=value pairs to set them directly without the menu.",
-          "source": "https://code.claude.com/docs/en/settings.md"
+          "name": "Ctrl+L",
+          "category": "shortcut",
+          "summary": "Redraw terminal or clear conversation (fullscreen mode: press twice within 2 seconds)",
+          "syntax": "Ctrl+L",
+          "example": "Screen garbled? Ctrl+L. In fullscreen mode, press Ctrl+L twice within 2 seconds to run /clear and start fresh.",
+          "details": "Single press: full screen redraw, input and history preserved. Fullscreen mode: first press shows hint, second press runs /clear. Also available as Cmd+K on macOS in fullscreen mode.",
+          "source": "https://code.claude.com/docs/en/interactive-mode.md"
+        },
+        {
+          "name": "Ctrl+O",
+          "category": "shortcut",
+          "summary": "Toggle verbose transcript viewer (fullscreen: shows less-style search and navigation)",
+          "syntax": "Ctrl+O",
+          "example": "Press Ctrl+O to expand all tool calls and show raw output; press again to collapse.",
+          "details": "Toggles between condensed view (one-line tool summaries) and verbose transcript (full output). In fullscreen mode, opens a full-featured viewer with `less`-style navigation (/search, n/N for next/prev, q/Esc to exit, [ to write to scrollback, v to open in $EDITOR).",
+          "source": "https://code.claude.com/docs/en/interactive-mode.md"
+        },
+        {
+          "name": "Shift+Tab",
+          "category": "shortcut",
+          "summary": "Cycle through permission modes: default → plan → acceptEdits → auto (if enabled)",
+          "syntax": "Shift+Tab",
+          "example": "Start in default mode (asks before edits), press Shift+Tab to switch to plan mode (view plan, approve edits), press again for acceptEdits mode (auto-applies edits).",
+          "details": "Quickly switch between permission modes without `/config`. Cycles through available modes in order. The current mode is shown in a colored border around the input box (prompt, plan, or autoAccept colors). Can be rebound via chat:cycleMode.",
+          "newcomerTip": "Use default mode for safety (asks before each edit), plan mode for complex changes (review first), and acceptEdits mode for rapid prototyping (auto-apply).",
+          "source": "https://code.claude.com/docs/en/interactive-mode.md"
         },
         {
           "name": "/theme",
@@ -5170,13 +4924,13 @@
           "source": "https://code.claude.com/docs/en/terminal-config.md"
         },
         {
-          "name": "Color token customization",
-          "category": "customization",
-          "summary": "Override individual colors in themes by setting token names to hex, RGB, ANSI, or named values",
-          "syntax": "In ~/.claude/themes/custom.json: { \"overrides\": { \"claude\": \"#bd93f9\", \"error\": \"#ff5555\" } }",
-          "example": "{\n  \"name\": \"Dracula\",\n  \"base\": \"dark\",\n  \"overrides\": {\n    \"claude\": \"#bd93f9\",\n    \"error\": \"#ff5555\",\n    \"success\": \"#50fa7b\"\n  }\n}",
-          "details": "Claude Code supports 40+ color tokens organized by category: text accents (claude, text, inactive, subtle), status colors (success, error, warning, merged), input/mode colors (promptBorder, planMode, autoAccept), diff colors (diffAdded, diffRemoved, diffAddedWord), and fullscreen-mode colors. Tokens not overridden fall back to the base preset. Invalid colors are silently ignored.",
-          "newcomerTip": "Use hex colors (#rrggbb) for exact control, or ansi256(n) for terminal colors. The interactive `/theme` editor shows live preview as you customize.",
+          "name": "/terminal-setup",
+          "category": "slash-command",
+          "summary": "Auto-configure your terminal: enables Shift+Enter, fixes GPU acceleration in VS Code, configures mouse options",
+          "syntax": "/terminal-setup",
+          "example": "/terminal-setup (detects terminal, runs once, modifies config files or IDE settings)",
+          "details": "One-time setup that configures: Shift+Enter for newlines (VS Code, Cursor, Alacritty, Zed only), terminal GPU acceleration toggle, mouse wheel sensitivity. Detects your terminal and applies appropriate changes. Some terminals (iTerm2, Ghostty, Kitty) work without setup. For tmux/screen, add configuration lines manually. On macOS, can also enable Option as Meta key.",
+          "newcomerTip": "Run once per terminal type. Safe to re-run; won't duplicate existing settings. Shows messages if binding already exists.",
           "source": "https://code.claude.com/docs/en/terminal-config.md"
         },
         {
@@ -5188,6 +4942,46 @@
           "details": "Opens ~/.claude/keybindings.json in your default editor. The file uses a bindings array with contexts and action maps. Changes are automatically detected and applied without restart. You can bind multiple modifiers (ctrl, shift, meta, cmd), use chords (sequences of keys), and unbind defaults by setting to null.",
           "newcomerTip": "Start by copying an example from the docs and changing just the keys you use most; most defaults work well out of the box.",
           "source": "https://code.claude.com/docs/en/keybindings.md"
+        },
+        {
+          "name": "/model",
+          "category": "slash-command",
+          "summary": "Open model picker to switch models mid-session (press 's' to apply this session only, Enter to save as default)",
+          "syntax": "/model [alias|name]",
+          "example": "/model\n/model opus\n/model sonnet[1m]",
+          "details": "Opens interactive picker showing model families, effort level (slider), and context window. Press Enter to switch and save as new default. Press 's' to apply to current session only (does not change settings). Using /model directly with a model name (e.g., /model sonnet) acts like Enter. Shows warning if model is retiring or mapped to newer version.",
+          "newcomerTip": "Use /model frequently to experiment. Opus is the strongest but most expensive; Sonnet balances speed/cost; Haiku is fastest/cheapest for simple tasks.",
+          "source": "https://code.claude.com/docs/en/model-config.md"
+        },
+        {
+          "name": "/effort",
+          "category": "slash-command",
+          "summary": "Adjust adaptive reasoning effort level: low, medium, high (default), xhigh, max (session-only), or ultracode (dynamic workflows)",
+          "syntax": "/effort [level]\n/effort (opens slider)",
+          "example": "/effort high\n/effort xhigh\n/effort (opens interactive slider)\n/effort auto (resets to model default)",
+          "details": "Controls how much the model thinks on each step. low/medium/high/xhigh persist across sessions; max and ultracode apply to current session only. Fable 5 supports max; Opus 4.8/4.7 support max; Opus/Sonnet 4.6 do not. Model defaults vary: Fable/Opus 4.8/Sonnet 4.6 default high; Opus 4.7 defaults xhigh. ultracode plans dynamic workflows at xhigh reasoning per turn. ultrathink keyword in prompt does one-off deep reasoning without changing session effort.",
+          "newcomerTip": "Use high for typical work, xhigh for complex problems, low for cost-sensitive/latency-sensitive tasks. Try max only if xhigh isn't enough.",
+          "source": "https://code.claude.com/docs/en/model-config.md"
+        },
+        {
+          "name": "/fast",
+          "category": "slash-command",
+          "summary": "Toggle fast mode: 2.5x faster Opus at higher per-token cost (research preview)",
+          "syntax": "/fast",
+          "example": "/fast (toggles on/off, shows confirmation 'Fast mode ON' or 'Fast mode OFF' with ↯ icon)",
+          "details": "Switches Opus to a high-speed configuration. Up to 2.5x faster at higher cost per token. Requires Anthropic API or subscription with usage credits. Available on Opus 4.8, 4.7, 4.6 only; not on Sonnet, Haiku, or third-party providers. Enabling auto-switches to Opus if on another model. Can also be set in settings as fastMode: true.",
+          "newcomerTip": "Use fast mode for interactive debugging or rapid iteration where speed is critical. Turn off for long-running tasks or batch processing.",
+          "source": "https://code.claude.com/docs/en/fast-mode.md"
+        },
+        {
+          "name": "Color token customization",
+          "category": "customization",
+          "summary": "Override individual colors in themes by setting token names to hex, RGB, ANSI, or named values",
+          "syntax": "In ~/.claude/themes/custom.json: { \"overrides\": { \"claude\": \"#bd93f9\", \"error\": \"#ff5555\" } }",
+          "example": "{\n  \"name\": \"Dracula\",\n  \"base\": \"dark\",\n  \"overrides\": {\n    \"claude\": \"#bd93f9\",\n    \"error\": \"#ff5555\",\n    \"success\": \"#50fa7b\"\n  }\n}",
+          "details": "Claude Code supports 40+ color tokens organized by category: text accents (claude, text, inactive, subtle), status colors (success, error, warning, merged), input/mode colors (promptBorder, planMode, autoAccept), diff colors (diffAdded, diffRemoved, diffAddedWord), and fullscreen-mode colors. Tokens not overridden fall back to the base preset. Invalid colors are silently ignored.",
+          "newcomerTip": "Use hex colors (#rrggbb) for exact control, or ansi256(n) for terminal colors. The interactive `/theme` editor shows live preview as you customize.",
+          "source": "https://code.claude.com/docs/en/terminal-config.md"
         },
         {
           "name": "Keybinding contexts",
@@ -5237,16 +5031,6 @@
           "source": "https://code.claude.com/docs/en/keybindings.md"
         },
         {
-          "name": "Shift+Tab",
-          "category": "shortcut",
-          "summary": "Cycle through permission modes: default → plan → acceptEdits → auto (if enabled)",
-          "syntax": "Shift+Tab",
-          "example": "Start in default mode (asks before edits), press Shift+Tab to switch to plan mode (view plan, approve edits), press again for acceptEdits mode (auto-applies edits).",
-          "details": "Quickly switch between permission modes without `/config`. Cycles through available modes in order. The current mode is shown in a colored border around the input box (prompt, plan, or autoAccept colors). Can be rebound via chat:cycleMode.",
-          "newcomerTip": "Use default mode for safety (asks before each edit), plan mode for complex changes (review first), and acceptEdits mode for rapid prototyping (auto-apply).",
-          "source": "https://code.claude.com/docs/en/interactive-mode.md"
-        },
-        {
           "name": "Option+P (macOS) / Alt+P (Windows/Linux)",
           "category": "shortcut",
           "summary": "Open model picker without clearing input, instantly switch models mid-session",
@@ -5286,24 +5070,6 @@
           "source": "https://code.claude.com/docs/en/interactive-mode.md"
         },
         {
-          "name": "Ctrl+L",
-          "category": "shortcut",
-          "summary": "Redraw terminal or clear conversation (fullscreen mode: press twice within 2 seconds)",
-          "syntax": "Ctrl+L",
-          "example": "Screen garbled? Ctrl+L. In fullscreen mode, press Ctrl+L twice within 2 seconds to run /clear and start fresh.",
-          "details": "Single press: full screen redraw, input and history preserved. Fullscreen mode: first press shows hint, second press runs /clear. Also available as Cmd+K on macOS in fullscreen mode.",
-          "source": "https://code.claude.com/docs/en/interactive-mode.md"
-        },
-        {
-          "name": "Ctrl+O",
-          "category": "shortcut",
-          "summary": "Toggle verbose transcript viewer (fullscreen: shows less-style search and navigation)",
-          "syntax": "Ctrl+O",
-          "example": "Press Ctrl+O to expand all tool calls and show raw output; press again to collapse.",
-          "details": "Toggles between condensed view (one-line tool summaries) and verbose transcript (full output). In fullscreen mode, opens a full-featured viewer with `less`-style navigation (/search, n/N for next/prev, q/Esc to exit, [ to write to scrollback, v to open in $EDITOR).",
-          "source": "https://code.claude.com/docs/en/interactive-mode.md"
-        },
-        {
           "name": "Ctrl+V (or Alt+V on Windows/WSL)",
           "category": "shortcut",
           "summary": "Paste image from clipboard and insert [Image #N] chip at cursor",
@@ -5314,30 +5080,12 @@
           "source": "https://code.claude.com/docs/en/interactive-mode.md"
         },
         {
-          "name": "Ctrl+C",
-          "category": "shortcut",
-          "summary": "Interrupt current operation (Ctrl+C then Ctrl+C again to exit session)",
-          "syntax": "Ctrl+C",
-          "example": "Claude is running a long command. Press Ctrl+C to stop. Press again to clear input. Press once more to exit.",
-          "details": "First press: stops current operation. If nothing is running, first press clears input and second press exits. Cannot be rebound (hardcoded).",
-          "source": "https://code.claude.com/docs/en/interactive-mode.md"
-        },
-        {
           "name": "Ctrl+B (or Ctrl+X Ctrl+B)",
           "category": "shortcut",
           "summary": "Background a running command or subagent task, continue working immediately",
           "syntax": "Ctrl+B or Ctrl+X Ctrl+B",
           "example": "Claude runs `npm build`. Press Ctrl+B to move to background. Continue with new prompts while build runs. Retrieve output later with the Read tool.",
           "details": "Moves bash commands or agents to background, returning a task ID. Output is written to a file. Tmux users must press Ctrl+B twice due to prefix conflict. Can be rebound via task:background.",
-          "source": "https://code.claude.com/docs/en/interactive-mode.md"
-        },
-        {
-          "name": "Ctrl+T",
-          "category": "shortcut",
-          "summary": "Toggle task list visibility (shows pending, in-progress, and completed tasks)",
-          "syntax": "Ctrl+T",
-          "example": "Press Ctrl+T to show/hide the task list panel at the bottom of the screen.",
-          "details": "Shows up to 5 tasks at a time. In fullscreen mode, full task list appears in a panel. Tasks persist across context compactions and can be shared across sessions via CLAUDE_CODE_TASK_LIST_ID env var.",
           "source": "https://code.claude.com/docs/en/interactive-mode.md"
         },
         {
@@ -5378,16 +5126,6 @@
           "details": "Output style files are Markdown with YAML frontmatter. Name, description, and keep-coding-instructions are frontmatter keys. keep-coding-instructions: true keeps Claude's built-in coding behavior; leave it out or set to false to replace it entirely. Styles load from every .claude/output-styles/ between CWD and repo root; closest to CWD wins if multiple define same name. Plugins can ship output styles in output-styles/ directories.",
           "newcomerTip": "Start by copying a built-in style concept and adding specific instructions. Set keep-coding-instructions: true to modify tone while preserving engineering behavior.",
           "source": "https://code.claude.com/docs/en/output-styles.md"
-        },
-        {
-          "name": "/terminal-setup",
-          "category": "slash-command",
-          "summary": "Auto-configure your terminal: enables Shift+Enter, fixes GPU acceleration in VS Code, configures mouse options",
-          "syntax": "/terminal-setup",
-          "example": "/terminal-setup (detects terminal, runs once, modifies config files or IDE settings)",
-          "details": "One-time setup that configures: Shift+Enter for newlines (VS Code, Cursor, Alacritty, Zed only), terminal GPU acceleration toggle, mouse wheel sensitivity. Detects your terminal and applies appropriate changes. Some terminals (iTerm2, Ghostty, Kitty) work without setup. For tmux/screen, add configuration lines manually. On macOS, can also enable Option as Meta key.",
-          "newcomerTip": "Run once per terminal type. Safe to re-run; won't duplicate existing settings. Shows messages if binding already exists.",
-          "source": "https://code.claude.com/docs/en/terminal-config.md"
         },
         {
           "name": "/tui fullscreen",
@@ -5437,36 +5175,6 @@
           "example": "{ \"model\": \"fable\" }\n{ \"model\": \"opus[1m]\" }\n{ \"model\": \"claude-sonnet-4-6\" }",
           "details": "Set the initial model when Claude Code starts. Alias options: default (recommended for your account), best (Fable 5 if available, else latest Opus), fable, opus, sonnet, haiku, opusplan (Opus in plan mode, Sonnet in execute mode), sonnet[1m], opus[1m] (with 1M token context). Can override at startup with --model flag or ANTHROPIC_MODEL env var. Use /model to switch mid-session.",
           "newcomerTip": "Start with opus for complex tasks, sonnet for everyday coding, haiku for simple tasks. Try fable for tough problems that need deep reasoning.",
-          "source": "https://code.claude.com/docs/en/model-config.md"
-        },
-        {
-          "name": "/model",
-          "category": "slash-command",
-          "summary": "Open model picker to switch models mid-session (press 's' to apply this session only, Enter to save as default)",
-          "syntax": "/model [alias|name]",
-          "example": "/model\n/model opus\n/model sonnet[1m]",
-          "details": "Opens interactive picker showing model families, effort level (slider), and context window. Press Enter to switch and save as new default. Press 's' to apply to current session only (does not change settings). Using /model directly with a model name (e.g., /model sonnet) acts like Enter. Shows warning if model is retiring or mapped to newer version.",
-          "newcomerTip": "Use /model frequently to experiment. Opus is the strongest but most expensive; Sonnet balances speed/cost; Haiku is fastest/cheapest for simple tasks.",
-          "source": "https://code.claude.com/docs/en/model-config.md"
-        },
-        {
-          "name": "/fast",
-          "category": "slash-command",
-          "summary": "Toggle fast mode: 2.5x faster Opus at higher per-token cost (research preview)",
-          "syntax": "/fast",
-          "example": "/fast (toggles on/off, shows confirmation 'Fast mode ON' or 'Fast mode OFF' with ↯ icon)",
-          "details": "Switches Opus to a high-speed configuration. Up to 2.5x faster at higher cost per token. Requires Anthropic API or subscription with usage credits. Available on Opus 4.8, 4.7, 4.6 only; not on Sonnet, Haiku, or third-party providers. Enabling auto-switches to Opus if on another model. Can also be set in settings as fastMode: true.",
-          "newcomerTip": "Use fast mode for interactive debugging or rapid iteration where speed is critical. Turn off for long-running tasks or batch processing.",
-          "source": "https://code.claude.com/docs/en/fast-mode.md"
-        },
-        {
-          "name": "/effort",
-          "category": "slash-command",
-          "summary": "Adjust adaptive reasoning effort level: low, medium, high (default), xhigh, max (session-only), or ultracode (dynamic workflows)",
-          "syntax": "/effort [level]\n/effort (opens slider)",
-          "example": "/effort high\n/effort xhigh\n/effort (opens interactive slider)\n/effort auto (resets to model default)",
-          "details": "Controls how much the model thinks on each step. low/medium/high/xhigh persist across sessions; max and ultracode apply to current session only. Fable 5 supports max; Opus 4.8/4.7 support max; Opus/Sonnet 4.6 do not. Model defaults vary: Fable/Opus 4.8/Sonnet 4.6 default high; Opus 4.7 defaults xhigh. ultracode plans dynamic workflows at xhigh reasoning per turn. ultrathink keyword in prompt does one-off deep reasoning without changing session effort.",
-          "newcomerTip": "Use high for typical work, xhigh for complex problems, low for cost-sensitive/latency-sensitive tasks. Try max only if xhigh isn't enough.",
           "source": "https://code.claude.com/docs/en/model-config.md"
         },
         {
@@ -5575,7 +5283,7 @@
         },
         {
           "name": "CLAUDE_CODE_NO_FLICKER environment variable",
-          "category": "env-flag",
+          "category": "setting",
           "summary": "Enable fullscreen rendering at startup (flicker-free, flat memory, mouse support)",
           "syntax": "export CLAUDE_CODE_NO_FLICKER=1",
           "example": "CLAUDE_CODE_NO_FLICKER=1 claude\nOR in ~/.claude/settings.json: { \"env\": { \"CLAUDE_CODE_NO_FLICKER\": \"1\" } }",
@@ -5585,7 +5293,7 @@
         },
         {
           "name": "CLAUDE_CODE_SCROLL_SPEED environment variable",
-          "category": "env-flag",
+          "category": "setting",
           "summary": "Multiply mouse wheel scroll distance in fullscreen mode (1-20, default auto-detected)",
           "syntax": "export CLAUDE_CODE_SCROLL_SPEED=3",
           "example": "CLAUDE_CODE_SCROLL_SPEED=3 claude\nOR in settings.json: { \"env\": { \"CLAUDE_CODE_SCROLL_SPEED\": \"3\" } }",
@@ -5595,7 +5303,7 @@
         },
         {
           "name": "ANTHROPIC_MODEL environment variable",
-          "category": "env-flag",
+          "category": "setting",
           "summary": "Set the model for current session (overrides settings, but not --model flag)",
           "syntax": "export ANTHROPIC_MODEL=opus",
           "example": "ANTHROPIC_MODEL=fable claude\nANTHROPIC_MODEL=sonnet claude",
@@ -5604,7 +5312,7 @@
         },
         {
           "name": "ANTHROPIC_DEFAULT_OPUS_MODEL, SONNET_MODEL, HAIKU_MODEL, FABLE_MODEL",
-          "category": "env-flag",
+          "category": "setting",
           "summary": "Pin model versions for your provider (Bedrock, Vertex AI, Foundry, Claude Platform on AWS)",
           "syntax": "export ANTHROPIC_DEFAULT_OPUS_MODEL='us.anthropic.claude-opus-4-8'",
           "example": "On Bedrock: export ANTHROPIC_DEFAULT_OPUS_MODEL='us.anthropic.claude-opus-4-8'\nOn Vertex AI: export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-8'",
@@ -5614,7 +5322,7 @@
         },
         {
           "name": "MAX_THINKING_TOKENS environment variable",
-          "category": "env-flag",
+          "category": "setting",
           "summary": "Control extended thinking budget: 0 to disable, or a token count limit (Opus 4.6/Sonnet 4.6 only)",
           "syntax": "export MAX_THINKING_TOKENS=0",
           "example": "MAX_THINKING_TOKENS=0 claude (disables thinking)\nMAX_THINKING_TOKENS=10000 claude (limits thinking to 10k tokens)",
@@ -5624,7 +5332,7 @@
         },
         {
           "name": "DISABLE_PROMPT_CACHING, DISABLE_PROMPT_CACHING_HAIKU, _SONNET, _OPUS, _FABLE",
-          "category": "env-flag",
+          "category": "setting",
           "summary": "Disable prompt caching globally or per-model tier to reduce costs or debug",
           "syntax": "export DISABLE_PROMPT_CACHING=1\nexport DISABLE_PROMPT_CACHING_SONNET=1",
           "example": "DISABLE_PROMPT_CACHING=1 claude (disables caching entirely)\nDISABLE_PROMPT_CACHING_SONNET=1 claude (disables cache for Sonnet only)",
@@ -5633,7 +5341,7 @@
         },
         {
           "name": "/statusline configuration",
-          "category": "customization",
+          "category": "slash-command",
           "summary": "Custom status bar script showing model, costs, context usage, git status, or any metrics",
           "syntax": "~/.claude/statusline",
           "example": "#!/bin/bash\nread -r json  # receives session data as JSON on stdin\necho \"Model: $(echo $json | jq -r .model) | Cost: $(echo $json | jq -r .totalCost)\"",
@@ -5648,24 +5356,6 @@
       "overview": "Claude Code organizes work into persistent sessions that resume across devices, supports context management to keep conversations efficient, and provides multiple ways to automate recurring tasks—from session-scoped loops to cloud routines and IDE integrations. Understanding these features helps you maintain long-running projects, parallelize work across branches, and offload repetitive tasks.",
       "items": [
         {
-          "name": "claude --continue",
-          "category": "shortcut",
-          "summary": "Resume the most recent session in the current directory",
-          "syntax": "claude --continue",
-          "example": "cd ~/my-project && claude --continue",
-          "details": "Re-opens your last conversation and appends new messages to the existing transcript. All context from the previous session is available.",
-          "newcomerTip": "This is the fastest way to pick up where you left off. Your conversation history and learnings persist."
-        },
-        {
-          "name": "claude --resume",
-          "category": "shortcut",
-          "summary": "Open an interactive session picker to resume any past conversation",
-          "syntax": "claude --resume [<name>]",
-          "example": "claude --resume auth-refactor",
-          "details": "Opens a searchable picker showing all sessions in the current project. Press up/down to navigate, / to search, Ctrl+A for all projects, Ctrl+W for all worktrees. Press Space to preview session content. If you supply a name, it attempts an exact match and resumes directly, or shows the picker with the name pre-filled for ambiguous matches.",
-          "newcomerTip": "Use /resume inside an active session to switch conversations without exiting."
-        },
-        {
           "name": "/resume",
           "category": "slash-command",
           "summary": "Switch to a different conversation from inside the current session",
@@ -5673,69 +5363,6 @@
           "example": "/resume\n/resume feature-auth",
           "details": "Opens the session picker from within a session. Searching and keyboard shortcuts work the same as `claude --resume`. If a name is provided, it looks for exact matches across the current worktree and repository.",
           "newcomerTip": "This keeps you in the CLI without needing to exit and restart."
-        },
-        {
-          "name": "Session picker keyboard shortcuts",
-          "category": "shortcut",
-          "summary": "Navigate and filter sessions with keyboard commands",
-          "syntax": "↑/↓ | Space | Ctrl+R | Ctrl+W | Ctrl+A | Ctrl+B | / | Esc",
-          "example": "↑↓ to browse, Space to preview, / to search, Ctrl+W to show all worktrees, Ctrl+A to show all projects",
-          "details": "Up/Down navigate, Space previews, Ctrl+R renames the highlighted session, Ctrl+W widens to all worktrees of the current repo, Ctrl+A widens to every project on the machine, Ctrl+B filters by current git branch. / starts search mode. Esc exits.",
-          "newcomerTip": "Sessions are grouped by root session when forked. Press → to expand a group. Paste a PR/MR URL in search to find the session that created it."
-        },
-        {
-          "name": "claude -n <name>",
-          "category": "cli-flag",
-          "summary": "Start a new session with a specific name",
-          "syntax": "claude -n <name>",
-          "example": "claude -n auth-refactor",
-          "details": "Launches Claude Code with a descriptive session name that appears in the session picker and in `/resume <name>` lookups. Names make it easy to find and resume work on parallel tasks.",
-          "newcomerTip": "Always name sessions when working on multiple parallel tasks. It saves time later."
-        },
-        {
-          "name": "/rename",
-          "category": "slash-command",
-          "summary": "Rename the current session",
-          "syntax": "/rename <new-name>",
-          "example": "/rename auth-refactor-final",
-          "details": "Changes the name of the active session. The name appears in the prompt bar and in the session picker. You can also rename from the picker with Ctrl+R.",
-          "newcomerTip": "Rename descriptively before using /clear so you can find the session later with /resume <name>."
-        },
-        {
-          "name": "claude --continue --fork-session",
-          "category": "cli-flag",
-          "summary": "Branch a session to try a different approach without losing the original",
-          "syntax": "claude --continue --fork-session",
-          "example": "claude --continue --fork-session",
-          "details": "Creates a copy of the current session with a new ID and switches you into it. The original session remains unchanged and available in the picker. This is useful when you want to explore an alternative direction without losing your current path. Permissions you approved ('allow for this session') do not carry over to the fork.",
-          "newcomerTip": "Forking and resuming the original lets you safely experiment without commitment."
-        },
-        {
-          "name": "/branch",
-          "category": "slash-command",
-          "summary": "Branch the current conversation to try a different approach",
-          "syntax": "/branch [<name>]",
-          "example": "/branch try-streaming-approach",
-          "details": "Creates a copy of the conversation so far and switches you into it, leaving the original session unchanged. The command prints two session IDs: the new branch and the original. You can return to the original by passing its ID to /resume.",
-          "newcomerTip": "Use /branch when you want to explore a different direction but keep your current progress safe."
-        },
-        {
-          "name": "Session ID lookup",
-          "category": "concept",
-          "summary": "Sessions are identified by unique IDs stored in ~/.claude/projects/<project>/",
-          "syntax": "claude --resume <session-id>",
-          "example": "claude --resume abc12345def",
-          "details": "Each session is saved to a .jsonl file under ~/.claude/projects/<project>/. Sessions created via 'claude -p' (headless) or the Agent SDK don't appear in the picker but can still be resumed by ID. ID lookup is scoped to the directory where the session was started, so you must run the command from that directory.",
-          "newcomerTip": "If a session doesn't show in /resume, try `claude --resume <session-id>` with the exact ID from earlier output."
-        },
-        {
-          "name": "/clear",
-          "category": "slash-command",
-          "summary": "Start fresh with an empty context window within the same session",
-          "syntax": "/clear",
-          "example": "/clear",
-          "details": "Wipes the conversation history and file outputs from the context window, but the session transcript is saved and resumable. Claude can still access learnings from /memory and CLAUDE.md. Use when switching to unrelated work to avoid wasting tokens on irrelevant context.",
-          "newcomerTip": "Clear between unrelated tasks to keep token costs down, but rename first so you can find the session later."
         },
         {
           "name": "/context",
@@ -5756,6 +5383,87 @@
           "newcomerTip": "Use /compact when early setup discussions are taking up space but you still need recent work intact."
         },
         {
+          "name": "/branch",
+          "category": "slash-command",
+          "summary": "Branch the current conversation to try a different approach",
+          "syntax": "/branch [<name>]",
+          "example": "/branch try-streaming-approach",
+          "details": "Creates a copy of the conversation so far and switches you into it, leaving the original session unchanged. The command prints two session IDs: the new branch and the original. You can return to the original by passing its ID to /resume.",
+          "newcomerTip": "Use /branch when you want to explore a different direction but keep your current progress safe."
+        },
+        {
+          "name": "/export",
+          "category": "slash-command",
+          "summary": "Export the current session conversation as readable text",
+          "syntax": "/export [<filename>]",
+          "example": "/export\n/export session-notes.txt",
+          "details": "Copies the conversation to your clipboard or saves to a file. Messages and tool outputs are rendered as readable text, not raw JSON. Useful for sharing or archiving.",
+          "newcomerTip": "Use /export to create a shareable record of your work for team review or documentation."
+        },
+        {
+          "name": "/rename",
+          "category": "slash-command",
+          "summary": "Rename the current session",
+          "syntax": "/rename <new-name>",
+          "example": "/rename auth-refactor-final",
+          "details": "Changes the name of the active session. The name appears in the prompt bar and in the session picker. You can also rename from the picker with Ctrl+R.",
+          "newcomerTip": "Rename descriptively before using /clear so you can find the session later with /resume <name>."
+        },
+        {
+          "name": "claude --continue",
+          "category": "cli-flag",
+          "summary": "Resume the most recent session in the current directory",
+          "syntax": "claude --continue",
+          "example": "cd ~/my-project && claude --continue",
+          "details": "Re-opens your last conversation and appends new messages to the existing transcript. All context from the previous session is available.",
+          "newcomerTip": "This is the fastest way to pick up where you left off. Your conversation history and learnings persist."
+        },
+        {
+          "name": "claude --resume",
+          "category": "cli-flag",
+          "summary": "Open an interactive session picker to resume any past conversation",
+          "syntax": "claude --resume [<name>]",
+          "example": "claude --resume auth-refactor",
+          "details": "Opens a searchable picker showing all sessions in the current project. Press up/down to navigate, / to search, Ctrl+A for all projects, Ctrl+W for all worktrees. Press Space to preview session content. If you supply a name, it attempts an exact match and resumes directly, or shows the picker with the name pre-filled for ambiguous matches.",
+          "newcomerTip": "Use /resume inside an active session to switch conversations without exiting."
+        },
+        {
+          "name": "Session picker keyboard shortcuts",
+          "category": "shortcut",
+          "summary": "Navigate and filter sessions with keyboard commands",
+          "syntax": "↑/↓ | Space | Ctrl+R | Ctrl+W | Ctrl+A | Ctrl+B | / | Esc",
+          "example": "↑↓ to browse, Space to preview, / to search, Ctrl+W to show all worktrees, Ctrl+A to show all projects",
+          "details": "Up/Down navigate, Space previews, Ctrl+R renames the highlighted session, Ctrl+W widens to all worktrees of the current repo, Ctrl+A widens to every project on the machine, Ctrl+B filters by current git branch. / starts search mode. Esc exits.",
+          "newcomerTip": "Sessions are grouped by root session when forked. Press → to expand a group. Paste a PR/MR URL in search to find the session that created it."
+        },
+        {
+          "name": "claude -n <name>",
+          "category": "cli-flag",
+          "summary": "Start a new session with a specific name",
+          "syntax": "claude -n <name>",
+          "example": "claude -n auth-refactor",
+          "details": "Launches Claude Code with a descriptive session name that appears in the session picker and in `/resume <name>` lookups. Names make it easy to find and resume work on parallel tasks.",
+          "newcomerTip": "Always name sessions when working on multiple parallel tasks. It saves time later."
+        },
+        {
+          "name": "claude --continue --fork-session",
+          "category": "cli-flag",
+          "summary": "Branch a session to try a different approach without losing the original",
+          "syntax": "claude --continue --fork-session",
+          "example": "claude --continue --fork-session",
+          "details": "Creates a copy of the current session with a new ID and switches you into it. The original session remains unchanged and available in the picker. This is useful when you want to explore an alternative direction without losing your current path. Permissions you approved ('allow for this session') do not carry over to the fork.",
+          "newcomerTip": "Forking and resuming the original lets you safely experiment without commitment."
+        },
+        {
+          "name": "Session ID lookup",
+          "category": "concept",
+          "summary": "Sessions are identified by unique IDs stored in ~/.claude/projects/<project>/",
+          "syntax": "claude --resume <session-id>",
+          "example": "claude --resume abc12345def",
+          "details": "Each session is saved to a .jsonl file under ~/.claude/projects/<project>/. Sessions created via 'claude -p' (headless) or the Agent SDK don't appear in the picker but can still be resumed by ID. ID lookup is scoped to the directory where the session was started, so you must run the command from that directory.",
+          "newcomerTip": "If a session doesn't show in /resume, try `claude --resume <session-id>` with the exact ID from earlier output."
+        },
+        {
           "name": "Esc Esc (rewind menu)",
           "category": "shortcut",
           "summary": "Open the rewind menu to undo changes or summarize parts of the conversation",
@@ -5763,15 +5471,6 @@
           "example": "Press Esc twice when the prompt box is empty",
           "details": "Opens a menu showing every prompt in the session. Select a point and choose 'Restore code and conversation', 'Restore conversation', 'Restore code', 'Summarize from here', or 'Summarize up to here'. If the prompt input is not empty, Esc clears it instead (the text is saved to history).",
           "newcomerTip": "Rewind is your safety net—always use it before asking Claude to try something risky."
-        },
-        {
-          "name": "/rewind",
-          "category": "slash-command",
-          "summary": "Open the rewind menu with explicit command invocation",
-          "syntax": "/rewind",
-          "example": "/rewind",
-          "details": "Same as pressing Esc Esc, but as an explicit command. Useful when Esc is bound to something else or when you have text in the prompt box.",
-          "newcomerTip": "Use /rewind when Esc Esc doesn't work, or just press Esc Esc for faster access."
         },
         {
           "name": "Checkpoint safety mechanism",
@@ -5838,7 +5537,7 @@
         },
         {
           "name": "CronCreate / CronList / CronDelete tools",
-          "category": "tool",
+          "category": "feature",
           "summary": "Programmatically manage scheduled tasks with cron expressions",
           "syntax": "Ask Claude to create/list/delete tasks, or use /schedule",
           "example": "what scheduled tasks do I have?\ncancel the deploy check\nschedule a task to run npm test every day at 9am",
@@ -5880,15 +5579,6 @@
           "example": "~/.claude/projects/my-project/abc12345.jsonl",
           "details": "Each session is a continuous JSONL transcript. Messages, tool uses, and metadata are written as you work. Sessions expire after 30 days by default (configurable via cleanupPeriodDays). To suppress transcript writes, set CLAUDE_CODE_SKIP_PROMPT_HISTORY. To store elsewhere, set CLAUDE_CONFIG_DIR.",
           "newcomerTip": "Sessions are plaintext—you can review or audit them directly. Transcripts survive session exit."
-        },
-        {
-          "name": "/export",
-          "category": "slash-command",
-          "summary": "Export the current session conversation as readable text",
-          "syntax": "/export [<filename>]",
-          "example": "/export\n/export session-notes.txt",
-          "details": "Copies the conversation to your clipboard or saves to a file. Messages and tool outputs are rendered as readable text, not raw JSON. Useful for sharing or archiving.",
-          "newcomerTip": "Use /export to create a shareable record of your work for team review or documentation."
         },
         {
           "name": "/cost and /usage",
@@ -6248,7 +5938,7 @@
     {
       "name": "Reverse search keyboard shortcut Ctrl+S",
       "domain": "Claude Code Terminal/REPL Interactive Controls",
-      "category": "Keyboard Shortcuts - Reverse Search",
+      "category": "shortcut",
       "summary": "In reverse history search (initiated with Ctrl+R), press Ctrl+S to cycle scope through this session, this project, and all projects",
       "syntax": "Ctrl+S (while in Ctrl+R search mode)",
       "source": "https://code.claude.com/docs/en/interactive-mode.md"
@@ -6256,7 +5946,7 @@
     {
       "name": "Jump to previous/next user prompt",
       "domain": "Claude Code Terminal/REPL Interactive Controls",
-      "category": "Keyboard Shortcuts - Transcript Viewer",
+      "category": "shortcut",
       "summary": "In fullscreen rendering with transcript viewer open, press { to jump to previous user prompt or } to jump to next user prompt, like vim paragraph motion",
       "syntax": "{ / } (requires fullscreen rendering)",
       "source": "https://code.claude.com/docs/en/interactive-mode.md",
@@ -6265,7 +5955,7 @@
     {
       "name": "Write scrollback to native terminal buffer",
       "domain": "Claude Code Terminal/REPL Interactive Controls",
-      "category": "Keyboard Shortcuts - Transcript Viewer",
+      "category": "shortcut",
       "summary": "In fullscreen rendering, press [ to write full conversation to terminal's native scrollback so Cmd+F, tmux copy mode, and other native search tools can find it",
       "syntax": "[ (requires fullscreen rendering)",
       "source": "https://code.claude.com/docs/en/interactive-mode.md"
@@ -6273,24 +5963,15 @@
     {
       "name": "Open conversation in editor",
       "domain": "Claude Code Terminal/REPL Interactive Controls",
-      "category": "Keyboard Shortcuts - Transcript Viewer",
+      "category": "shortcut",
       "summary": "In fullscreen rendering, press v to write conversation to temp file and open in $VISUAL or $EDITOR",
       "syntax": "v (requires fullscreen rendering)",
       "source": "https://code.claude.com/docs/en/interactive-mode.md"
     },
     {
-      "name": "/simplify",
-      "domain": "Claude Code Slash Commands",
-      "category": "Code Review Commands",
-      "summary": "Review changed code for cleanup opportunities (reuse, simplification, efficiency, abstraction level) and apply fixes. Four review agents run in parallel. Does not hunt for correctness bugs (use /code-review for that). Available as bundled skill from v2.1.154+",
-      "syntax": "/simplify [target]",
-      "example": "/simplify src/auth.ts",
-      "source": "https://code.claude.com/docs/en/commands.md"
-    },
-    {
       "name": "/fewer-permission-prompts",
       "domain": "Claude Code Slash Commands",
-      "category": "Automation & Configuration",
+      "category": "slash-command",
       "summary": "Scan transcripts for common read-only Bash and MCP tool calls, then add a prioritized allowlist to project .claude/settings.json to reduce permission prompts during development",
       "syntax": "/fewer-permission-prompts",
       "source": "https://code.claude.com/docs/en/commands.md",
@@ -6299,7 +5980,7 @@
     {
       "name": "/scroll-speed",
       "domain": "Claude Code Slash Commands",
-      "category": "Interface Configuration",
+      "category": "slash-command",
       "summary": "Adjust mouse wheel scroll speed interactively in fullscreen rendering mode with a ruler preview",
       "syntax": "/scroll-speed",
       "source": "https://code.claude.com/docs/en/commands.md",
@@ -6308,7 +5989,7 @@
     {
       "name": "/remote-env",
       "domain": "Claude Code Slash Commands",
-      "category": "Cloud & Remote",
+      "category": "slash-command",
       "summary": "Choose the default environment for cloud agents running on Claude Code on the web",
       "syntax": "/remote-env",
       "source": "https://code.claude.com/docs/en/commands.md"
@@ -6316,7 +5997,7 @@
     {
       "name": "/workflows",
       "domain": "Claude Code Slash Commands",
-      "category": "Workflows",
+      "category": "slash-command",
       "summary": "Open the workflow progress view to watch, pause, resume, or save running and completed workflows",
       "syntax": "/workflows",
       "source": "https://code.claude.com/docs/en/commands.md"
@@ -6324,7 +6005,7 @@
     {
       "name": "/bashes",
       "domain": "Claude Code Slash Commands",
-      "category": "Background Tasks",
+      "category": "slash-command",
       "summary": "Alias for /tasks. View and manage everything running in the background",
       "syntax": "/bashes",
       "source": "https://code.claude.com/docs/en/commands.md"
@@ -6332,136 +6013,23 @@
     {
       "name": "--disable-slash-commands",
       "domain": "Claude Code CLI",
-      "category": "CLI Flags - Behavior Control",
+      "category": "cli-flag",
       "summary": "Disable all skills and commands for this session",
       "syntax": "claude --disable-slash-commands",
       "source": "https://code.claude.com/docs/en/cli-reference.md"
     },
     {
-      "name": "--ax-screen-reader",
-      "domain": "Claude Code CLI",
-      "category": "CLI Flags - Accessibility",
-      "summary": "Render screen-reader friendly output with flat text without decorative borders or animations. Forces classic renderer. Takes precedence over CLAUDE_AX_SCREEN_READER env var and axScreenReader setting. Added in v2.1.181",
-      "syntax": "claude --ax-screen-reader",
-      "source": "https://code.claude.com/docs/en/cli-reference.md"
-    },
-    {
       "name": "--input-format",
       "domain": "Claude Code CLI",
-      "category": "CLI Flags - Output & Streaming",
+      "category": "cli-flag",
       "summary": "Specify input format for print mode (options: text, stream-json)",
       "syntax": "claude -p --input-format stream-json",
       "source": "https://code.claude.com/docs/en/cli-reference.md"
     },
     {
-      "name": "--json-schema",
-      "domain": "Claude Code CLI",
-      "category": "CLI Flags - Structured Output",
-      "summary": "Get validated JSON output matching a JSON Schema after agent completes its workflow (print mode only). See structured outputs documentation",
-      "syntax": "claude -p --json-schema '{\"type\":\"object\",\"properties\":{...}}' \"query\"",
-      "source": "https://code.claude.com/docs/en/cli-reference.md"
-    },
-    {
-      "name": "--max-budget-usd",
-      "domain": "Claude Code CLI",
-      "category": "CLI Flags - Cost Control",
-      "summary": "Set maximum dollar amount to spend on API calls before stopping (print mode only)",
-      "syntax": "claude -p --max-budget-usd 5.00 \"query\"",
-      "source": "https://code.claude.com/docs/en/cli-reference.md"
-    },
-    {
-      "name": "--maintenance",
-      "domain": "Claude Code CLI",
-      "category": "CLI Flags - Hooks",
-      "summary": "Run Setup hooks with the maintenance matcher before the session (print mode only)",
-      "syntax": "claude -p --maintenance \"query\"",
-      "source": "https://code.claude.com/docs/en/cli-reference.md"
-    },
-    {
-      "name": "--init",
-      "domain": "Claude Code CLI",
-      "category": "CLI Flags - Hooks",
-      "summary": "Run Setup hooks with the init matcher before the session (print mode only)",
-      "syntax": "claude -p --init \"query\"",
-      "source": "https://code.claude.com/docs/en/cli-reference.md"
-    },
-    {
-      "name": "--init-only",
-      "domain": "Claude Code CLI",
-      "category": "CLI Flags - Hooks",
-      "summary": "Run Setup and SessionStart hooks, then exit without starting a conversation",
-      "syntax": "claude --init-only",
-      "source": "https://code.claude.com/docs/en/cli-reference.md"
-    },
-    {
-      "name": "--exclude-dynamic-system-prompt-sections",
-      "domain": "Claude Code CLI",
-      "category": "CLI Flags - System Prompt",
-      "summary": "Move per-machine sections from system prompt (cwd, env info, memory paths, git-repo flag) into first user message. Improves prompt-cache reuse across machines/users. Works with default system prompt only",
-      "syntax": "claude -p --exclude-dynamic-system-prompt-sections \"query\"",
-      "source": "https://code.claude.com/docs/en/cli-reference.md"
-    },
-    {
-      "name": "--fallback-model",
-      "domain": "Claude Code CLI",
-      "category": "CLI Flags - Model Selection",
-      "summary": "Enable automatic fallback to specified model(s) when primary is overloaded. Accepts comma-separated list tried in order",
-      "syntax": "claude --fallback-model sonnet,haiku",
-      "source": "https://code.claude.com/docs/en/cli-reference.md"
-    },
-    {
-      "name": "--from-pr",
-      "domain": "Claude Code CLI",
-      "category": "CLI Flags - Session Management",
-      "summary": "Resume sessions linked to a specific pull request. Accepts PR number, GitHub URL, GitLab MR URL, or Bitbucket PR URL. Sessions auto-link when Claude creates the PR",
-      "syntax": "claude --from-pr 123",
-      "source": "https://code.claude.com/docs/en/cli-reference.md"
-    },
-    {
-      "name": "--no-chrome",
-      "domain": "Claude Code CLI",
-      "category": "CLI Flags - Features",
-      "summary": "Disable Chrome browser integration for this session",
-      "syntax": "claude --no-chrome",
-      "source": "https://code.claude.com/docs/en/cli-reference.md"
-    },
-    {
-      "name": "--permission-prompt-tool",
-      "domain": "Claude Code CLI",
-      "category": "CLI Flags - Permissions",
-      "summary": "Specify an MCP tool to handle permission prompts in non-interactive mode",
-      "syntax": "claude -p --permission-prompt-tool mcp_auth_tool \"query\"",
-      "source": "https://code.claude.com/docs/en/cli-reference.md"
-    },
-    {
-      "name": "--replay-user-messages",
-      "domain": "Claude Code CLI",
-      "category": "CLI Flags - Streaming",
-      "summary": "Re-emit user messages from stdin back on stdout for acknowledgment. Requires stream-json format on both input and output",
-      "syntax": "claude -p --input-format stream-json --output-format stream-json --replay-user-messages",
-      "source": "https://code.claude.com/docs/en/cli-reference.md"
-    },
-    {
-      "name": "--safe-mode",
-      "domain": "Claude Code CLI",
-      "category": "CLI Flags - Troubleshooting",
-      "summary": "Start with all customizations disabled (CLAUDE.md, skills, plugins, hooks, MCP servers, custom commands, output styles, themes, keybindings) but keeping auth, model selection, built-in tools, and permissions. Added in v2.1.169. Sets CLAUDE_CODE_SAFE_MODE env var",
-      "syntax": "claude --safe-mode",
-      "source": "https://code.claude.com/docs/en/cli-reference.md",
-      "newcomerTip": "Useful for troubleshooting broken configurations or checking if customization causes fallback"
-    },
-    {
-      "name": "--teammate-mode",
-      "domain": "Claude Code CLI",
-      "category": "CLI Flags - Agent Teams",
-      "summary": "Set how agent team teammates display: in-process (default), auto, tmux, or iterm2 (v2.1.186+). Overrides teammateMode setting",
-      "syntax": "claude --teammate-mode auto",
-      "source": "https://code.claude.com/docs/en/cli-reference.md"
-    },
-    {
       "name": "Setup hook event",
       "domain": "Claude Code Hooks System",
-      "category": "Hook Events - Session Lifecycle",
+      "category": "hook",
       "summary": "Hook event that runs setup tasks before the session, triggered by --init or --maintenance flags or @matcher. Can modify the working directory or install tools",
       "syntax": "{\"event\": \"Setup\"}",
       "source": "https://code.claude.com/docs/en/hooks.md"
@@ -6469,7 +6037,7 @@
     {
       "name": "InstructionsLoaded hook event",
       "domain": "Claude Code Hooks System",
-      "category": "Hook Events - Session Lifecycle",
+      "category": "hook",
       "summary": "Hook event fired after CLAUDE.md files and project memory load. Useful for validating or augmenting project instructions",
       "syntax": "{\"event\": \"InstructionsLoaded\"}",
       "source": "https://code.claude.com/docs/en/hooks.md"
@@ -6477,7 +6045,7 @@
     {
       "name": "UserPromptExpansion hook event",
       "domain": "Claude Code Hooks System",
-      "category": "Hook Events - Per-Turn",
+      "category": "hook",
       "summary": "Hook event that fires when user submits text starting with @ or / but before command/file expansion. Can modify or reject the expansion",
       "syntax": "{\"event\": \"UserPromptExpansion\"}",
       "source": "https://code.claude.com/docs/en/hooks.md"
@@ -6485,7 +6053,7 @@
     {
       "name": "PostToolBatch hook event",
       "domain": "Claude Code Hooks System",
-      "category": "Hook Events - Per-Tool-Call",
+      "category": "hook",
       "summary": "Hook event fired after all tools in a batch complete. Receives results from all tools in the batch for aggregate handling",
       "syntax": "{\"event\": \"PostToolBatch\"}",
       "source": "https://code.claude.com/docs/en/hooks.md"
@@ -6493,7 +6061,7 @@
     {
       "name": "PostToolUseFailure hook event",
       "domain": "Claude Code Hooks System",
-      "category": "Hook Events - Per-Tool-Call",
+      "category": "hook",
       "summary": "Hook event fired when a tool call fails. Can be used to log failures, retry, or provide alternate data",
       "syntax": "{\"event\": \"PostToolUseFailure\"}",
       "source": "https://code.claude.com/docs/en/hooks.md"
@@ -6501,7 +6069,7 @@
     {
       "name": "TeammateIdle hook event",
       "domain": "Claude Code Hooks System",
-      "category": "Hook Events - Agent Teams",
+      "category": "hook",
       "summary": "Hook event fired when an agent team teammate becomes idle. Can be used to reassign work or check on progress",
       "syntax": "{\"event\": \"TeammateIdle\"}",
       "source": "https://code.claude.com/docs/en/hooks.md"
@@ -6509,7 +6077,7 @@
     {
       "name": "ConfigChange hook event",
       "domain": "Claude Code Hooks System",
-      "category": "Hook Events - Configuration",
+      "category": "hook",
       "summary": "Hook event fired when settings or configuration change during a session. Can be used to validate, log, or react to config changes",
       "syntax": "{\"event\": \"ConfigChange\"}",
       "source": "https://code.claude.com/docs/en/hooks.md"
@@ -6517,7 +6085,7 @@
     {
       "name": "CwdChanged hook event",
       "domain": "Claude Code Hooks System",
-      "category": "Hook Events - Filesystem",
+      "category": "hook",
       "summary": "Hook event fired when the current working directory changes (via /cd). Input includes old and new paths",
       "syntax": "{\"event\": \"CwdChanged\"}",
       "source": "https://code.claude.com/docs/en/hooks.md"
@@ -6525,7 +6093,7 @@
     {
       "name": "FileChanged hook event",
       "domain": "Claude Code Hooks System",
-      "category": "Hook Events - Filesystem",
+      "category": "hook",
       "summary": "Hook event fired when files change on disk outside of Claude's edits. Can be used to reload context or re-read files",
       "syntax": "{\"event\": \"FileChanged\"}",
       "source": "https://code.claude.com/docs/en/hooks.md"
@@ -6533,7 +6101,7 @@
     {
       "name": "WorktreeCreate hook event",
       "domain": "Claude Code Hooks System",
-      "category": "Hook Events - Worktrees",
+      "category": "hook",
       "summary": "Hook event fired when a new git worktree is created. Includes worktree path and branch information",
       "syntax": "{\"event\": \"WorktreeCreate\"}",
       "source": "https://code.claude.com/docs/en/hooks.md"
@@ -6541,7 +6109,7 @@
     {
       "name": "WorktreeRemove hook event",
       "domain": "Claude Code Hooks System",
-      "category": "Hook Events - Worktrees",
+      "category": "hook",
       "summary": "Hook event fired when a git worktree is removed. Includes the worktree path being removed",
       "syntax": "{\"event\": \"WorktreeRemove\"}",
       "source": "https://code.claude.com/docs/en/hooks.md"
@@ -6549,7 +6117,7 @@
     {
       "name": "PreCompact hook event",
       "domain": "Claude Code Hooks System",
-      "category": "Hook Events - Compaction",
+      "category": "hook",
       "summary": "Hook event fired before conversation compaction starts. Can be used to save state or reject compaction",
       "syntax": "{\"event\": \"PreCompact\"}",
       "source": "https://code.claude.com/docs/en/hooks.md"
@@ -6557,7 +6125,7 @@
     {
       "name": "PostCompact hook event",
       "domain": "Claude Code Hooks System",
-      "category": "Hook Events - Compaction",
+      "category": "hook",
       "summary": "Hook event fired after conversation compaction completes. Can be used to log compaction or verify results",
       "syntax": "{\"event\": \"PostCompact\"}",
       "source": "https://code.claude.com/docs/en/hooks.md"
@@ -6565,7 +6133,7 @@
     {
       "name": "SessionEnd hook event",
       "domain": "Claude Code Hooks System",
-      "category": "Hook Events - Session Lifecycle",
+      "category": "hook",
       "summary": "Hook event fired when a session ends. Can be used to clean up resources, save artifacts, or log metrics",
       "syntax": "{\"event\": \"SessionEnd\"}",
       "source": "https://code.claude.com/docs/en/hooks.md"
@@ -6573,7 +6141,7 @@
     {
       "name": "Elicitation hook event",
       "domain": "Claude Code Hooks System",
-      "category": "Hook Events - MCP",
+      "category": "hook",
       "summary": "Hook event fired when an MCP server requests information from Claude. Can provide data or reject the request",
       "syntax": "{\"event\": \"Elicitation\"}",
       "source": "https://code.claude.com/docs/en/hooks.md"
@@ -6581,7 +6149,7 @@
     {
       "name": "ElicitationResult hook event",
       "domain": "Claude Code Hooks System",
-      "category": "Hook Events - MCP",
+      "category": "hook",
       "summary": "Hook event fired after Claude responds to an MCP elicitation request. Can be used to log or validate the response",
       "syntax": "{\"event\": \"ElicitationResult\"}",
       "source": "https://code.claude.com/docs/en/hooks.md"
@@ -6589,7 +6157,7 @@
     {
       "name": "respondToBashCommands setting",
       "domain": "Claude Code settings.json Configuration System",
-      "category": "Settings - Shell Behavior",
+      "category": "setting",
       "summary": "Boolean setting that controls whether Claude automatically responds to shell mode (!) commands. Default true. Set to false to restore older behavior where output is added to context without response",
       "syntax": "\"respondToBashCommands\": false",
       "source": "https://code.claude.com/docs/en/interactive-mode.md"
@@ -6597,7 +6165,7 @@
     {
       "name": "viewMode setting",
       "domain": "Claude Code settings.json Configuration System",
-      "category": "Settings - Display",
+      "category": "setting",
       "summary": "Set default view mode for sessions: focus (show only last prompt/response) or normal (show full history). Can be overridden per-session with /focus",
       "syntax": "\"viewMode\": \"focus\"",
       "source": "https://code.claude.com/docs/en/commands.md"
@@ -6605,7 +6173,7 @@
     {
       "name": "fallbackModel setting",
       "domain": "Claude Code settings.json Configuration System",
-      "category": "Settings - Model Selection",
+      "category": "setting",
       "summary": "Comma-separated list of model fallback chain for when primary model is overloaded. Overridable with --fallback-model flag",
       "syntax": "\"fallbackModel\": \"sonnet,haiku\"",
       "source": "https://code.claude.com/docs/en/model-config.md"
@@ -6613,7 +6181,7 @@
     {
       "name": "advisorModel setting",
       "domain": "Claude Code settings.json Configuration System",
-      "category": "Settings - Advisor",
+      "category": "setting",
       "summary": "Set default advisor model (opus, sonnet, fable, or full model ID). Can be overridden with /advisor command or --advisor flag",
       "syntax": "\"advisorModel\": \"opus\"",
       "source": "https://code.claude.com/docs/en/advisor.md"
@@ -6621,7 +6189,7 @@
     {
       "name": "axScreenReader setting",
       "domain": "Claude Code settings.json Configuration System",
-      "category": "Settings - Accessibility",
+      "category": "setting",
       "summary": "Boolean setting for screen-reader friendly output (flat text without decorative borders). Can be overridden with --ax-screen-reader flag",
       "syntax": "\"axScreenReader\": true",
       "source": "https://code.claude.com/docs/en/cli-reference.md"
@@ -6629,7 +6197,7 @@
     {
       "name": "teammateMode setting",
       "domain": "Claude Code settings.json Configuration System",
-      "category": "Settings - Agent Teams",
+      "category": "setting",
       "summary": "Default display mode for agent team teammates: in-process, auto, tmux, or iterm2. Can be overridden with --teammate-mode flag",
       "syntax": "\"teammateMode\": \"auto\"",
       "source": "https://code.claude.com/docs/en/cli-reference.md"
@@ -6637,7 +6205,7 @@
     {
       "name": "CLAUDE_CODE_SKIP_PROMPT_HISTORY",
       "domain": "Claude Code settings.json Configuration System",
-      "category": "Environment Variables - Session",
+      "category": "setting",
       "summary": "Environment variable that disables session persistence so sessions are not saved to disk and cannot be resumed. Works across all modes (equivalent to --no-session-persistence)",
       "syntax": "export CLAUDE_CODE_SKIP_PROMPT_HISTORY=1",
       "source": "https://code.claude.com/docs/en/cli-reference.md"
@@ -6645,7 +6213,7 @@
     {
       "name": "CLAUDE_REMOTE_CONTROL_SESSION_NAME_PREFIX",
       "domain": "Claude Code settings.json Configuration System",
-      "category": "Environment Variables - Remote Control",
+      "category": "setting",
       "summary": "Prefix for auto-generated Remote Control session names when no explicit name is set. Defaults to machine hostname",
       "syntax": "export CLAUDE_REMOTE_CONTROL_SESSION_NAME_PREFIX=dev-box",
       "source": "https://code.claude.com/docs/en/cli-reference.md"
@@ -6653,7 +6221,7 @@
     {
       "name": "CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION",
       "domain": "Claude Code settings.json Configuration System",
-      "category": "Environment Variables - Suggestions",
+      "category": "setting",
       "summary": "Environment variable to disable prompt suggestions globally. Set to 0 or false to turn off suggestions",
       "syntax": "export CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION=false",
       "source": "https://code.claude.com/docs/en/interactive-mode.md"
@@ -6661,7 +6229,7 @@
     {
       "name": "CLAUDE_CODE_DISABLE_BACKGROUND_TASKS",
       "domain": "Claude Code settings.json Configuration System",
-      "category": "Environment Variables - Background Tasks",
+      "category": "setting",
       "summary": "Environment variable to disable all background task functionality. Set to 1 to turn off background commands with Ctrl+B",
       "syntax": "export CLAUDE_CODE_DISABLE_BACKGROUND_TASKS=1",
       "source": "https://code.claude.com/docs/en/interactive-mode.md"
@@ -6669,7 +6237,7 @@
     {
       "name": "CLAUDE_CODE_TASK_LIST_ID",
       "domain": "Claude Code settings.json Configuration System",
-      "category": "Environment Variables - Task Management",
+      "category": "setting",
       "summary": "Environment variable to share a task list across sessions. Set to named directory in ~/.claude/tasks/ to use persistent task tracking",
       "syntax": "export CLAUDE_CODE_TASK_LIST_ID=my-project",
       "source": "https://code.claude.com/docs/en/interactive-mode.md"
@@ -6677,7 +6245,7 @@
     {
       "name": "CLAUDE_CODE_NEW_INIT",
       "domain": "Claude Code settings.json Configuration System",
-      "category": "Environment Variables - Initialization",
+      "category": "setting",
       "summary": "Environment variable that enables interactive flow for /init command, walking through skills, hooks, and personal memory setup",
       "syntax": "export CLAUDE_CODE_NEW_INIT=1",
       "source": "https://code.claude.com/docs/en/commands.md"

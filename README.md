@@ -19,7 +19,7 @@ configure, runs entirely in your browser.
 - 🎮 **Playground** — a safe *simulated* Claude Code terminal (nothing executes) to try commands.
 - 🚀 **Start here** — a guided on-ramp for newcomers.
 
-Built on a catalog of **~728 features across 12 domains**, audited against the official Claude Code docs.
+Built on a curated catalog of **Claude Code features across 12 domains**, audited against the official docs.
 
 ## Tech stack
 
