@@ -3,7 +3,9 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AppProvider } from '../shell/AppContext';
+import { CATALOG } from '../../data/catalog';
 import { Quiz } from './Quiz';
+import { generateQuestions } from './generator';
 import type { Rng } from './quizTypes';
 
 // Deterministic seeded RNG — same one used in the generator tests.
@@ -78,31 +80,45 @@ describe('Quiz', () => {
     expect(screen.getByTestId('quiz-next')).toBeInTheDocument();
   });
 
-  it('answering the correct option increments the score', async () => {
+  it('clicking the correct option deterministically scores a point', async () => {
     const user = userEvent.setup();
-    renderQuiz();
+
+    // Build the exact questions the surface will render: call the generator
+    // with a FRESH seeded rng using the SAME defaults the Quiz uses internally
+    // (count 10, category 'all'), then render <Quiz> with an identical fresh
+    // seeded rng. Because the rng sequences match, the rendered first question
+    // equals expected[0], so we know its correct answerIndex.
+    const SEED = 5; // seed whose first question is a 4-option choice question
+    const expected = generateQuestions(CATALOG, {
+      count: 10,
+      category: 'all',
+      rng: makeSeed(SEED),
+    });
+    const first = expected[0];
+    expect(first.kind === 'name-to-summary' || first.kind === 'summary-to-name').toBe(true);
+    if (first.kind === 'type-shortcut') throw new Error('seed regressed: expected a choice question');
+
+    renderQuiz(makeSeed(SEED));
     await user.click(screen.getByTestId('quiz-start'));
 
-    const options = screen.getAllByTestId('quiz-option');
-    expect(options.length).toBe(4);
+    // Score and streak both start at 0.
+    expect(screen.getByTestId('quiz-score')).toHaveTextContent('Score: 0');
+    expect(screen.getByTestId('quiz-score')).toHaveTextContent('Streak: 0');
 
-    // The scorebar starts at 0. Click each option fresh by re-rendering is
-    // overkill; instead find the option that turns green (correct) by clicking
-    // the first one and reading feedback colour via the score delta.
-    const scoreBefore = screen.getByTestId('quiz-score').textContent ?? '';
-    await user.click(options[0]);
-    const scoreAfter = screen.getByTestId('quiz-score').textContent ?? '';
-    // Either it was correct (score increased) or not, but feedback must show.
+    const options = screen.getAllByTestId('quiz-option');
+    expect(options).toHaveLength(4);
+    // Sanity: the rendered option matches the generated correct option text.
+    expect(options[first.answerIndex]).toHaveTextContent(first.options[first.answerIndex]);
+
+    // Click the KNOWN-correct option.
+    await user.click(options[first.answerIndex]);
+
+    // The correct answer is worth exactly one point and one streak.
+    expect(screen.getByTestId('quiz-score')).toHaveTextContent('Score: 1');
+    expect(screen.getByTestId('quiz-score')).toHaveTextContent('Streak: 1');
+    // Feedback shows and the clicked option is highlighted green.
     expect(screen.getByTestId('quiz-next')).toBeInTheDocument();
-    // Find the green (correct) option after answering — exactly one exists.
-    const greenOption = screen
-      .getAllByTestId('quiz-option')
-      .find((b) => b.className.includes('text-cc-green'));
-    expect(greenOption).toBeDefined();
-    // If we happened to click the correct one, score must have gone up.
-    if (greenOption === options[0]) {
-      expect(scoreAfter).not.toBe(scoreBefore);
-    }
+    expect(options[first.answerIndex].className).toContain('text-cc-green');
   });
 
   it('answering wrong reveals the correct option in green', async () => {

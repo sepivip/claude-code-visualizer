@@ -64,7 +64,10 @@ function buildChoiceQuestion(item: CatalogItem, pool: CatalogItem[], rng: Rng): 
   const kind: 'name-to-summary' | 'summary-to-name' =
     rng() < 0.5 ? 'name-to-summary' : 'summary-to-name';
 
-  const distractors = pickDistractors(item, pool, pool.length, rng);
+  // Pull a small headroom of candidates (not the whole pool) so the dedup
+  // loop below has enough to find 3 distinct option strings, without cloning +
+  // shuffling every catalog item or over-consuming the RNG on each question.
+  const distractors = pickDistractors(item, pool, Math.min(8, pool.length - 1), rng);
 
   const correctOption = kind === 'name-to-summary' ? item.summary : item.name;
   const prompt =
