@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { TRACK } from './track';
 import type { Chapter } from './track';
 import { useApp } from '../shell/AppContext';
@@ -97,14 +97,11 @@ function ChapterContent({
   onPrev: () => void;
   onNext: () => void;
 }): JSX.Element {
-  const { setMode, setParams } = useApp();
+  const { setMode } = useApp();
 
   const handleCta = useCallback(() => {
-    if (chapter.cta.params !== undefined) {
-      setParams(chapter.cta.params);
-    }
-    setMode(chapter.cta.mode);
-  }, [chapter.cta, setMode, setParams]);
+    setMode(chapter.cta.mode, chapter.cta.params ?? {});
+  }, [chapter.cta, setMode]);
 
   return (
     <div data-testid="chapter-content" className="flex flex-col gap-5">
@@ -250,14 +247,6 @@ export function Start(): JSX.Element {
   const handleNext = useCallback(() => {
     if (activeIndex < TRACK.length - 1) setActiveId(TRACK[activeIndex + 1].id);
   }, [activeIndex]);
-
-  // Restore active chapter from localStorage on mount (if browser restores state)
-  useEffect(() => {
-    const saved = load<string[]>(STORAGE_KEY, []);
-    const ids = new Set(saved);
-    setCompletedIds(ids);
-    setActiveId(firstUncompletedOrFirst(ids));
-  }, []);
 
   return (
     <div data-testid="start" className="h-full overflow-auto bg-cc-bg font-mono">

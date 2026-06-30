@@ -15,10 +15,15 @@ function renderStart() {
   );
 }
 
-/** Probe component that reads the current app mode into the DOM. */
+/** Probe component that reads the current app mode + params into the DOM. */
 function Probe(): JSX.Element {
-  const { mode } = useApp();
-  return <span data-testid="probe-mode">{mode}</span>;
+  const { mode, params } = useApp();
+  return (
+    <>
+      <span data-testid="probe-mode">{mode}</span>
+      <span data-testid="probe-params-q">{params.q ?? ''}</span>
+    </>
+  );
 }
 
 beforeEach(() => {
@@ -136,7 +141,7 @@ describe('Start', () => {
     const cta = screen.getByTestId('chapter-cta');
     await user.click(cta);
 
-    expect(window.location.hash).toContain('playground');
+    expect(screen.getByTestId('probe-mode')).toHaveTextContent('playground');
   });
 
   it('CTA button on slash chapter navigates to cheatsheet', async () => {
@@ -159,7 +164,9 @@ describe('Start', () => {
     // Click CTA
     await user.click(screen.getByTestId('chapter-cta'));
 
-    expect(window.location.hash).toContain('cheatsheet');
+    // Mode switches to cheatsheet AND params.q is seeded with '/' (locks in atomic navigate)
+    expect(screen.getByTestId('probe-mode')).toHaveTextContent('cheatsheet');
+    expect(screen.getByTestId('probe-params-q')).toHaveTextContent('/');
   });
 
   it('active chapter nav item has aria-current="step"', () => {

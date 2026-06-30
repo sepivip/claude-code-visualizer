@@ -14,7 +14,7 @@ import { useHashRoute } from '../../hooks/useHashRoute';
 
 export interface AppContextValue {
   mode: Mode;
-  setMode: (m: Mode) => void;
+  setMode: (m: Mode, params?: Record<string, string>) => void;
   params: Record<string, string>;
   setParams: (p: Record<string, string>) => void;
   lines: TerminalLine[];
@@ -39,7 +39,8 @@ export function AppProvider({ children }: { children: ReactNode }): JSX.Element 
   const [platform, setPlatform] = useState<Platform>(detectPlatform);
   const turn = useRef(0);
 
-  const setMode = (m: Mode): void => setRoute({ mode: m, params: {} });
+  const setMode = (m: Mode, params: Record<string, string> = {}): void =>
+    setRoute({ mode: m, params });
   const setParams = (p: Record<string, string>): void =>
     setRoute({ mode: route.mode, params: p });
 
