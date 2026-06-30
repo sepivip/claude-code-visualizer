@@ -41,10 +41,10 @@ describe('App integration', () => {
     expect(screen.getByTestId('surface-cheatsheet')).toBeInTheDocument();
   });
 
-  it('navigates from a Start card button to the playground', () => {
+  it('navigates from the Start track CTA to the playground', () => {
     render(<App />);
     const start = screen.getByTestId('surface-start');
-    fireEvent.click(within(start).getByRole('button', { name: /open playground/i }));
+    fireEvent.click(within(start).getByRole('button', { name: /try the prompt/i }));
     expect(screen.getByTestId('surface-playground')).toBeInTheDocument();
   });
 });
