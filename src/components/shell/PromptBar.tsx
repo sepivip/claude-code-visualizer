@@ -1,10 +1,9 @@
 import { useRef, useState, type FormEvent, type KeyboardEvent } from 'react';
 import { completions } from '../../engine/commandRegistry';
-import { CATALOG } from '../../data/catalog';
 import { useApp } from './AppContext';
 
 export function PromptBar(): JSX.Element {
-  const { mode, submit } = useApp();
+  const { mode, submit, catalog } = useApp();
   const [value, setValue] = useState('');
   const [hint, setHint] = useState('');
   const history = useRef<string[]>([]);
@@ -36,7 +35,7 @@ export function PromptBar(): JSX.Element {
 
   const handleTab = (): void => {
     if (!value.startsWith('/')) return;
-    const matches = completions(value, { catalog: CATALOG });
+    const matches = completions(value, { catalog });
     if (matches.length === 1) {
       setValue(matches[0]);
       setHint('');

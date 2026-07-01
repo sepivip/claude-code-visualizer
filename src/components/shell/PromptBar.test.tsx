@@ -20,6 +20,7 @@ vi.mock('./AppContext', async () => {
       submit,
       platform: 'mac',
       setPlatform: vi.fn(),
+      catalog: [],
     }),
   };
 });

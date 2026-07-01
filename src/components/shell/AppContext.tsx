@@ -1,15 +1,15 @@
 import {
   createContext,
   useContext,
+  useEffect,
   useRef,
   useState,
   type ReactNode,
 } from 'react';
-import type { Mode, Platform } from '../../data/types';
+import type { CatalogItem, Mode, Platform } from '../../data/types';
 import type { TerminalLine } from '../../engine/types';
 import { parseInput } from '../../engine/parser';
 import { runCommand } from '../../engine/commandRegistry';
-import { CATALOG } from '../../data/catalog';
 import { useHashRoute } from '../../hooks/useHashRoute';
 
 export interface AppContextValue {
@@ -21,6 +21,7 @@ export interface AppContextValue {
   submit: (raw: string) => void;
   platform: Platform;
   setPlatform: (p: Platform) => void;
+  catalog: CatalogItem[];
 }
 
 const AppContext = createContext<AppContextValue | null>(null);
@@ -37,7 +38,19 @@ export function AppProvider({ children }: { children: ReactNode }): JSX.Element 
   const [route, setRoute] = useHashRoute();
   const [lines, setLines] = useState<TerminalLine[]>([]);
   const [platform, setPlatform] = useState<Platform>(detectPlatform);
+  const [catalog, setCatalog] = useState<CatalogItem[]>([]);
   const turn = useRef(0);
+
+  // Lazy-load the catalog so it stays out of the eager shell bundle.
+  useEffect(() => {
+    let live = true;
+    import('../../data/catalog').then((m) => {
+      if (live) setCatalog(m.CATALOG);
+    });
+    return () => {
+      live = false;
+    };
+  }, []);
 
   const setMode = (m: Mode, params: Record<string, string> = {}): void =>
     setRoute({ mode: m, params });
@@ -46,7 +59,7 @@ export function AppProvider({ children }: { children: ReactNode }): JSX.Element 
 
   const submit = (raw: string): void => {
     const parsed = parseInput(raw);
-    const result = runCommand(parsed, { catalog: CATALOG });
+    const result = runCommand(parsed, { catalog });
     if (result.clear) {
       setLines([]);
     } else {
@@ -69,6 +82,7 @@ export function AppProvider({ children }: { children: ReactNode }): JSX.Element 
     submit,
     platform,
     setPlatform,
+    catalog,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
