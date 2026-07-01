@@ -17,6 +17,10 @@
 The whole app presents as **one Claude Code window**. You learn by doing — no install, nothing to
 configure, runs entirely in your browser.
 
+<p align="center">
+  <a href="https://cckeys.work"><img src="docs/media/demo.gif" alt="cckeys demo — keyboard glow, cheatsheet search, and quiz" width="760"></a>
+</p>
+
 ## Features
 
 - ⌨️ **Keyboard visualizer** — a full keyboard where shortcut keys glow; click a key to light up its
