@@ -1,10 +1,11 @@
-import { describe, it, expect, beforeEach } from 'vitest';
-import { render, screen, fireEvent, within } from '@testing-library/react';
+import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
+import { render, screen, fireEvent, within, waitFor, act } from '@testing-library/react';
 import { SearchBox } from './SearchBox';
 import { Filters } from './Filters';
 import { ItemCard } from './ItemCard';
 import { ItemDrawer } from './ItemDrawer';
 import { Cheatsheet } from './Cheatsheet';
+import { AppProvider } from '../shell/AppContext';
 import { CATALOG } from '../../data/catalog';
 import { DOMAINS } from '../../data/domains';
 import type { CatalogItem } from '../../data/types';
@@ -17,6 +18,10 @@ const clearItem = (): CatalogItem => {
 
 beforeEach(() => {
   window.location.hash = '';
+});
+
+afterEach(() => {
+  vi.restoreAllMocks();
 });
 
 describe('SearchBox', () => {
@@ -136,5 +141,161 @@ describe('Cheatsheet', () => {
   it('does not set its own surface-* testid (App.tsx owns surface-cheatsheet)', () => {
     render(<Cheatsheet />);
     expect(screen.queryByTestId('surface-cheatsheet')).toBeNull();
+  });
+});
+
+describe('Cheatsheet — deep-link seeding', () => {
+  it('seeds query from URL ?q= param on mount (via AppProvider)', () => {
+    window.location.hash = '#/cheatsheet?q=clear';
+    render(
+      <AppProvider>
+        <Cheatsheet />
+      </AppProvider>,
+    );
+    const input = screen.getByRole('searchbox', { name: /search features/i }) as HTMLInputElement;
+    expect(input.value).toBe('clear');
+    const grid = screen.getByTestId('results-grid');
+    expect(within(grid).getAllByText('/clear').length).toBeGreaterThan(0);
+  });
+
+  it('seeds category filter from URL ?cat= param on mount (via AppProvider)', () => {
+    window.location.hash = '#/cheatsheet?cat=slash-command';
+    render(
+      <AppProvider>
+        <Cheatsheet />
+      </AppProvider>,
+    );
+    // All visible cards should be in the slash-command category
+    const cards = screen.getAllByTestId('item-card');
+    expect(cards.length).toBeGreaterThan(0);
+    // The slash-command category button should be active (aria-pressed=true)
+    const catBtn = screen.getByRole('button', { name: 'slash-command' });
+    expect(catBtn.getAttribute('aria-pressed')).toBe('true');
+  });
+
+  it('ignores invalid ?cat= values (no filter applied)', () => {
+    window.location.hash = '#/cheatsheet?cat=not-a-real-category';
+    render(
+      <AppProvider>
+        <Cheatsheet />
+      </AppProvider>,
+    );
+    // All categories btn should be active
+    const allCatBtn = screen.getByRole('button', { name: 'All categories' });
+    expect(allCatBtn.getAttribute('aria-pressed')).toBe('true');
+  });
+
+  it('ignores invalid ?d= values (no domain filter applied)', () => {
+    window.location.hash = '#/cheatsheet?d=garbage-domain';
+    render(
+      <AppProvider>
+        <Cheatsheet />
+      </AppProvider>,
+    );
+    const allDomainBtn = screen.getByRole('button', { name: 'All domains' });
+    expect(allDomainBtn.getAttribute('aria-pressed')).toBe('true');
+  });
+});
+
+describe('Cheatsheet — URL sync (replaceState)', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.runAllTimers();
+    vi.useRealTimers();
+  });
+
+  it('typing in the search updates window.location.hash with ?q= after debounce', async () => {
+    const replaceSpy = vi.spyOn(window.history, 'replaceState');
+    render(<Cheatsheet />);
+    const input = screen.getByRole('searchbox', { name: /search features/i });
+
+    fireEvent.change(input, { target: { value: 'compact' } });
+
+    // Before debounce fires, replaceState should not have been called with the new value
+    // Advance timers past the 300ms debounce
+    await act(async () => {
+      vi.advanceTimersByTime(350);
+    });
+
+    expect(replaceSpy).toHaveBeenCalled();
+    const lastCall = replaceSpy.mock.calls[replaceSpy.mock.calls.length - 1];
+    const hashArg = lastCall[2] as string;
+    expect(hashArg).toContain('q=compact');
+  });
+
+  it('replaceState is used (not pushState) so no history entries are added', async () => {
+    const replaceSpy = vi.spyOn(window.history, 'replaceState');
+    const pushSpy = vi.spyOn(window.history, 'pushState');
+    render(<Cheatsheet />);
+    const input = screen.getByRole('searchbox', { name: /search features/i });
+
+    fireEvent.change(input, { target: { value: 'hook' } });
+
+    await act(async () => {
+      vi.advanceTimersByTime(350);
+    });
+
+    expect(replaceSpy).toHaveBeenCalled();
+    expect(pushSpy).not.toHaveBeenCalled();
+  });
+});
+
+describe('Cheatsheet — copy link button', () => {
+  it('renders the copy link button with correct testid', () => {
+    render(<Cheatsheet />);
+    expect(screen.getByTestId('cheatsheet-copylink')).toBeInTheDocument();
+  });
+
+  it('calls navigator.clipboard.writeText with current URL and shows "Copied!"', async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, 'clipboard', {
+      value: { writeText },
+      configurable: true,
+    });
+
+    render(<Cheatsheet />);
+    const btn = screen.getByTestId('cheatsheet-copylink');
+    fireEvent.click(btn);
+
+    await waitFor(() => {
+      expect(writeText).toHaveBeenCalledWith(window.location.href);
+    });
+
+    await waitFor(() => {
+      expect(btn).toHaveTextContent('Copied!');
+    });
+  });
+
+  it('copy link button contains the current query in the URL after typing', async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, 'clipboard', {
+      value: { writeText },
+      configurable: true,
+    });
+
+    render(<Cheatsheet />);
+    const input = screen.getByRole('searchbox', { name: /search features/i });
+    fireEvent.change(input, { target: { value: 'clear' } });
+
+    // Flush debounce so replaceState updates window.location
+    await act(async () => {
+      vi.advanceTimersByTime(350);
+    });
+
+    const btn = screen.getByTestId('cheatsheet-copylink');
+    fireEvent.click(btn);
+
+    // Use real timers for waitFor so it doesn't hang
+    vi.useRealTimers();
+
+    await waitFor(() => {
+      expect(writeText).toHaveBeenCalled();
+      const calledUrl = writeText.mock.calls[0][0] as string;
+      expect(calledUrl).toContain('clear');
+    });
   });
 });
