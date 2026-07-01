@@ -67,7 +67,7 @@ export const CATALOG: CatalogItem[] = [
     "name": "Ctrl+T",
     "category": "shortcut",
     "domain": "interactive",
-    "summary": "Toggle task list visibility",
+    "summary": "Show or hide the task list in the terminal status area.",
     "confidence": "verified",
     "syntax": "Press Ctrl+T",
     "details": "Shows or hides the task list tracking progress on multi-step work. Displays up to 5 tasks with status indicators (pending/in-progress/complete). Ask Claude to 'show all tasks' or 'clear tasks' for full control.",
@@ -429,7 +429,7 @@ export const CATALOG: CatalogItem[] = [
     "name": "Tab (suggestion accept)",
     "category": "shortcut",
     "domain": "interactive",
-    "summary": "Accept prompt suggestion",
+    "summary": "Accept a prompt suggestion (suggestions appear after Claude responds).",
     "confidence": "verified",
     "syntax": "Press Tab",
     "details": "Prompt suggestions appear grayed-out after first turn. Press Tab or Right arrow to place in input, then Enter to submit.",
@@ -458,18 +458,6 @@ export const CATALOG: CatalogItem[] = [
     "syntax": "Type /recap",
     "details": "Manually generate a one-line recap of session progress. Normally appears automatically after 3+ turns and 3+ minutes away from terminal.",
     "example": "/recap → 'Fixed bug in auth, added tests, ready to merge'",
-    "platformNotes": "Same across platforms"
-  },
-  {
-    "id": "vim",
-    "name": "/vim",
-    "category": "slash-command",
-    "domain": "interactive",
-    "summary": "Enable vim editor mode (alternative to /config)",
-    "confidence": "verified",
-    "syntax": "Type /vim",
-    "details": "Shortcut to enable vim keybindings in prompt input. Also configurable via /config → Editor mode or settings.json editorMode: 'vim'.",
-    "example": "/vim → INSERT mode active → vim hjkl navigation, v/V selection, etc. now work",
     "platformNotes": "Same across platforms"
   },
   {
@@ -715,7 +703,7 @@ export const CATALOG: CatalogItem[] = [
   },
   {
     "id": "transcript-viewer-shortcuts-ctrl-e-v-q",
-    "name": "Transcript viewer shortcuts (?/{{ }}/Ctrl+E/[/v/q)",
+    "name": "Transcript viewer shortcuts (?/{ }/Ctrl+E/[/v/q)",
     "category": "shortcut",
     "domain": "interactive",
     "summary": "View and search transcript in fullscreen mode",
@@ -1152,7 +1140,7 @@ export const CATALOG: CatalogItem[] = [
     "name": "/usage",
     "category": "slash-command",
     "domain": "slash",
-    "summary": "Show session cost, plan usage limits, and activity stats",
+    "summary": "View your Claude usage and costs (24-hour and weekly breakdowns).",
     "confidence": "verified",
     "syntax": "/usage",
     "details": "View token usage, cost, plan limits, and activity stats. On Pro/Max/Team/Enterprise, includes breakdown by skill, subagent, plugin, and MCP server. See [cost tracking guide](/en/costs#using-the-%2Fusage-command). Aliases: `/cost`, `/stats`",
@@ -1258,7 +1246,7 @@ export const CATALOG: CatalogItem[] = [
     "name": "/loop",
     "category": "slash-command",
     "domain": "slash",
-    "summary": "Run a prompt repeatedly while the session stays open",
+    "summary": "Run a prompt repeatedly on a schedule (or a maintenance prompt from .claude/loop.md).",
     "confidence": "verified",
     "syntax": "/loop [interval] [prompt]",
     "details": "Run a prompt on a fixed interval or let Claude self-pace. Omit the prompt to run an autonomous maintenance check or `.claude/loop.md`. A **Skill**. See [Run prompts on a schedule](/en/scheduled-tasks)",
@@ -1618,24 +1606,12 @@ export const CATALOG: CatalogItem[] = [
     "name": "/privacy-settings",
     "category": "slash-command",
     "domain": "slash",
-    "summary": "View and update your privacy settings",
+    "summary": "View and update your privacy settings (Pro & Max plans only.)",
     "confidence": "verified",
     "syntax": "/privacy-settings",
     "details": "Manage data sharing preferences. Only available for Pro and Max subscribers",
     "example": "/privacy-settings",
     "newcomerTip": "Review this to understand what data is collected and shared"
-  },
-  {
-    "id": "workflow",
-    "name": "/workflow",
-    "category": "slash-command",
-    "domain": "slash",
-    "summary": "Watch and manage running workflows",
-    "confidence": "verified",
-    "syntax": "/workflows",
-    "details": "Open the workflow progress view to watch, pause, resume, or save running and completed workflows (like `/batch`)",
-    "example": "/workflows",
-    "newcomerTip": "Use to monitor large parallel tasks that are running in the background"
   },
   {
     "id": "sandbox",
@@ -3576,18 +3552,6 @@ export const CATALOG: CatalogItem[] = [
     "source": "https://code.claude.com/docs/en/cli-reference.md"
   },
   {
-    "id": "permissions-command",
-    "name": "/permissions command",
-    "category": "slash-command",
-    "domain": "settings",
-    "summary": "Interactive UI to view, manage, and toggle permission modes; add allow/ask/deny rules; check effective permissions from all scopes",
-    "confidence": "verified",
-    "details": "/permissions opens an interactive dialog showing all permission rules from all scopes (managed, project, local, user) merged and effective. Use to: (1) toggle permission mode (default, acceptEdits, plan, auto, dontAsk, bypassPermissions); (2) add allow/ask/deny rules (saved to local .claude/settings.local.json); (3) review recently denied tool calls and mark for retry; (4) view effective rule hierarchy. Rules added via /permissions are always saved to .claude/settings.local.json, not project or user scopes, so they're temporary per-developer per-project.",
-    "example": "Type /permissions, toggle to \"plan\" mode, add Bash(npm run *) to allow list, see all active rules and their source files",
-    "newcomerTip": "Use /permissions to build your allow list interactively. Approve actions with \"Yes, don't ask again\" and they're saved to local settings.",
-    "source": "https://code.claude.com/docs/en/permissions.md"
-  },
-  {
     "id": "model-command",
     "name": "/model command",
     "category": "slash-command",
@@ -3597,18 +3561,6 @@ export const CATALOG: CatalogItem[] = [
     "details": "/model opens a picker to choose the model for the current session. List available models, their descriptions, current selection. Selected model applies for the rest of the session. Does not change settings files; next session reverts to settings-defined default. Use when you want to switch models mid-session (e.g., use Haiku for quick iteration, then Opus for review).",
     "example": "Type /model, select \"Claude Opus 4\" from the list, continue session with Opus",
     "newcomerTip": "/model doesn't change your settings—only this session. Use -- --model flag on CLI to change session without /model command.",
-    "source": "https://code.claude.com/docs/en/commands.md"
-  },
-  {
-    "id": "effort-command",
-    "name": "/effort command",
-    "category": "slash-command",
-    "domain": "settings",
-    "summary": "Toggle effort level (low, medium, high, xhigh) for the current session",
-    "confidence": "verified",
-    "details": "/effort opens a menu to select effort level for the current session: low (fast), medium (balanced), high (thorough), xhigh (ultra-deep with subagents). Selection applies only to this session; next session uses effortLevel from settings. Useful for upgrading to xhigh when stuck on a hard problem.",
-    "example": "Type /effort, select \"xhigh\" to spawn multi-agent deep analysis",
-    "newcomerTip": "Start with medium. Use low for fast iteration, high for careful review, xhigh when stuck.",
     "source": "https://code.claude.com/docs/en/commands.md"
   },
   {
@@ -4729,19 +4681,6 @@ export const CATALOG: CatalogItem[] = [
     "source": "https://code.claude.com/docs/en/mcp-quickstart.md"
   },
   {
-    "id": "agents-command",
-    "name": "/agents command",
-    "category": "slash-command",
-    "domain": "subagents",
-    "summary": "Interactive interface to view, create, edit, and manage subagents with tabbed UI for Running and Library views",
-    "confidence": "verified",
-    "syntax": "/agents",
-    "details": "Opens a two-tabbed interface: Running tab shows live and recently finished subagents with status; Library tab lets you view all available subagents (built-in, user, project, plugin), create new ones with guided setup or Claude generation, edit existing configurations, delete custom subagents, and see which are active when duplicates exist. Recommended way to manage subagents. Created subagents take effect immediately without session restart, unlike manual file edits.",
-    "example": "In Claude Code, run `/agents` then switch to Library tab and click 'Create new agent' to generate a new subagent",
-    "newcomerTip": "Start with /agents to create your first subagent—the guided interface is easier than writing YAML by hand. Choose 'Generate with Claude' to have Claude write the system prompt for you.",
-    "source": "https://code.claude.com/docs/en/sub-agents.md"
-  },
-  {
     "id": "built-in-explore-subagent",
     "name": "Built-in Explore subagent",
     "category": "feature",
@@ -5445,29 +5384,6 @@ export const CATALOG: CatalogItem[] = [
     "newcomerTip": "Avoid this mode unless you're in a container or VM. For most use cases where you want fewer prompts, auto mode is safer and more appropriate."
   },
   {
-    "id": "shift-tab-cycling-permission-modes-cli",
-    "name": "Shift+Tab: Cycling Permission Modes (CLI)",
-    "category": "shortcut",
-    "domain": "permissions",
-    "summary": "Press Shift+Tab in the CLI or JetBrains IDE to cycle through permission modes mid-session",
-    "confidence": "verified",
-    "details": "Shift+Tab cycles through available modes: default → acceptEdits → plan → (optional: bypassPermissions) → (optional: auto) → back to default. The current mode appears in the status bar. Not all modes appear in the cycle by default: auto mode requires an opt-in prompt the first time it appears; bypassPermissions only appears after you start with --permission-mode bypassPermissions or --dangerously-skip-permissions (or --allow-dangerously-skip-permissions to add it without activating). dontAsk never appears in the cycle; set it with --permission-mode dontAsk at startup.",
-    "example": "In a CLI session, press Shift+Tab to switch from default to acceptEdits. Press again to switch to plan. Press again to cycle back to default. Auto mode prompts for opt-in the first time you cycle to it; select 'No, don't ask again' if you want to skip it in future cycles.",
-    "newcomerTip": "You don't have to restart to change modes. Shift+Tab is the fastest way to switch gears mid-session—flip to acceptEdits to move faster, or back to default for careful review.",
-    "platformNotes": "Works in the CLI terminal and JetBrains IDE terminal. VS Code uses a visual mode selector instead. Desktop and web use dropdown/button selectors."
-  },
-  {
-    "id": "permissions-command-2",
-    "name": "/permissions Command",
-    "category": "slash-command",
-    "domain": "permissions",
-    "summary": "View, manage, and audit all permission rules and where they come from",
-    "confidence": "verified",
-    "details": "/permissions opens an interactive UI that lists all permission rules organized by tool, showing whether each is Allow, Ask, or Deny. It displays which settings file each rule comes from (user settings, project settings, local project settings, or managed settings). You can navigate with arrow keys, press 'a' to add a rule, 'd' to delete one, and view detailed information about rules. The UI also shows Recently denied tab with actions auto-denied by auto mode. Press 'r' on a recent denial to retry it with manual approval.",
-    "example": "In a session, type `/permissions` and press Enter. You'll see a table of all rules. Use arrow keys to highlight a rule, press Enter for details, 'd' to delete, 'a' to add. The display shows whether each rule comes from user settings (~/.claude/settings.json), project settings (.claude/settings.json), local project settings (.claude/settings.local.json), or managed settings.",
-    "newcomerTip": "If you're confused about why Claude is prompting or not prompting, run /permissions to see exactly what rules are in effect and where they come from. It's your permission audit trail."
-  },
-  {
     "id": "permission-rules-allow-ask-deny",
     "name": "Permission Rules: Allow/Ask/Deny",
     "category": "concept",
@@ -6089,18 +6005,6 @@ export const CATALOG: CatalogItem[] = [
     "source": "https://code.claude.com/docs/en/plugins-reference.md"
   },
   {
-    "id": "plugin-command",
-    "name": "/plugin command",
-    "category": "slash-command",
-    "domain": "plugins",
-    "summary": "Interactive UI for discovering, installing, managing, and configuring plugins",
-    "confidence": "verified",
-    "details": "/plugin opens a four-tab interface: Discover (browse available plugins from all marketplaces with details on context cost, last updated, components), Installed (view, enable, disable, uninstall plugins grouped by scope with 'Not used recently' filter), Marketplaces (add, remove, update marketplaces), Errors (view plugin loading errors). Tab through with Tab/Shift+Tab, filter by typing, press Enter to view details or install. Shows components the plugin will install before confirming. Installation scopes: user (personal across projects), project (shared via .claude/settings.json), local (gitignored, personal to repo).",
-    "example": "/plugin → Tab to Discover → type 'formatter' → Enter on result → 'User scope' → confirms install with skill list",
-    "newcomerTip": "Run /plugin without arguments to open the manager. Use /plugin list to see installed plugins from the command line. /plugin install name@marketplace-name to install directly without the UI.",
-    "source": "https://code.claude.com/docs/en/discover-plugins.md"
-  },
-  {
     "id": "plugin-install",
     "name": "/plugin install",
     "category": "slash-command",
@@ -6110,18 +6014,6 @@ export const CATALOG: CatalogItem[] = [
     "details": "/plugin install <name>@<marketplace> installs a single plugin. If no marketplace specified, Claude searches all added marketplaces. Default scope is user (personal). Use /plugin install <name>@<marketplace> --scope project to share with team via .claude/settings.json, or --scope local for gitignored local install. If marketplace is not found, run /plugin marketplace update <marketplace-name> to refresh, or /plugin marketplace add anthropics/claude-plugins-official if you haven't added the official marketplace.",
     "example": "/plugin install formatter@claude-plugins-official --scope project",
     "newcomerTip": "Install to project scope (--scope project) if you want to share the plugin with your entire team via version control. Otherwise defaults to user scope which persists across projects.",
-    "source": "https://code.claude.com/docs/en/discover-plugins.md"
-  },
-  {
-    "id": "plugin-marketplace-add",
-    "name": "/plugin marketplace add",
-    "category": "slash-command",
-    "domain": "plugins",
-    "summary": "Register a plugin marketplace catalog so plugins from it become installable",
-    "confidence": "verified",
-    "details": "/plugin marketplace add <source> registers the marketplace without installing any plugins. Source can be: GitHub owner/repo (anthropics/claude-code), git URL (https://gitlab.com/team/plugins.git), local path (./my-marketplace), or direct URL to marketplace.json (https://example.com/marketplace.json). Optional: append @ref to GitHub shorthand or #ref to git URLs to pin a branch/tag. After adding, plugins from that marketplace appear in /plugin Discover tab and are installable with /plugin install <name>@<marketplace-name>.",
-    "example": "/plugin marketplace add anthropics/claude-plugins-community",
-    "newcomerTip": "The official marketplace (claude-plugins-official) is pre-added. Add community plugins with /plugin marketplace add anthropics/claude-plugins-community to access third-party submissions.",
     "source": "https://code.claude.com/docs/en/discover-plugins.md"
   },
   {
@@ -6212,8 +6104,8 @@ export const CATALOG: CatalogItem[] = [
     "source": "https://code.claude.com/docs/en/plugin-marketplaces.md"
   },
   {
-    "id": "list-installed-plugins-plugin-list",
-    "name": "List installed plugins: /plugin list",
+    "id": "plugin-list",
+    "name": "/plugin list",
     "category": "slash-command",
     "domain": "plugins",
     "summary": "Display all installed plugins with version, source, and enable status",
@@ -6224,8 +6116,8 @@ export const CATALOG: CatalogItem[] = [
     "source": "https://code.claude.com/docs/en/discover-plugins.md"
   },
   {
-    "id": "plugin-uninstall-plugin-uninstall",
-    "name": "Plugin uninstall: /plugin uninstall",
+    "id": "plugin-uninstall",
+    "name": "/plugin uninstall",
     "category": "slash-command",
     "domain": "plugins",
     "summary": "Remove a plugin completely or from a specific scope",
@@ -6411,7 +6303,7 @@ export const CATALOG: CatalogItem[] = [
     "name": "Ctrl+L",
     "category": "shortcut",
     "domain": "customization",
-    "summary": "Redraw terminal or clear conversation (fullscreen mode: press twice within 2 seconds)",
+    "summary": "Redraw the screen — force a full terminal redraw.",
     "confidence": "verified",
     "syntax": "Ctrl+L",
     "details": "Single press: full screen redraw, input and history preserved. Fullscreen mode: first press shows hint, second press runs /clear. Also available as Cmd+K on macOS in fullscreen mode.",
@@ -6435,7 +6327,7 @@ export const CATALOG: CatalogItem[] = [
     "name": "Shift+Tab",
     "category": "shortcut",
     "domain": "customization",
-    "summary": "Cycle through permission modes: default → plan → acceptEdits → auto (if enabled)",
+    "summary": "Cycle permission modes: default, acceptEdits, plan, and any enabled modes (auto, bypassPermissions).",
     "confidence": "verified",
     "syntax": "Shift+Tab",
     "details": "Quickly switch between permission modes without `/config`. Cycles through available modes in order. The current mode is shown in a colored border around the input box (prompt, plan, or autoAccept colors). Can be rebound via chat:cycleMode.",
@@ -6502,7 +6394,7 @@ export const CATALOG: CatalogItem[] = [
     "domain": "customization",
     "summary": "Adjust adaptive reasoning effort level: low, medium, high (default), xhigh, max (session-only), or ultracode (dynamic workflows)",
     "confidence": "verified",
-    "syntax": "/effort [level]\n/effort (opens slider)",
+    "syntax": "/effort [level|auto]",
     "details": "Controls how much the model thinks on each step. low/medium/high/xhigh persist across sessions; max and ultracode apply to current session only. Fable 5 supports max; Opus 4.8/4.7 support max; Opus/Sonnet 4.6 do not. Model defaults vary: Fable/Opus 4.8/Sonnet 4.6 default high; Opus 4.7 defaults xhigh. ultracode plans dynamic workflows at xhigh reasoning per turn. ultrathink keyword in prompt does one-off deep reasoning without changing session effort.",
     "example": "/effort high\n/effort xhigh\n/effort (opens interactive slider)\n/effort auto (resets to model default)",
     "newcomerTip": "Use high for typical work, xhigh for complex problems, low for cost-sensitive/latency-sensitive tasks. Try max only if xhigh isn't enough.",
@@ -6560,18 +6452,6 @@ export const CATALOG: CatalogItem[] = [
     "source": "https://code.claude.com/docs/en/keybindings.md"
   },
   {
-    "id": "chat-submit",
-    "name": "chat:submit",
-    "category": "slash-command",
-    "domain": "customization",
-    "summary": "Submit a prompt message (default: Enter)",
-    "confidence": "verified",
-    "syntax": "Enter",
-    "details": "Sends the current prompt to Claude. Default binding is Enter. Can be rebound to any key or chord. Related: chat:newline (Ctrl+J) inserts a newline without submitting.",
-    "example": "Rebind to Ctrl+J: { \"context\": \"Chat\", \"bindings\": { \"ctrl+j\": \"chat:submit\", \"enter\": null } }",
-    "source": "https://code.claude.com/docs/en/keybindings.md"
-  },
-  {
     "id": "chat-newline",
     "name": "chat:newline",
     "category": "slash-command",
@@ -6583,18 +6463,6 @@ export const CATALOG: CatalogItem[] = [
     "example": "Rebind to Shift+Enter: { \"context\": \"Chat\", \"bindings\": { \"shift+enter\": \"chat:newline\" } }",
     "platformNotes": "Shift+Enter works natively on iTerm2, Terminal.app, WezTerm, Ghostty, Kitty, Warp, Windows Terminal. Requires /terminal-setup on VS Code, Cursor, Alacritty, Zed. gnome-terminal and JetBrains IDEs: use Ctrl+J or backslash+Enter instead.",
     "source": "https://code.claude.com/docs/en/interactive-mode.md"
-  },
-  {
-    "id": "chat-externaleditor",
-    "name": "chat:externalEditor",
-    "category": "slash-command",
-    "domain": "customization",
-    "summary": "Open current prompt in external editor ($EDITOR or system default)",
-    "confidence": "verified",
-    "syntax": "Ctrl+G or Ctrl+X Ctrl+E",
-    "details": "Launches your default text editor with the current prompt. When you save and exit, the edited text is loaded back into Claude Code. Can be configured in /config to prepend Claude's last response as comments for context.",
-    "example": "Type a prompt, press Ctrl+G, edit in vim/nano, save and exit. If configured, Claude's previous response appears as comments above for context.",
-    "source": "https://code.claude.com/docs/en/keybindings.md"
   },
   {
     "id": "option-p-macos-alt-p-windows-linux",
@@ -6685,19 +6553,6 @@ export const CATALOG: CatalogItem[] = [
     "source": "https://code.claude.com/docs/en/interactive-mode.md"
   },
   {
-    "id": "output-style",
-    "name": "/output-style",
-    "category": "slash-command",
-    "domain": "customization",
-    "summary": "Change Claude's response style: Default, Proactive, Explanatory, Learning, or custom",
-    "confidence": "verified",
-    "syntax": "/config and select 'Output style' OR edit outputStyle in settings.json",
-    "details": "Output styles modify the system prompt to change tone and response format without changing Claude's coding knowledge. Default: standard engineering assistant. Proactive: executes immediately, makes reasonable assumptions. Explanatory: adds insights between helping. Learning: collaborative, asks you to implement small pieces. Custom: create Markdown files in ~/.claude/output-styles or .claude/output-styles with frontmatter and instructions. Custom styles can keep or drop Claude's built-in coding instructions via keep-coding-instructions: true/false.",
-    "example": "/config\nSelect 'Output style' > 'Explanatory'\nOR { \"outputStyle\": \"Explanatory\" } in settings.json",
-    "newcomerTip": "Start with Explanatory to understand implementation choices. Create custom styles for specialized workflows like documentation writing or domain-specific analysis.",
-    "source": "https://code.claude.com/docs/en/output-styles.md"
-  },
-  {
     "id": "built-in-output-styles",
     "name": "Built-in output styles",
     "category": "feature",
@@ -6754,9 +6609,9 @@ export const CATALOG: CatalogItem[] = [
     "name": "/statusline",
     "category": "slash-command",
     "domain": "customization",
-    "summary": "Configure a custom status bar that runs any shell script to display context (model, git, costs, etc.)",
+    "summary": "Generate or configure a custom status-line script (model, cost, context, git status, and more).",
     "confidence": "verified",
-    "syntax": "/statusline",
+    "syntax": "/statusline [description]",
     "details": "Status line is a customizable bar at the bottom showing whatever your shell script outputs. Receives session data as JSON on stdin (current model, context usage, costs, token counts, working directory, git status, etc.). Script output is live-updated. Useful for tracking context window usage, session costs, git branch, or custom metrics. Status line is separate from footer badges (which show PR status, usage meter, etc.).",
     "example": "/statusline (opens picker)",
     "newcomerTip": "Start with a simple example: print the model name and remaining context percentage. Customize as you learn what metrics matter for your workflow.",
@@ -7002,19 +6857,6 @@ export const CATALOG: CatalogItem[] = [
     "source": "https://code.claude.com/docs/en/model-config.md"
   },
   {
-    "id": "statusline-configuration",
-    "name": "/statusline configuration",
-    "category": "slash-command",
-    "domain": "customization",
-    "summary": "Custom status bar script showing model, costs, context usage, git status, or any metrics",
-    "confidence": "verified",
-    "syntax": "~/.claude/statusline",
-    "details": "Executable script at ~/.claude/statusline receives session JSON on stdin with fields: model, contextUsedPercent, totalTokens, totalCost, elapsedSeconds, workingDir, gitBranch, gitStatus. Output is displayed on status line and updates live. Can be Bash, Python, or any executable.",
-    "example": "#!/bin/bash\nread -r json  # receives session data as JSON on stdin\necho \"Model: $(echo $json | jq -r .model) | Cost: $(echo $json | jq -r .totalCost)\"",
-    "newcomerTip": "Start simple: print just the model name and remaining context. Add git branch and costs as needed.",
-    "source": "https://code.claude.com/docs/en/statusline.md"
-  },
-  {
     "id": "resume",
     "name": "/resume",
     "category": "slash-command",
@@ -7183,42 +7025,6 @@ export const CATALOG: CatalogItem[] = [
     "newcomerTip": "Checkpoints are separate from git—they're for quick session-level recovery, not permanent history."
   },
   {
-    "id": "loop-interval-prompt",
-    "name": "/loop <interval> <prompt>",
-    "category": "slash-command",
-    "domain": "sessions",
-    "summary": "Run a prompt repeatedly on a fixed interval",
-    "confidence": "verified",
-    "syntax": "/loop <interval> <prompt>",
-    "details": "Schedules a prompt to run every N seconds/minutes/hours/days. Intervals are converted to cron expressions. Supported units: s, m, h, d. Non-standard intervals (like 7m) are rounded to the nearest clean cron step. The prompt fires between your turns, not mid-response. Times are in your local timezone. Tasks expire after 7 days and resume with --resume if unexpired.",
-    "example": "/loop 5m check if deployment finished",
-    "newcomerTip": "Use /loop for quick polling during a session. For durable automation, use Routines or Desktop tasks."
-  },
-  {
-    "id": "loop-prompt",
-    "name": "/loop <prompt>",
-    "category": "slash-command",
-    "domain": "sessions",
-    "summary": "Run a prompt on a dynamically chosen interval",
-    "confidence": "verified",
-    "syntax": "/loop <prompt>",
-    "details": "Omit the interval and Claude picks one dynamically between 1 minute and 1 hour based on what it observes. Short waits while builds are active, longer waits when idle. The chosen delay is printed at the end of each iteration.",
-    "example": "/loop check CI status and review comments",
-    "newcomerTip": "Dynamic loops are great for babysitting PRs or deployments—Claude adapts the frequency as things progress."
-  },
-  {
-    "id": "loop-built-in-maintenance",
-    "name": "/loop (built-in maintenance)",
-    "category": "slash-command",
-    "domain": "sessions",
-    "summary": "Run a built-in maintenance prompt: continue unfinished work, tend to PRs, run cleanup",
-    "confidence": "verified",
-    "syntax": "/loop",
-    "details": "A bare /loop runs the built-in prompt at a dynamically chosen interval (or fixed if you supply one). The prompt continues unfinished work, reviews PR comments, checks CI, and runs cleanup tasks. Does not start new initiatives. Override the default with .claude/loop.md or ~/.claude/loop.md.",
-    "example": "/loop\n/loop 15m",
-    "newcomerTip": "Bare /loop is a great way to babysit a release branch—it handles routine maintenance automatically."
-  },
-  {
     "id": "loop-md-customization",
     "name": "loop.md customization",
     "category": "setting",
@@ -7327,18 +7133,6 @@ export const CATALOG: CatalogItem[] = [
     "newcomerTip": "Run /usage when you notice prompts are taking longer—high costs often mean context is bloated. Use /context to see what's consuming space."
   },
   {
-    "id": "usage-day-and-usage-week",
-    "name": "/usage --day and /usage --week",
-    "category": "slash-command",
-    "domain": "sessions",
-    "summary": "Switch between 24-hour and 7-day usage breakdown",
-    "confidence": "verified",
-    "syntax": "/usage then press 'd' or 'w'",
-    "details": "In the /usage dialog, press 'd' to switch to last-24-hours view or 'w' for last-7-days. Figures are approximate, computed from local session history on this machine, so multi-device or claude.ai usage is not included.",
-    "example": "Press 'd' for last 24 hours, 'w' for last 7 days",
-    "newcomerTip": "Check weekly usage to spot trends—increasing costs often point to features (like subagents) that need optimization."
-  },
-  {
     "id": "vs-code-extension-mentions",
     "name": "VS Code extension @-mentions",
     "category": "feature",
@@ -7351,18 +7145,6 @@ export const CATALOG: CatalogItem[] = [
     "newcomerTip": "Use @-mentions to give Claude precise context without reading entire files. This saves tokens and time."
   },
   {
-    "id": "vs-code-alt-k-option-k",
-    "name": "VS Code Alt+K / Option+K",
-    "category": "shortcut",
-    "domain": "sessions",
-    "summary": "Insert @-mention reference to current file and selection",
-    "confidence": "verified",
-    "syntax": "Alt+K (Windows/Linux) or Option+K (Mac)",
-    "details": "In VS Code, when your cursor is in a file, pressing this shortcut inserts the file path and selected line numbers into the prompt box. The selected text is automatically visible to Claude.",
-    "example": "Select lines 5-10, press Option+K, Claude gets @file.ts#5-10",
-    "newcomerTip": "Use this shortcut to quickly reference the exact code you're asking about."
-  },
-  {
     "id": "vs-code-cmd-ctrl-esc-focus-toggle",
     "name": "VS Code Cmd/Ctrl+Esc (focus toggle)",
     "category": "shortcut",
@@ -7373,18 +7155,6 @@ export const CATALOG: CatalogItem[] = [
     "details": "When the editor is focused, your cursor is in code. When Claude is focused, you can type prompts. This shortcut toggles between them without using the mouse.",
     "example": "Type some code, press Ctrl+Esc to jump to the prompt, ask Claude about it",
     "newcomerTip": "Keep your hands on the keyboard—use this shortcut for fast navigation."
-  },
-  {
-    "id": "vs-code-cmd-ctrl-n-new-conversation",
-    "name": "VS Code Cmd/Ctrl+N (new conversation)",
-    "category": "shortcut",
-    "domain": "sessions",
-    "summary": "Start a new Claude conversation as an editor tab",
-    "confidence": "verified",
-    "syntax": "Cmd+N (Mac) or Ctrl+N (Windows/Linux)",
-    "details": "Requires Claude to be focused and the setting enableNewConversationShortcut set to true. Opens a fresh conversation tab alongside your current work.",
-    "example": "Press Ctrl+N to open a new conversation tab",
-    "newcomerTip": "Use this to parallelize work without leaving VS Code."
   },
   {
     "id": "vs-code-cmd-ctrl-shift-esc-new-tab",
@@ -7529,18 +7299,6 @@ export const CATALOG: CatalogItem[] = [
     "details": "Switches the current session from the CLI to the Desktop app so you can use the graphical diff viewer.",
     "example": "/desktop",
     "newcomerTip": "Use /desktop when a diff gets complex and you want to review it visually."
-  },
-  {
-    "id": "shift-tab-permission-mode-cycling",
-    "name": "Shift+Tab (permission mode cycling)",
-    "category": "shortcut",
-    "domain": "sessions",
-    "summary": "Cycle through permission modes: Default -> Auto-accept -> Plan -> Auto (if available)",
-    "confidence": "verified",
-    "syntax": "Shift+Tab",
-    "details": "Quick toggle between permission modes without opening a menu. In the CLI, cycles through available modes for the current session.",
-    "example": "Press Shift+Tab multiple times to switch modes",
-    "newcomerTip": "Use Shift+Tab to rapidly switch between Plan mode (for vetting approaches) and Auto-accept (for fast iteration)."
   },
   {
     "id": "esc-interrupt-claude-s-work",

@@ -53,7 +53,7 @@
         {
           "name": "Ctrl+T",
           "category": "shortcut",
-          "summary": "Toggle task list visibility",
+          "summary": "Show or hide the task list in the terminal status area.",
           "details": "Shows or hides the task list tracking progress on multi-step work. Displays up to 5 tasks with status indicators (pending/in-progress/complete). Ask Claude to 'show all tasks' or 'clear tasks' for full control.",
           "syntax": "Press Ctrl+T",
           "example": "Working on feature: press Ctrl+T to see task progress",
@@ -325,7 +325,7 @@
         {
           "name": "Tab (suggestion accept)",
           "category": "shortcut",
-          "summary": "Accept prompt suggestion",
+          "summary": "Accept a prompt suggestion (suggestions appear after Claude responds).",
           "details": "Prompt suggestions appear grayed-out after first turn. Press Tab or Right arrow to place in input, then Enter to submit.",
           "syntax": "Press Tab",
           "example": "Grayed-out suggestion appears: 'run tests' → Tab → suggestion moves to input → Enter to run",
@@ -347,15 +347,6 @@
           "details": "Manually generate a one-line recap of session progress. Normally appears automatically after 3+ turns and 3+ minutes away from terminal.",
           "syntax": "Type /recap",
           "example": "/recap → 'Fixed bug in auth, added tests, ready to merge'",
-          "platformNotes": "Same across platforms"
-        },
-        {
-          "name": "/vim",
-          "category": "slash-command",
-          "summary": "Enable vim editor mode (alternative to /config)",
-          "details": "Shortcut to enable vim keybindings in prompt input. Also configurable via /config → Editor mode or settings.json editorMode: 'vim'.",
-          "syntax": "Type /vim",
-          "example": "/vim → INSERT mode active → vim hjkl navigation, v/V selection, etc. now work",
           "platformNotes": "Same across platforms"
         },
         {
@@ -540,7 +531,7 @@
           "platformNotes": "Same across platforms"
         },
         {
-          "name": "Transcript viewer shortcuts (?/{{ }}/Ctrl+E/[/v/q)",
+          "name": "Transcript viewer shortcuts (?/{ }/Ctrl+E/[/v/q)",
           "category": "shortcut",
           "summary": "View and search transcript in fullscreen mode",
           "details": "Toggle with Ctrl+O. In fullscreen: ? = help panel. { } = jump prev/next user prompt (vim paragraph motion). Ctrl+E = toggle show all. [ = write to scrollback for native search. v = open in $VISUAL/$EDITOR. q/Ctrl+C/Esc = exit.",
@@ -874,7 +865,7 @@
         {
           "name": "/usage",
           "category": "slash-command",
-          "summary": "Show session cost, plan usage limits, and activity stats",
+          "summary": "View your Claude usage and costs (24-hour and weekly breakdowns).",
           "syntax": "/usage",
           "example": "/usage",
           "details": "View token usage, cost, plan limits, and activity stats. On Pro/Max/Team/Enterprise, includes breakdown by skill, subagent, plugin, and MCP server. See [cost tracking guide](/en/costs#using-the-%2Fusage-command). Aliases: `/cost`, `/stats`",
@@ -953,7 +944,7 @@
         {
           "name": "/loop",
           "category": "slash-command",
-          "summary": "Run a prompt repeatedly while the session stays open",
+          "summary": "Run a prompt repeatedly on a schedule (or a maintenance prompt from .claude/loop.md).",
           "syntax": "/loop [interval] [prompt]",
           "example": "/loop 5m check if the deploy finished\n/loop",
           "details": "Run a prompt on a fixed interval or let Claude self-pace. Omit the prompt to run an autonomous maintenance check or `.claude/loop.md`. A **Skill**. See [Run prompts on a schedule](/en/scheduled-tasks)",
@@ -1223,20 +1214,11 @@
         {
           "name": "/privacy-settings",
           "category": "slash-command",
-          "summary": "View and update your privacy settings",
+          "summary": "View and update your privacy settings (Pro & Max plans only.)",
           "syntax": "/privacy-settings",
           "example": "/privacy-settings",
           "details": "Manage data sharing preferences. Only available for Pro and Max subscribers",
           "newcomerTip": "Review this to understand what data is collected and shared"
-        },
-        {
-          "name": "/workflow",
-          "category": "slash-command",
-          "summary": "Watch and manage running workflows",
-          "syntax": "/workflows",
-          "example": "/workflows",
-          "details": "Open the workflow progress view to watch, pause, resume, or save running and completed workflows (like `/batch`)",
-          "newcomerTip": "Use to monitor large parallel tasks that are running in the background"
         },
         {
           "name": "/sandbox",
@@ -2703,15 +2685,6 @@
           "platformNotes": "All surfaces support these flags: Terminal, VS Code, Desktop, Web. Managed settings cannot be overridden by CLI flags."
         },
         {
-          "name": "/permissions command",
-          "category": "slash-command",
-          "summary": "Interactive UI to view, manage, and toggle permission modes; add allow/ask/deny rules; check effective permissions from all scopes",
-          "details": "/permissions opens an interactive dialog showing all permission rules from all scopes (managed, project, local, user) merged and effective. Use to: (1) toggle permission mode (default, acceptEdits, plan, auto, dontAsk, bypassPermissions); (2) add allow/ask/deny rules (saved to local .claude/settings.local.json); (3) review recently denied tool calls and mark for retry; (4) view effective rule hierarchy. Rules added via /permissions are always saved to .claude/settings.local.json, not project or user scopes, so they're temporary per-developer per-project.",
-          "example": "Type /permissions, toggle to \"plan\" mode, add Bash(npm run *) to allow list, see all active rules and their source files",
-          "source": "https://code.claude.com/docs/en/permissions.md",
-          "newcomerTip": "Use /permissions to build your allow list interactively. Approve actions with \"Yes, don't ask again\" and they're saved to local settings."
-        },
-        {
           "name": "/model command",
           "category": "slash-command",
           "summary": "Change the model for the current session without restarting; select from available models or aliases",
@@ -2719,15 +2692,6 @@
           "example": "Type /model, select \"Claude Opus 4\" from the list, continue session with Opus",
           "source": "https://code.claude.com/docs/en/commands.md",
           "newcomerTip": "/model doesn't change your settings—only this session. Use -- --model flag on CLI to change session without /model command."
-        },
-        {
-          "name": "/effort command",
-          "category": "slash-command",
-          "summary": "Toggle effort level (low, medium, high, xhigh) for the current session",
-          "details": "/effort opens a menu to select effort level for the current session: low (fast), medium (balanced), high (thorough), xhigh (ultra-deep with subagents). Selection applies only to this session; next session uses effortLevel from settings. Useful for upgrading to xhigh when stuck on a hard problem.",
-          "example": "Type /effort, select \"xhigh\" to spawn multi-agent deep analysis",
-          "source": "https://code.claude.com/docs/en/commands.md",
-          "newcomerTip": "Start with medium. Use low for fast iteration, high for careful review, xhigh when stuck."
         },
         {
           "name": "/memory command",
@@ -3601,16 +3565,6 @@
       "overview": "Subagents are specialized AI assistants in Claude Code that run in isolated context windows with custom system prompts, specific tool access, and independent permissions. They help preserve context by handling side tasks (research, analysis, testing) in parallel while the main conversation stays focused. You can create custom subagents as Markdown files in .claude/agents/ (project) or ~/.claude/agents/ (user), or manage them through the /agents command interface.",
       "items": [
         {
-          "name": "/agents command",
-          "category": "slash-command",
-          "summary": "Interactive interface to view, create, edit, and manage subagents with tabbed UI for Running and Library views",
-          "syntax": "/agents",
-          "details": "Opens a two-tabbed interface: Running tab shows live and recently finished subagents with status; Library tab lets you view all available subagents (built-in, user, project, plugin), create new ones with guided setup or Claude generation, edit existing configurations, delete custom subagents, and see which are active when duplicates exist. Recommended way to manage subagents. Created subagents take effect immediately without session restart, unlike manual file edits.",
-          "example": "In Claude Code, run `/agents` then switch to Library tab and click 'Create new agent' to generate a new subagent",
-          "newcomerTip": "Start with /agents to create your first subagent—the guided interface is easier than writing YAML by hand. Choose 'Generate with Claude' to have Claude write the system prompt for you.",
-          "source": "https://code.claude.com/docs/en/sub-agents.md"
-        },
-        {
           "name": "Built-in Explore subagent",
           "category": "feature",
           "summary": "Fast, read-only agent optimized for codebase exploration using Haiku model with search and analysis capabilities",
@@ -4149,23 +4103,6 @@
           "newcomerTip": "Avoid this mode unless you're in a container or VM. For most use cases where you want fewer prompts, auto mode is safer and more appropriate."
         },
         {
-          "name": "Shift+Tab: Cycling Permission Modes (CLI)",
-          "category": "shortcut",
-          "summary": "Press Shift+Tab in the CLI or JetBrains IDE to cycle through permission modes mid-session",
-          "details": "Shift+Tab cycles through available modes: default → acceptEdits → plan → (optional: bypassPermissions) → (optional: auto) → back to default. The current mode appears in the status bar. Not all modes appear in the cycle by default: auto mode requires an opt-in prompt the first time it appears; bypassPermissions only appears after you start with --permission-mode bypassPermissions or --dangerously-skip-permissions (or --allow-dangerously-skip-permissions to add it without activating). dontAsk never appears in the cycle; set it with --permission-mode dontAsk at startup.",
-          "example": "In a CLI session, press Shift+Tab to switch from default to acceptEdits. Press again to switch to plan. Press again to cycle back to default. Auto mode prompts for opt-in the first time you cycle to it; select 'No, don't ask again' if you want to skip it in future cycles.",
-          "platformNotes": "Works in the CLI terminal and JetBrains IDE terminal. VS Code uses a visual mode selector instead. Desktop and web use dropdown/button selectors.",
-          "newcomerTip": "You don't have to restart to change modes. Shift+Tab is the fastest way to switch gears mid-session—flip to acceptEdits to move faster, or back to default for careful review."
-        },
-        {
-          "name": "/permissions Command",
-          "category": "slash-command",
-          "summary": "View, manage, and audit all permission rules and where they come from",
-          "details": "/permissions opens an interactive UI that lists all permission rules organized by tool, showing whether each is Allow, Ask, or Deny. It displays which settings file each rule comes from (user settings, project settings, local project settings, or managed settings). You can navigate with arrow keys, press 'a' to add a rule, 'd' to delete one, and view detailed information about rules. The UI also shows Recently denied tab with actions auto-denied by auto mode. Press 'r' on a recent denial to retry it with manual approval.",
-          "example": "In a session, type `/permissions` and press Enter. You'll see a table of all rules. Use arrow keys to highlight a rule, press Enter for details, 'd' to delete, 'a' to add. The display shows whether each rule comes from user settings (~/.claude/settings.json), project settings (.claude/settings.json), local project settings (.claude/settings.local.json), or managed settings.",
-          "newcomerTip": "If you're confused about why Claude is prompting or not prompting, run /permissions to see exactly what rules are in effect and where they come from. It's your permission audit trail."
-        },
-        {
           "name": "Permission Rules: Allow/Ask/Deny",
           "category": "concept",
           "summary": "Three rule types control whether Claude can use a tool: allow (auto-approve), ask (prompt), deny (block)",
@@ -4640,30 +4577,12 @@
           "source": "https://code.claude.com/docs/en/plugins-reference.md"
         },
         {
-          "name": "/plugin command",
-          "category": "slash-command",
-          "summary": "Interactive UI for discovering, installing, managing, and configuring plugins",
-          "details": "/plugin opens a four-tab interface: Discover (browse available plugins from all marketplaces with details on context cost, last updated, components), Installed (view, enable, disable, uninstall plugins grouped by scope with 'Not used recently' filter), Marketplaces (add, remove, update marketplaces), Errors (view plugin loading errors). Tab through with Tab/Shift+Tab, filter by typing, press Enter to view details or install. Shows components the plugin will install before confirming. Installation scopes: user (personal across projects), project (shared via .claude/settings.json), local (gitignored, personal to repo).",
-          "example": "/plugin → Tab to Discover → type 'formatter' → Enter on result → 'User scope' → confirms install with skill list",
-          "newcomerTip": "Run /plugin without arguments to open the manager. Use /plugin list to see installed plugins from the command line. /plugin install name@marketplace-name to install directly without the UI.",
-          "source": "https://code.claude.com/docs/en/discover-plugins.md"
-        },
-        {
           "name": "/plugin install",
           "category": "slash-command",
           "summary": "Install a plugin from a marketplace by name",
           "details": "/plugin install <name>@<marketplace> installs a single plugin. If no marketplace specified, Claude searches all added marketplaces. Default scope is user (personal). Use /plugin install <name>@<marketplace> --scope project to share with team via .claude/settings.json, or --scope local for gitignored local install. If marketplace is not found, run /plugin marketplace update <marketplace-name> to refresh, or /plugin marketplace add anthropics/claude-plugins-official if you haven't added the official marketplace.",
           "example": "/plugin install formatter@claude-plugins-official --scope project",
           "newcomerTip": "Install to project scope (--scope project) if you want to share the plugin with your entire team via version control. Otherwise defaults to user scope which persists across projects.",
-          "source": "https://code.claude.com/docs/en/discover-plugins.md"
-        },
-        {
-          "name": "/plugin marketplace add",
-          "category": "slash-command",
-          "summary": "Register a plugin marketplace catalog so plugins from it become installable",
-          "details": "/plugin marketplace add <source> registers the marketplace without installing any plugins. Source can be: GitHub owner/repo (anthropics/claude-code), git URL (https://gitlab.com/team/plugins.git), local path (./my-marketplace), or direct URL to marketplace.json (https://example.com/marketplace.json). Optional: append @ref to GitHub shorthand or #ref to git URLs to pin a branch/tag. After adding, plugins from that marketplace appear in /plugin Discover tab and are installable with /plugin install <name>@<marketplace-name>.",
-          "example": "/plugin marketplace add anthropics/claude-plugins-community",
-          "newcomerTip": "The official marketplace (claude-plugins-official) is pre-added. Add community plugins with /plugin marketplace add anthropics/claude-plugins-community to access third-party submissions.",
           "source": "https://code.claude.com/docs/en/discover-plugins.md"
         },
         {
@@ -4733,7 +4652,7 @@
           "source": "https://code.claude.com/docs/en/plugin-marketplaces.md"
         },
         {
-          "name": "List installed plugins: /plugin list",
+          "name": "/plugin list",
           "category": "slash-command",
           "summary": "Display all installed plugins with version, source, and enable status",
           "details": "/plugin list shows installed plugins in tabular format: name, version, marketplace source, scope, and enabled/disabled state. Use /plugin ls as shorthand. Interactive form accepts --enabled or --disabled to filter. CLI form: claude plugin list [--json] [--available] shows JSON output with optional --available flag to include all available plugins from marketplaces (requires --json). Interactive /plugin interface shows unused plugins in a collapsed group (v2.1.187+) - plugins not invoked in 2+ weeks across 10+ sessions (marketplace plugins only).",
@@ -4742,7 +4661,7 @@
           "source": "https://code.claude.com/docs/en/discover-plugins.md"
         },
         {
-          "name": "Plugin uninstall: /plugin uninstall",
+          "name": "/plugin uninstall",
           "category": "slash-command",
           "summary": "Remove a plugin completely or from a specific scope",
           "syntax": "/plugin uninstall <name>@<marketplace> [--scope user|project|local]",
@@ -4888,7 +4807,7 @@
         {
           "name": "Ctrl+L",
           "category": "shortcut",
-          "summary": "Redraw terminal or clear conversation (fullscreen mode: press twice within 2 seconds)",
+          "summary": "Redraw the screen — force a full terminal redraw.",
           "syntax": "Ctrl+L",
           "example": "Screen garbled? Ctrl+L. In fullscreen mode, press Ctrl+L twice within 2 seconds to run /clear and start fresh.",
           "details": "Single press: full screen redraw, input and history preserved. Fullscreen mode: first press shows hint, second press runs /clear. Also available as Cmd+K on macOS in fullscreen mode.",
@@ -4906,7 +4825,7 @@
         {
           "name": "Shift+Tab",
           "category": "shortcut",
-          "summary": "Cycle through permission modes: default → plan → acceptEdits → auto (if enabled)",
+          "summary": "Cycle permission modes: default, acceptEdits, plan, and any enabled modes (auto, bypassPermissions).",
           "syntax": "Shift+Tab",
           "example": "Start in default mode (asks before edits), press Shift+Tab to switch to plan mode (view plan, approve edits), press again for acceptEdits mode (auto-applies edits).",
           "details": "Quickly switch between permission modes without `/config`. Cycles through available modes in order. The current mode is shown in a colored border around the input box (prompt, plan, or autoAccept colors). Can be rebound via chat:cycleMode.",
@@ -4957,7 +4876,7 @@
           "name": "/effort",
           "category": "slash-command",
           "summary": "Adjust adaptive reasoning effort level: low, medium, high (default), xhigh, max (session-only), or ultracode (dynamic workflows)",
-          "syntax": "/effort [level]\n/effort (opens slider)",
+          "syntax": "/effort [level|auto]",
           "example": "/effort high\n/effort xhigh\n/effort (opens interactive slider)\n/effort auto (resets to model default)",
           "details": "Controls how much the model thinks on each step. low/medium/high/xhigh persist across sessions; max and ultracode apply to current session only. Fable 5 supports max; Opus 4.8/4.7 support max; Opus/Sonnet 4.6 do not. Model defaults vary: Fable/Opus 4.8/Sonnet 4.6 default high; Opus 4.7 defaults xhigh. ultracode plans dynamic workflows at xhigh reasoning per turn. ultrathink keyword in prompt does one-off deep reasoning without changing session effort.",
           "newcomerTip": "Use high for typical work, xhigh for complex problems, low for cost-sensitive/latency-sensitive tasks. Try max only if xhigh isn't enough.",
@@ -5003,15 +4922,6 @@
           "source": "https://code.claude.com/docs/en/keybindings.md"
         },
         {
-          "name": "chat:submit",
-          "category": "slash-command",
-          "summary": "Submit a prompt message (default: Enter)",
-          "syntax": "Enter",
-          "example": "Rebind to Ctrl+J: { \"context\": \"Chat\", \"bindings\": { \"ctrl+j\": \"chat:submit\", \"enter\": null } }",
-          "details": "Sends the current prompt to Claude. Default binding is Enter. Can be rebound to any key or chord. Related: chat:newline (Ctrl+J) inserts a newline without submitting.",
-          "source": "https://code.claude.com/docs/en/keybindings.md"
-        },
-        {
           "name": "chat:newline",
           "category": "slash-command",
           "summary": "Insert a newline in the prompt without submitting (default: Ctrl+J)",
@@ -5020,15 +4930,6 @@
           "details": "Adds a line break to multiline input. Works in any terminal. Shift+Enter also works natively in iTerm2, WezTerm, Ghostty, Kitty, and Windows Terminal without configuration; use /terminal-setup for VS Code, Cursor, or Alacritty.",
           "platformNotes": "Shift+Enter works natively on iTerm2, Terminal.app, WezTerm, Ghostty, Kitty, Warp, Windows Terminal. Requires /terminal-setup on VS Code, Cursor, Alacritty, Zed. gnome-terminal and JetBrains IDEs: use Ctrl+J or backslash+Enter instead.",
           "source": "https://code.claude.com/docs/en/interactive-mode.md"
-        },
-        {
-          "name": "chat:externalEditor",
-          "category": "slash-command",
-          "summary": "Open current prompt in external editor ($EDITOR or system default)",
-          "syntax": "Ctrl+G or Ctrl+X Ctrl+E",
-          "example": "Type a prompt, press Ctrl+G, edit in vim/nano, save and exit. If configured, Claude's previous response appears as comments above for context.",
-          "details": "Launches your default text editor with the current prompt. When you save and exit, the edited text is loaded back into Claude Code. Can be configured in /config to prepend Claude's last response as comments for context.",
-          "source": "https://code.claude.com/docs/en/keybindings.md"
         },
         {
           "name": "Option+P (macOS) / Alt+P (Windows/Linux)",
@@ -5098,16 +4999,6 @@
           "source": "https://code.claude.com/docs/en/interactive-mode.md"
         },
         {
-          "name": "/output-style",
-          "category": "slash-command",
-          "summary": "Change Claude's response style: Default, Proactive, Explanatory, Learning, or custom",
-          "syntax": "/config and select 'Output style' OR edit outputStyle in settings.json",
-          "example": "/config\nSelect 'Output style' > 'Explanatory'\nOR { \"outputStyle\": \"Explanatory\" } in settings.json",
-          "details": "Output styles modify the system prompt to change tone and response format without changing Claude's coding knowledge. Default: standard engineering assistant. Proactive: executes immediately, makes reasonable assumptions. Explanatory: adds insights between helping. Learning: collaborative, asks you to implement small pieces. Custom: create Markdown files in ~/.claude/output-styles or .claude/output-styles with frontmatter and instructions. Custom styles can keep or drop Claude's built-in coding instructions via keep-coding-instructions: true/false.",
-          "newcomerTip": "Start with Explanatory to understand implementation choices. Create custom styles for specialized workflows like documentation writing or domain-specific analysis.",
-          "source": "https://code.claude.com/docs/en/output-styles.md"
-        },
-        {
           "name": "Built-in output styles",
           "category": "feature",
           "summary": "Four shipped response styles that modify system prompt behavior",
@@ -5150,8 +5041,8 @@
         {
           "name": "/statusline",
           "category": "slash-command",
-          "summary": "Configure a custom status bar that runs any shell script to display context (model, git, costs, etc.)",
-          "syntax": "/statusline",
+          "summary": "Generate or configure a custom status-line script (model, cost, context, git status, and more).",
+          "syntax": "/statusline [description]",
           "example": "/statusline (opens picker)",
           "details": "Status line is a customizable bar at the bottom showing whatever your shell script outputs. Receives session data as JSON on stdin (current model, context usage, costs, token counts, working directory, git status, etc.). Script output is live-updated. Useful for tracking context window usage, session costs, git branch, or custom metrics. Status line is separate from footer badges (which show PR status, usage meter, etc.).",
           "newcomerTip": "Start with a simple example: print the model name and remaining context percentage. Customize as you learn what metrics matter for your workflow.",
@@ -5338,16 +5229,6 @@
           "example": "DISABLE_PROMPT_CACHING=1 claude (disables caching entirely)\nDISABLE_PROMPT_CACHING_SONNET=1 claude (disables cache for Sonnet only)",
           "details": "DISABLE_PROMPT_CACHING takes precedence over per-tier settings. Useful for testing cache behavior or avoiding cold-cache costs when switching models. Normally caching should remain enabled for cost savings.",
           "source": "https://code.claude.com/docs/en/model-config.md"
-        },
-        {
-          "name": "/statusline configuration",
-          "category": "slash-command",
-          "summary": "Custom status bar script showing model, costs, context usage, git status, or any metrics",
-          "syntax": "~/.claude/statusline",
-          "example": "#!/bin/bash\nread -r json  # receives session data as JSON on stdin\necho \"Model: $(echo $json | jq -r .model) | Cost: $(echo $json | jq -r .totalCost)\"",
-          "details": "Executable script at ~/.claude/statusline receives session JSON on stdin with fields: model, contextUsedPercent, totalTokens, totalCost, elapsedSeconds, workingDir, gitBranch, gitStatus. Output is displayed on status line and updates live. Can be Bash, Python, or any executable.",
-          "newcomerTip": "Start simple: print just the model name and remaining context. Add git branch and costs as needed.",
-          "source": "https://code.claude.com/docs/en/statusline.md"
         }
       ]
     },
@@ -5482,33 +5363,6 @@
           "newcomerTip": "Checkpoints are separate from git—they're for quick session-level recovery, not permanent history."
         },
         {
-          "name": "/loop <interval> <prompt>",
-          "category": "slash-command",
-          "summary": "Run a prompt repeatedly on a fixed interval",
-          "syntax": "/loop <interval> <prompt>",
-          "example": "/loop 5m check if deployment finished",
-          "details": "Schedules a prompt to run every N seconds/minutes/hours/days. Intervals are converted to cron expressions. Supported units: s, m, h, d. Non-standard intervals (like 7m) are rounded to the nearest clean cron step. The prompt fires between your turns, not mid-response. Times are in your local timezone. Tasks expire after 7 days and resume with --resume if unexpired.",
-          "newcomerTip": "Use /loop for quick polling during a session. For durable automation, use Routines or Desktop tasks."
-        },
-        {
-          "name": "/loop <prompt>",
-          "category": "slash-command",
-          "summary": "Run a prompt on a dynamically chosen interval",
-          "syntax": "/loop <prompt>",
-          "example": "/loop check CI status and review comments",
-          "details": "Omit the interval and Claude picks one dynamically between 1 minute and 1 hour based on what it observes. Short waits while builds are active, longer waits when idle. The chosen delay is printed at the end of each iteration.",
-          "newcomerTip": "Dynamic loops are great for babysitting PRs or deployments—Claude adapts the frequency as things progress."
-        },
-        {
-          "name": "/loop (built-in maintenance)",
-          "category": "slash-command",
-          "summary": "Run a built-in maintenance prompt: continue unfinished work, tend to PRs, run cleanup",
-          "syntax": "/loop",
-          "example": "/loop\n/loop 15m",
-          "details": "A bare /loop runs the built-in prompt at a dynamically chosen interval (or fixed if you supply one). The prompt continues unfinished work, reviews PR comments, checks CI, and runs cleanup tasks. Does not start new initiatives. Override the default with .claude/loop.md or ~/.claude/loop.md.",
-          "newcomerTip": "Bare /loop is a great way to babysit a release branch—it handles routine maintenance automatically."
-        },
-        {
           "name": "loop.md customization",
           "category": "setting",
           "summary": "Replace the built-in /loop prompt with custom instructions",
@@ -5590,15 +5444,6 @@
           "newcomerTip": "Run /usage when you notice prompts are taking longer—high costs often mean context is bloated. Use /context to see what's consuming space."
         },
         {
-          "name": "/usage --day and /usage --week",
-          "category": "slash-command",
-          "summary": "Switch between 24-hour and 7-day usage breakdown",
-          "syntax": "/usage then press 'd' or 'w'",
-          "example": "Press 'd' for last 24 hours, 'w' for last 7 days",
-          "details": "In the /usage dialog, press 'd' to switch to last-24-hours view or 'w' for last-7-days. Figures are approximate, computed from local session history on this machine, so multi-device or claude.ai usage is not included.",
-          "newcomerTip": "Check weekly usage to spot trends—increasing costs often point to features (like subagents) that need optimization."
-        },
-        {
           "name": "VS Code extension @-mentions",
           "category": "feature",
           "summary": "Reference specific files or line ranges in VS Code with @file#start-end syntax",
@@ -5608,15 +5453,6 @@
           "newcomerTip": "Use @-mentions to give Claude precise context without reading entire files. This saves tokens and time."
         },
         {
-          "name": "VS Code Alt+K / Option+K",
-          "category": "shortcut",
-          "summary": "Insert @-mention reference to current file and selection",
-          "syntax": "Alt+K (Windows/Linux) or Option+K (Mac)",
-          "example": "Select lines 5-10, press Option+K, Claude gets @file.ts#5-10",
-          "details": "In VS Code, when your cursor is in a file, pressing this shortcut inserts the file path and selected line numbers into the prompt box. The selected text is automatically visible to Claude.",
-          "newcomerTip": "Use this shortcut to quickly reference the exact code you're asking about."
-        },
-        {
           "name": "VS Code Cmd/Ctrl+Esc (focus toggle)",
           "category": "shortcut",
           "summary": "Toggle focus between code editor and Claude prompt box",
@@ -5624,15 +5460,6 @@
           "example": "Type some code, press Ctrl+Esc to jump to the prompt, ask Claude about it",
           "details": "When the editor is focused, your cursor is in code. When Claude is focused, you can type prompts. This shortcut toggles between them without using the mouse.",
           "newcomerTip": "Keep your hands on the keyboard—use this shortcut for fast navigation."
-        },
-        {
-          "name": "VS Code Cmd/Ctrl+N (new conversation)",
-          "category": "shortcut",
-          "summary": "Start a new Claude conversation as an editor tab",
-          "syntax": "Cmd+N (Mac) or Ctrl+N (Windows/Linux)",
-          "example": "Press Ctrl+N to open a new conversation tab",
-          "details": "Requires Claude to be focused and the setting enableNewConversationShortcut set to true. Opens a fresh conversation tab alongside your current work.",
-          "newcomerTip": "Use this to parallelize work without leaving VS Code."
         },
         {
           "name": "VS Code Cmd/Ctrl+Shift+Esc (new tab)",
@@ -5741,15 +5568,6 @@
           "example": "/desktop",
           "details": "Switches the current session from the CLI to the Desktop app so you can use the graphical diff viewer.",
           "newcomerTip": "Use /desktop when a diff gets complex and you want to review it visually."
-        },
-        {
-          "name": "Shift+Tab (permission mode cycling)",
-          "category": "shortcut",
-          "summary": "Cycle through permission modes: Default -> Auto-accept -> Plan -> Auto (if available)",
-          "syntax": "Shift+Tab",
-          "example": "Press Shift+Tab multiple times to switch modes",
-          "details": "Quick toggle between permission modes without opening a menu. In the CLI, cycles through available modes for the current session.",
-          "newcomerTip": "Use Shift+Tab to rapidly switch between Plan mode (for vetting approaches) and Auto-accept (for fast iteration)."
         },
         {
           "name": "Esc (interrupt Claude's work)",
